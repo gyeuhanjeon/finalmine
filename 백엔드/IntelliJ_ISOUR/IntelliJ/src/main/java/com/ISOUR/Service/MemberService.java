@@ -2,10 +2,12 @@ package com.ISOUR.Service;
 
 import com.ISOUR.Entity.I_MEMBER;
 import com.ISOUR.dao.MemberRepository;
+import com.ISOUR.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -41,6 +43,15 @@ public class MemberService {
         i_member.setRegion2(region2);
         I_MEMBER rst = memberRepository.save(i_member);
         log.warn(rst.toString());
+        return true;
+    }
+
+    // 아이디 중복 체크
+    public boolean IdCheck(String id) {
+        List<I_MEMBER> memberList = memberRepository.findById(id);
+        for(I_MEMBER e : memberList) {
+            return false;
+        }
         return true;
     }
 }

@@ -4,6 +4,7 @@ package com.ISOUR.controller;
 import com.ISOUR.Entity.I_MEMBER;
 import com.ISOUR.Service.MemberService;
 import com.ISOUR.dao.MemberRepository;
+import com.ISOUR.vo.MemberVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class ISOURController {
 
     // 로그인
     @GetMapping("/ISOUR/Login")
-    public ResponseEntity<Boolean> LoginMember(@RequestBody Map<String, String> LoginData) {
+    public ResponseEntity<Boolean> LoginMember_Ctrl(@RequestBody Map<String, String> LoginData) {
         String id = LoginData.get("id");
         String pwd = LoginData.get("pwd");
         boolean result = memberService.LoginCheck(id, pwd);
@@ -39,7 +40,7 @@ public class ISOURController {
     // 회원 가입
     @PostMapping("/ISOUR/RegMember")
     // 객체 타입이 와야하기 때문에 Boolean 대문자
-    public ResponseEntity<Boolean> registerMember(@RequestBody Map<String, String> regData) {
+    public ResponseEntity<Boolean> registerMember_Ctrl(@RequestBody Map<String, String> regData) {
         String id = regData.get("id");
         String pwd = regData.get("pwd");
         String name = regData.get("name");
@@ -57,7 +58,17 @@ public class ISOURController {
         }
     }
 
-
+    // 중복 아이디 체크
+    @GetMapping("/ISOUR/IdCheck")
+    public ResponseEntity<Boolean> IdCheck_Ctrl(@RequestBody Map<String, String> LoginData) {
+        String id = LoginData.get("id");
+        boolean result = memberService.IdCheck("id");
+        if(result) {
+            return new ResponseEntity(true, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 //    // 전체 회원 정보 조회
 //    @GetMapping("/ISOUR/admin")
