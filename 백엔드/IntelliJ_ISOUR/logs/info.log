@@ -1,0 +1,360 @@
+[2022-11-16 17:15:11.510] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 6436 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:15:11.515] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:15:12.058] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:15:12.103] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 36 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:15:12.573] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8090 (http)
+[2022-11-16 17:15:12.587] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8090"]
+[2022-11-16 17:15:12.588] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:15:12.588] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:15:12.669] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:15:12.669] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1110 ms
+[2022-11-16 17:15:13.077] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#16f0ec18' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#16f0ec18': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:15:13.082] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:15:13.091] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:15:13.113] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:20:26.757] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 11876 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:20:26.759] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:20:27.290] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:20:27.330] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:20:27.784] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8090 (http)
+[2022-11-16 17:20:27.796] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8090"]
+[2022-11-16 17:20:27.796] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:20:27.796] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:20:27.875] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:20:27.875] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1076 ms
+[2022-11-16 17:20:28.276] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#16f0ec18' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#16f0ec18': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:20:28.280] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:20:28.289] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:20:28.305] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:20:47.724] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 12376 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:20:47.728] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:20:48.201] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:20:48.240] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 31 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:20:48.673] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8090 (http)
+[2022-11-16 17:20:48.686] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8090"]
+[2022-11-16 17:20:48.686] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:20:48.686] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:20:48.763] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:20:48.763] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 994 ms
+[2022-11-16 17:20:49.138] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#12417468' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#12417468': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:20:49.142] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:20:49.151] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:20:49.165] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+A component required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:25:30.682] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 960 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:25:30.686] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:25:31.190] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:25:31.236] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 36 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:25:31.740] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8090 (http)
+[2022-11-16 17:25:31.751] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8090"]
+[2022-11-16 17:25:31.751] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:25:31.752] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:25:31.837] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:25:31.837] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1113 ms
+[2022-11-16 17:25:31.904] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#2da16263' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#2da16263': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:25:31.906] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:25:32.003] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:25:32.021] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:26:13.868] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 10408 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:26:13.872] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:26:14.398] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:26:14.438] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:26:14.917] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8090 (http)
+[2022-11-16 17:26:14.929] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8090"]
+[2022-11-16 17:26:14.929] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:26:14.929] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:26:15.022] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:26:15.022] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1111 ms
+[2022-11-16 17:26:15.086] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#5ebffb44' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#5ebffb44': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:26:15.088] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:26:15.173] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:26:15.190] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:26:56.607] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 11368 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:26:56.610] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:26:57.096] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:26:57.139] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 34 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:26:57.581] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8100 (http)
+[2022-11-16 17:26:57.598] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8100"]
+[2022-11-16 17:26:57.599] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:26:57.599] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:26:57.678] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:26:57.678] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1030 ms
+[2022-11-16 17:26:57.743] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#5ebffb44' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#5ebffb44': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:26:57.746] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:26:57.837] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:26:57.853] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:27:09.852] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 16288 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:27:09.856] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:27:10.332] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:27:10.375] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:27:10.849] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:27:10.863] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:27:10.863] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:27:10.863] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:27:10.944] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:27:10.944] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1050 ms
+[2022-11-16 17:27:11.011] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#5ebffb44' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#5ebffb44': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:27:11.014] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:27:11.101] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:27:11.117] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:36:27.348] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 13632 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:36:27.350] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:36:27.813] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:36:27.855] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 34 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:36:28.303] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:36:28.316] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:36:28.316] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:36:28.316] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:36:28.395] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:36:28.395] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1007 ms
+[2022-11-16 17:36:28.463] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#5ebffb44' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#5ebffb44': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:36:28.465] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:36:28.555] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:36:28.571] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:38:13.391] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 4460 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:38:13.394] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:38:13.902] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:38:13.953] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 41 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:38:14.411] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:38:14.421] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:38:14.421] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:38:14.422] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:38:14.500] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:38:14.500] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1067 ms
+[2022-11-16 17:38:14.566] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#5ebffb44' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#5ebffb44': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:38:14.569] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:38:14.651] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:38:14.667] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:38:27.588] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 15176 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:38:27.592] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:38:28.063] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:38:28.106] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 33 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:38:28.556] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:38:28.568] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:38:28.568] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:38:28.568] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:38:28.647] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:38:28.647] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1015 ms
+[2022-11-16 17:38:28.715] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#109f8c7e' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#109f8c7e': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:38:28.718] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:38:28.801] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:38:28.817] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:40:20.288] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 5056 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:40:20.291] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:40:20.794] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:40:20.836] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 34 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:40:21.298] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:40:21.308] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:40:21.309] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:40:21.309] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:40:21.388] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:40:21.388] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1059 ms
+[2022-11-16 17:40:21.458] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#235d659c' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#235d659c': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:40:21.460] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:40:21.546] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:40:21.560] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
+[2022-11-16 17:43:30.277] [INFO ] [main] com.ISOUR.IsourApplication Starting IsourApplication using Java 11.0.15 on DESKTOP-MP6M01C with PID 13556 (D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes started by user1 in D:\Work_Java\IntelliJ_ISOUR)
+[2022-11-16 17:43:30.278] [INFO ] [main] com.ISOUR.IsourApplication No active profile set, falling back to 1 default profile: "default"
+[2022-11-16 17:43:30.826] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2022-11-16 17:43:30.870] [INFO ] [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 35 ms. Found 1 JPA repository interfaces.
+[2022-11-16 17:43:31.343] [INFO ] [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 8190 (http)
+[2022-11-16 17:43:31.360] [INFO ] [main] org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-8190"]
+[2022-11-16 17:43:31.361] [INFO ] [main] org.apache.catalina.core.StandardService Starting service [Tomcat]
+[2022-11-16 17:43:31.361] [INFO ] [main] org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.68]
+[2022-11-16 17:43:31.439] [INFO ] [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+[2022-11-16 17:43:31.439] [INFO ] [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 1119 ms
+[2022-11-16 17:43:31.508] [WARN ] [main] org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'customerController' defined in file [D:\Work_Java\IntelliJ_ISOUR\IntelliJ\target\classes\com\ISOUR\controller\CustomerController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'customerRepo' defined in com.ISOUR.dao.MemberRepository defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Cannot create inner bean '(inner bean)#311ff287' of type [org.springframework.orm.jpa.SharedEntityManagerCreator] while setting bean property 'entityManager'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name '(inner bean)#311ff287': Cannot resolve reference to bean 'entityManagerFactory' while setting constructor argument; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'entityManagerFactory' available
+[2022-11-16 17:43:31.510] [INFO ] [main] org.apache.catalina.core.StandardService Stopping service [Tomcat]
+[2022-11-16 17:43:31.602] [INFO ] [main] org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+[2022-11-16 17:43:31.617] [ERROR] [main] org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.ISOUR.controller.ISOURController required a bean named 'entityManagerFactory' that could not be found.
+
+
+Action:
+
+Consider defining a bean named 'entityManagerFactory' in your configuration.
+
