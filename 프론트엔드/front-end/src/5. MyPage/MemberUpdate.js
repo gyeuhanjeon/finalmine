@@ -26,6 +26,7 @@ function MemberUpdate() {
   const {sido, sigugun} = hangjungdong;
   const [region1, setRegion1] = useState("");
   const [region2, setRegion2] = useState("");
+  const [mbti, setMbti] = useState("");
   const [keySido, setKeySido] = useState("");
   const today = new Date();
 
@@ -65,7 +66,7 @@ function MemberUpdate() {
     const memberData = async () => {
         console.log("localId : "+ localId);
     try {
-        const response = await TeamAPI.memberInfo(id); // 회원 정보 조회
+        const response = await TeamAPI.memberInfo(localId); // 회원 정보 조회
         setMemberInfo(response.data);
         console.log(response.data)
 
@@ -74,10 +75,11 @@ function MemberUpdate() {
         setPwd(response.data.pwd);
         setBirth(response.data.birth);
         setGender(response.data.gender);
-        console.log("성별 확인 : " + response.data.gender)
+        console.log("생일 확인 : " + response.data.birth)
         setRegion1(response.data.region1);
         setRegion2(response.data.region2);
-        console.log(response.data)
+        setMbti(response.data.mbti);
+        console.log("기존 회원 정보 가져오기 완료")
         } catch (e) {
             console.log(e);
         }
@@ -153,10 +155,10 @@ const onChangeBirth = e => {
       handleClick();
     }
     // if(isBirth && isGender && isRegion1 && isRegion2) {
-    let id = localId;
-      const MemberUpdate = await TeamAPI.MemberUpdate(id, pwd, birth, region1, region2);
+      const MemberUpdate = await TeamAPI.MemberUpdate(id, name, pwd, birth, region1, region2 );
   
         console.log("id : " + id);
+        console.log("name : " + name);
         console.log("password : " + pwd);
         console.log("region1 : " + region1);
         console.log("region2 : " + region2);
@@ -196,8 +198,8 @@ const [imageSrc, setImageSrc] = useState('');
   return (
       <div className='Container'>
       <div className='MyPage-Container'>
-        {memberInfo.map(member => (
-            <div key={member.id}>
+        {/* {memberInfo.map(member => (
+            <div key={member.id}> */}
           <table className='MemberUpdate-table'>
             <colgroup> 
               <col width="50%" /> 
@@ -218,9 +220,9 @@ const [imageSrc, setImageSrc] = useState('');
                     //  추가한 파일 이 있는 경우 해당 파일은 미리보기로 보여줌.
                       <img src={imageSrc} style={{borderRadius:'70%', width: '200px'}} />
                       //  추가한 파일이 없는 경우 DB에 저장된 파일이 있는지 확인
-                      : member.fileName ?
+                      : memberInfo.fileName ?
                       // DB 에 저장된 데이터가 있다면 해당 데이터를 미리보기에 보여줌.
-                            <img src={ TEAM_DOMAIN + "MemberInfo/file/" + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}} />
+                            <img src={ TEAM_DOMAIN + "MemberInfo/file/" + memberInfo.fileName } style={{borderRadius:'70%', width: '200px'}} />
                       // DB에 저장된 데이터가 없다면 기본 파일을 보여줌.
                             : <img src={logo} style={{borderRadius:'70%', width: '200px'}} /> 
                     } 
@@ -238,34 +240,34 @@ const [imageSrc, setImageSrc] = useState('');
               </tr>
               <tr>
                 <th>이름</th>
-                <td><input type="text" value={name} placeholder={member.name} required onChange={onChangeName}/></td>
+                <td><input type="text" value={name} onChange={onChangeName}/></td>
               </tr>
               <tr>
                 <th>아이디</th>
-                <td><input type="text" value={member.id} disabled required id="inputId" readOnly/></td>
+                <td><input type="text" value={id} disabled id="inputId" readOnly /></td>
               </tr>
               <tr>
                 <th>비밀번호</th>
-                <td><input type="password" value={member.pwd} disabled readOnly/></td>
+                <td><input type="password" value={pwd} disabled readOnly /></td>
               </tr>
               <tr>
                 <th>생년월일</th>
-                <td><input type="date" value={member.birth} readOnly />
-                    <span readOnly>만 {member.age}세</span>
+                <td><input type="date" value={birth} readOnly />
+                    <span readOnly>만 {age}세</span>
                 </td>
               </tr>
               <tr>
                 <th>성별</th>
                 <td>
                 <label>
-                  {(`${member.gender}` === "남자") ?  
-                      <input type="radio" name="gender" value="남자" checked disabled readOnly /> 
-                      : <input type="radio" name="gender" value="남자" disabled readOnly />
+                  {( gender === "남자") ?  
+                      <input type="radio" name="gender" value="남자" checked disabled /> 
+                      : <input type="radio" name="gender" value="남자" disabled />
                   } 남자
 
-                  {(`${member.gender}` === "여자") ?  
-                      <input type="radio" name="gender" value="여자" checked disabled readOnly /> 
-                      : <input type="radio" name="gender" value="여자" disabled readOnly />
+                  {( gender === "여자") ?  
+                      <input type="radio" name="gender" value="여자" checked disabled /> 
+                      : <input type="radio" name="gender" value="여자" disabled />
                   } 여자
                 </label>
                 </td>
@@ -273,21 +275,21 @@ const [imageSrc, setImageSrc] = useState('');
               <tr>
                 <th>주소</th>
                 <td>
-                <select defaultValue={member.region1} onChange={onChangeRegion1} disabled readOnly>
-                    <option disabled >시도선택</option>
-                    {sido.map((e) => (
-                    <option key={e.sido} value={e.codeNm} >
-                        {e.codeNm}
+                <select defaultValue={region1} onChange={onChangeRegion1} >
+                <option disabled selected>시도선택</option>
+                  {sido.map((e) => (
+                    <option key={e.sido} value={e.codeNm}>
+                      {e.codeNm}
                     </option>
-                    ))}
+                  ))}
                 </select>
-                <select defaultValue={member.region2} onChange={onChangeRegion2} disabled readOnly>
-                    <option disabled >시/구/군선택</option>
-                    {sigugun
-                    // 필터함수를 사용하여 배열을 필터링하여 군/구를 불러옴
-                    .filter((e) => e.sido === `${member.region1}` )
+                <select onChange={onChangeRegion2}>
+                  <option  disabled selected>시/구/군선택</option>
+                  {sigugun
+                  // 필터함수를 사용하여 배열을 필터링하여 군/구를 불러옴
+                    .filter((e) => e.sido === keySido)
                     .map((e) => (
-                        <option key={e.sigugun} value={e.codeNm}>
+                      <option key={e.sigugun} value={e.codeNm}>
                         {e.codeNm}
                         </option>
                     ))}
@@ -297,7 +299,7 @@ const [imageSrc, setImageSrc] = useState('');
               <tr>
                 <th>MBTI</th>
                 <td>
-                  <input type="text" value={member.mbti} disabled />
+                  <input type="text" value={mbti} disabled />
                 </td>
               </tr>
               <tr>
@@ -311,14 +313,14 @@ const [imageSrc, setImageSrc] = useState('');
               </tr>
           </table>
       </div>
-      ))}
+      {/* ))} */}
           {/* 저장하기 */}
           <div className='MemberUpdate-btn'>
             <Link to="/" ><button type="submit">취소하기</button></Link>
             <button type="submit" onClick={onClickButton}>저장하기</button>
           </div>
       </div>
-    </div>
+    // </div>
   )
 }
 

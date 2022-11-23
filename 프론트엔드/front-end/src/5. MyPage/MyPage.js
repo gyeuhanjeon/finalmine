@@ -11,9 +11,6 @@ const MyPage = () => {
   if(isLogin === "FALSE") window.location.replace("/login");
   // ▲ 로그인 안 되어 있으면 로그인 페이지로
 
-  // const DOMAIN = 'http://localhost:8111/ISOUR/MemberInfo/file/';
-  // const DOMAIN = 'http://localhost:8282/';
-
   const localId = window.localStorage.getItem("userId");
   const localPw = window.localStorage.getItem("userPw");
 
@@ -48,7 +45,7 @@ const MyPage = () => {
         setPwd(response.data.pwd);
         setBirth(response.data.birth);
         setGender(response.data.gender);
-        console.log("성별 확인 : " + response.data.gender)
+        console.log("생일 확인 : " + response.data.birth)
         setRegion1(response.data.region1);
         setRegion2(response.data.region2);
         console.log(response.data)
@@ -90,24 +87,9 @@ const MyPage = () => {
 
 
   return(
-    <div>
       <div className="MyPage-Container">
-        <div className="mainhead">
-          
-          {/* admin 계정일 때만 회원목록조회 버튼 생성 */}
-          {/* { localId === 'admin' &&
-            <div onClick={onClickMember}>
-              <img src={nowGo} alt="화살표"/>
-              <Link to='/AdminMemberInfo'><span>회원 목록 조회</span></Link>
-            </div>
-          } */}
-          
-        </div>
         <div className="history" >
-        {memberInfo && memberInfo.map(member => (
-          <div key={member.id}>
             <table className='mypage-table'>
-              <div key={memberInfo.id}>
               <colgroup> 
                 <col width="50%" /> 
                 <col width="50%" /> 
@@ -117,8 +99,8 @@ const MyPage = () => {
                 </tr>
                 <tr>
                   <td colSpan="2" align='center' >
-                    { member.fileName ?  
-                      <img src={ TEAM_DOMAIN + "MemberInfo/file/" + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}}/>
+                    { memberInfo.fileName ?  
+                      <img src={ TEAM_DOMAIN + "MemberInfo/file/" + id } style={{borderRadius:'70%', width: '200px'}}/>
                       : <img src={noImage} style={{borderRadius:'70%', width: '200px'}} />
                     }</td>
                 </tr>
@@ -164,17 +146,12 @@ const MyPage = () => {
                 <tr>
                   <br />
                 </tr>
-              </div>
             </table> 
           
-            { (id !== 'admin') ?
             <div onClick={onClickUpdate}>
-              <img src={nowGo} alt="화살표" />
               <span>회원정보 수정</span>
             </div>
-            : ''}
           </div>
-          ))}
           <div onClick={onClickMessage}>
               <img src={nowGo} alt="화살표" />
               <span>메세지 함</span>
@@ -184,8 +161,6 @@ const MyPage = () => {
               <span>탈퇴하기</span>
             </div>
           
-        </div>
-      </div>
     </div>
   );
 

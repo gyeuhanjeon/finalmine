@@ -30,13 +30,9 @@ const TeamAPI = {
 
   // 회원 정보 조회
   memberInfo: async function(id) {
-    const memberObj = {
-      id: id
-    };
 
     // return await axios.get(TEAM_DOMAIN + "GetMemberParam?cmd=MemberList", HEADER);
-    // return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
-    return await axios.get(TEAM_DOMAIN + "MyPage", memberObj, HEADER);
+    return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
   },
 
   // 회원 가입
@@ -65,10 +61,12 @@ const TeamAPI = {
   },
 
   // 회원 정보 수정
-  MemberUpdate: async function(id, pwd, region1, region2) {
+  MemberUpdate: async function(id, name, pwd, birth, region1, region2) {
     const memberObj = {
       id: id,
+      name: name,
       pwd: pwd,
+      birth: birth,
       region1: region1,
       region2: region2
     };
