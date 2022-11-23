@@ -9,10 +9,12 @@ import MBTI from './6. MBTI/MBTI';
 import MbtiTypes from './6. MBTI/MbtiTypes';
 import MessageList from './7. PostBOX/MessageList';
 import Home from './4. Home/Home';
+import Logout from './other/Logout';
 
 function App_Test() {
   return (
     <Router>
+      <Logout />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />

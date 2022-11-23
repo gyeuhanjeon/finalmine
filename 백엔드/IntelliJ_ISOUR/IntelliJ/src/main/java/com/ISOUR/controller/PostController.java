@@ -1,7 +1,7 @@
 package com.ISOUR.controller;
 
 import com.ISOUR.dto.PostDTO;
-import com.ISOUR.service.PostService;
+import com.ISOUR.Service.PostService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;

@@ -6,14 +6,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MemberDTO {
-    private String name;
+    private Long id_num;
     private String id;
     private String pwd;
+    private String name;
+    private String nickName;
+    private String email;
     private String birth;
-//    private String nickname;
     private String gender;
     private String region1;
     private String region2;
     private String mbti;
-//    private String introduce;
+    private String introduce;
 }

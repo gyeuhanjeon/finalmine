@@ -1,8 +1,6 @@
 package com.ISOUR.controller;
-
 import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.service.MemberService;
-
+import com.ISOUR.Service.MemberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -112,17 +110,21 @@ public class MemberController {
     // 객체 타입이 와야하기 때문에 Boolean 대문자
     public ResponseEntity<Boolean> MemberUpdate_Ctrl(@RequestBody Map<String, String> regData) {
         log.warn("★★★★★★★★★회원정보 수정 Controller★★★★★★★★★");
-
         String getId = regData.get("id");
         String getPwd = regData.get("pwd");
+        String getName = regData.get("name");
+        String getGender = regData.get("gender");
+        String getNickName = regData.get("NickName");
         String getRegion1 = regData.get("region1");
         String getRegion2 = regData.get("region2");
+        String getIntroduce = regData.get("introduce");
         log.warn("아이디(id) : " + getId);
         log.warn("변경한 비밀번호(pwd) : " + getPwd);
         log.warn("변경한 시도(region1) : " + getRegion1);
         log.warn("변경한 시구군(region2) : " + getRegion2);
+        log.warn("변경한 자기소개(introduce) : " + getIntroduce);
 
-        boolean isTrue = memberService.MemberUpdate(getId, getPwd, getRegion1, getRegion2);
+        boolean isTrue = memberService.MemberUpdate(getId, getPwd, getName, getNickName, getGender, getRegion1, getRegion2, getIntroduce);
 
         if(isTrue) {
             log.warn(">" + isTrue + " : 회원정보 수정 성공 ");
@@ -159,7 +161,6 @@ public class MemberController {
     @GetMapping("/MyPage")
     public ResponseEntity<MemberDTO> memberInfo(@RequestParam String id) {
         log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
-
         MemberDTO memberDTO = memberService.getMemberInfo(id);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }

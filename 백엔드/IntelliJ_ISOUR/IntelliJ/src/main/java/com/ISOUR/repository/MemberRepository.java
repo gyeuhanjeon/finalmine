@@ -1,6 +1,6 @@
 package com.ISOUR.repository;
 
-import com.ISOUR.entity.MemberInfo;
+import com.ISOUR.Entity.MemberInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

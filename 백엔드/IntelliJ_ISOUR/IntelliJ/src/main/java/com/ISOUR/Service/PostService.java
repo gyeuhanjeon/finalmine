@@ -1,7 +1,7 @@
-package com.ISOUR.service;
+package com.ISOUR.Service;
 
+import com.ISOUR.Entity.Postbox;
 import com.ISOUR.dto.PostDTO;
-import com.ISOUR.entity.Postbox;
 import com.ISOUR.repository.PostboxRepository;
 
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
-package com.ISOUR.service;
+package com.ISOUR.Service;
 
 import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.entity.MemberInfo;
+import com.ISOUR.Entity.MemberInfo;
 import com.ISOUR.repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +80,7 @@ public class MemberService {
     }
 
     /* 회원정보 수정 서비스 */
-    public boolean MemberUpdate(String id, String pwd, String region1, String region2 ) {
+    public boolean MemberUpdate(String id, String pwd, String name, String NickName, String gender, String region1, String region2, String introduce ) {
         log.warn("★★★★★★★★★회원정보 수정 서비스★★★★★★★★★");
         log.warn("아이디(id) : " + id);
         log.warn("변경한 비밀번호(pwd) : " + pwd);
@@ -90,9 +90,12 @@ public class MemberService {
         MemberInfo memberInfo = memberRepository.findById(id);
         memberInfo.setId_num(memberInfo.getId_num());
         memberInfo.setPwd(pwd);
+        memberInfo.setName(name);
+        memberInfo.setNickName(NickName);
+        memberInfo.setGender(gender);
         memberInfo.setRegion1(region1);
         memberInfo.setRegion2(region2);
-
+        memberInfo.setIntroduce(introduce);
         memberRepository.save(memberInfo);
 
         return true;
@@ -115,9 +118,7 @@ public class MemberService {
     public MemberDTO getMemberInfo(String id) {
         log.warn("★★★★★★★★★개별 회원 조회 서비스★★★★★★★★★");
         log.warn("조회할 아이디(id) : " + id);
-
         MemberInfo memberInfo = memberRepository.findById(id);
-
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setName(memberInfo.getName());
         memberDTO.setId(memberInfo.getId());

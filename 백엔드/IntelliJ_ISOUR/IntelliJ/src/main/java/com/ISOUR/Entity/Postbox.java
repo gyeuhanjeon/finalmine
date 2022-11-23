@@ -1,4 +1,4 @@
-package com.ISOUR.entity;
+package com.ISOUR.Entity;
 
 import lombok.Data;
 
