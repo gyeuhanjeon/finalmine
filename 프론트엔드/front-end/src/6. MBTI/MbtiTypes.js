@@ -1,24 +1,21 @@
 import React from "react";
-// import INTP from "../images/INTP-F.svg"
-import styled from 'styled-components';
-// import "./MbtiTypes.css";
-import Mbti from '../../CSS/Mbti.css';
-import 전략가 from '../../images/전략가.png';
-import 논리술사 from '../../images/논리술사.png';
-import 통솔자 from '../../images/통솔자.png';
-import 변론가 from '../../images/변론가.png';
-import 옹호자 from '../../images/옹호자.png';
-import 중재자 from '../../images/중재자.png';
-import 선도자 from '../../images/선도자.png';
-import 활동가 from '../../images/활동가.png';
-import 현실주의자 from '../../images/현실주의자.png';
-import 수호자 from '../../images/수호자.png';
-import 경영자 from '../../images/경영자.png';
-import 집정관 from '../../images/집정관.png';
-import 장인 from '../../images/장인.png';
-import 모험가 from '../../images/모험가.png';
-import 사업가 from '../../images/사업가.png';
-import 연예인 from '../../images/연예인.png';
+
+import 전략가 from '../images/전략가.png';
+import 논리술사 from '../images/논리술사.png';
+import 통솔자 from '../images/통솔자.png';
+import 변론가 from '../images/변론가.png';
+import 옹호자 from '../images/옹호자.png';
+import 중재자 from '../images/중재자.png';
+import 선도자 from '../images/선도자.png';
+import 활동가 from '../images/활동가.png';
+import 현실주의자 from '../images/현실주의자.png';
+import 수호자 from '../images/수호자.png';
+import 경영자 from '../images/경영자.png';
+import 집정관 from '../images/집정관.png';
+import 장인 from '../images/장인.png';
+import 모험가 from '../images/모험가.png';
+import 사업가 from '../images/사업가.png';
+import 연예인 from '../images/연예인.png';
 
 
 

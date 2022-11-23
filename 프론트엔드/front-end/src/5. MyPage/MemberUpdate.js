@@ -1,73 +1,49 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import TeamAPI from '../../api/TeamAPI';
-import hangjungdong from "../../hangjungdong";
-import '../../CSS/MyPage.css'
+import TeamAPI, { TEAM_DOMAIN } from '../0. API/TeamAPI';
+import hangjungdong from '../other/hangjungdong';
 import { Link } from 'react-router-dom';
-import noImage from '../../images/no_image.gif'
 import axios from 'axios';
+import logo from '../images/logo.png'
 
 
-const MemberListBlock = styled.div`
-box-sizing: border-box;
-padding-bottom: 3em;
-width: 768px;
-margin: 0 auto;
-margin-top: 2rem;
-@media screen and (max-width: 768px) {
-  width: 100%;
-  padding-left: 1em;
-  padding-right:1em;
-}
-`;
-
-const Msg = styled.div`
-  color: white;
-  font-size: .8em;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
 
 function MemberUpdate() {
     const localId = window.localStorage.getItem("userId");
     const localPw = window.localStorage.getItem("userPw");
     const isLogin = window.localStorage.getItem("isLogin");
     if(isLogin === "FALSE") window.location.replace("/");
-    const DOMAIN = 'http://localhost:8111/ISOUR/MemberInfo/file/';
 
 
   // 이름, 아이디, 비밀번호, 비밀번호 확인, 생년월일, 성별, 주소, 회원가입
   const [memberInfo, setMemberInfo] = useState([]); // 현재 로그인 되어 있는 회원의 정보 저장용
 
-  const [ files, SetFiles ] = useState({noImage});
+  const [files, SetFiles] = useState({logo});
   const [name, setName] = useState('');
   const [birth, setBirth] = useState('');
   const [age, setAge] = useState("");
   const [gender, setGender] = useState('');
-
-  const { sido, sigugun } = hangjungdong;
+  const {sido, sigugun} = hangjungdong;
   const [region1, setRegion1] = useState("");
   const [region2, setRegion2] = useState("");
   const [keySido, setKeySido] = useState("");
-
   const today = new Date();
+
+  // 유효성 검사
   const [isBirth, setIsBirth] = useState(false);
   const [isGender, setIsGender] = useState(false);
   const [isRegion1, setIsRegion1] = useState(false);
   const [isRegion2, setIsRegion2] = useState(false);
-    // 이름, 아이디, 비밀번호, 비밀번호 확인, 생년월일, 나이, 성별, 주소 1, 주소 2
 
-    const [id, setId] = useState('');
-    const [pwd, setPwd] = useState('');
-
+  const [id, setId] = useState('');
+  const [pwd, setPwd] = useState('');
 
   // 프로필 사진 추가 여부 확인
   const [isFileUP, setIsFileUp] = useState(false); 
 
   // formData 객체는 key, value 형식으로 되어 있는 객체이다.
   // formData.append( key, value );
-  const handleClick = () => {
+  const handleClick = async () => {
     const formData = new FormData();
     formData.append('uploadImage', files);
     formData.append('Id', localId);
@@ -76,21 +52,18 @@ function MemberUpdate() {
       console.log(value);
     }
 
-    const config = {
-      Header: {
-        'content-type': 'multipart/form-data',
-      },
-    };
-    // https://bewci01vce.execute-api.ap-northeast-2.amazonaws.com/prod/isour-file-upload
-    axios.post('http://localhost:8111/ISOUR/UploadService', formData, config).then(() => { // API Gateway URL 입력
-      console.log(localId);
-    });
+    try {
+      const UploadService = await TeamAPI.UploadService(formData)
+        console.log("통신 완 : " + localId);
+        console.log(UploadService.data);
+    } catch (e) {
+      console.log(e);
+    }
 };
 
   useEffect(() => {  
     const memberData = async () => {
         console.log("localId : "+ localId);
-        let id = localId;
     try {
         const response = await TeamAPI.memberInfo(id); // 회원 정보 조회
         setMemberInfo(response.data);
@@ -118,14 +91,11 @@ const onChangeName = e => {
 }
 
 const onChangePwd = e => {
-
-
   let temp_pwd = e.target.value;
   setPwd(temp_pwd);
 }
 
 const onChangeBirth = e => {
-
     let temp_birth = e.target.value;
     setBirth(temp_birth); 
     console.log("\n\ntemp_birth : " + temp_birth);
@@ -224,13 +194,12 @@ const [imageSrc, setImageSrc] = useState('');
 
   
   return (
-    <div className='Container'>
-      <div className='MemberUpdate-Container'>
-        
-
-            <div>
+      <div className='Container'>
+      <div className='MyPage-Container'>
+        {memberInfo.map(member => (
+            <div key={member.id}>
           <table className='MemberUpdate-table'>
-            {/* <colgroup> 
+            <colgroup> 
               <col width="50%" /> 
               <col width="50%" /> 
             </colgroup>
@@ -242,23 +211,24 @@ const [imageSrc, setImageSrc] = useState('');
               <tr>
                 <td colSpan="2" align='center' >
 
-                  파일이 추가되었는지를 먼저 확인 -> DB 데이터가 있는지를 먼저 확인할 경우 파일을 변경했을 때를 인식하지 못함. 
+                    {/* 미리보기 */}
+
+                  {/* 파일이 추가되었는지를 먼저 확인 -> DB 데이터가 있는지를 먼저 확인할 경우 파일을 변경했을 때를 인식하지 못함.  */}
                     { isFileUP ?  
-                     추가한 파일 이 있는 경우 해당 파일은 미리보기로 보여줌.
+                    //  추가한 파일 이 있는 경우 해당 파일은 미리보기로 보여줌.
                       <img src={imageSrc} style={{borderRadius:'70%', width: '200px'}} />
-                       추가한 파일이 없는 경우 DB에 저장된 파일이 있는지 확인
+                      //  추가한 파일이 없는 경우 DB에 저장된 파일이 있는지 확인
                       : member.fileName ?
-                      DB 에 저장된 데이터가 있다면 해당 데이터를 미리보기에 보여줌.
-                            <img src={`${DOMAIN}` + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}} />
-                      DB에 저장된 데이터가 없다면 기본 파일을 보여줌.
-                            : <img src={noImage} style={{borderRadius:'70%', width: '200px'}} /> 
-                    
+                      // DB 에 저장된 데이터가 있다면 해당 데이터를 미리보기에 보여줌.
+                            <img src={ TEAM_DOMAIN + "MemberInfo/file/" + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}} />
+                      // DB에 저장된 데이터가 없다면 기본 파일을 보여줌.
+                            : <img src={logo} style={{borderRadius:'70%', width: '200px'}} /> 
+                    } 
                 </td>   
-              </tr>  */}
-                       
+              </tr>           
               <tr>
                 <td colSpan="2" align='center' >
-                  <form className='MemberUpdate-profileImg-label' >
+                  <form className='MemberUpdate-profileImg-label'>
                     <label className='MemberUpdate-profileImg-label'>
                       <input className="MemberUpdate-profileImg-input" type='file' display='none' id='image' accept='image/*' onChange={(e) => {encodeFileToBase64(e.target.files[0])}} />
                       프로필사진 추가
@@ -268,23 +238,23 @@ const [imageSrc, setImageSrc] = useState('');
               </tr>
               <tr>
                 <th>이름</th>
-                <td><input type="text" value={name} placeholder={name} onChange={onChangeName}/></td>
+                <td><input type="text" value={name} placeholder={member.name} required onChange={onChangeName}/></td>
               </tr>
-              {/* <tr>
+              <tr>
                 <th>아이디</th>
-                <td><input type="text" value={id} disabled required id="inputId" readOnly/></td>
-              </tr> */}
+                <td><input type="text" value={member.id} disabled required id="inputId" readOnly/></td>
+              </tr>
               <tr>
                 <th>비밀번호</th>
-                <td><input type="password" value={pwd} onChange={onChangePwd} /></td>
+                <td><input type="password" value={member.pwd} disabled readOnly/></td>
               </tr>
-              {/* <tr>
+              <tr>
                 <th>생년월일</th>
-                <td><input type="date" value={birth} onChange={onChangeBirth} />
-                   
+                <td><input type="date" value={member.birth} readOnly />
+                    <span readOnly>만 {member.age}세</span>
                 </td>
-              </tr> */}
-              {/* <tr>
+              </tr>
+              <tr>
                 <th>성별</th>
                 <td>
                 <label>
@@ -311,10 +281,10 @@ const [imageSrc, setImageSrc] = useState('');
                     </option>
                     ))}
                 </select>
-                <select defaultValue={region2} onChange={onChangeRegion2} disabled readOnly>
+                <select defaultValue={member.region2} onChange={onChangeRegion2} disabled readOnly>
                     <option disabled >시/구/군선택</option>
                     {sigugun
-
+                    // 필터함수를 사용하여 배열을 필터링하여 군/구를 불러옴
                     .filter((e) => e.sido === `${member.region1}` )
                     .map((e) => (
                         <option key={e.sigugun} value={e.codeNm}>
@@ -338,10 +308,10 @@ const [imageSrc, setImageSrc] = useState('');
               </tr>
               <tr>
                 <br />
-              </tr>*/}
+              </tr>
           </table>
-      </div> 
-   
+      </div>
+      ))}
           {/* 저장하기 */}
           <div className='MemberUpdate-btn'>
             <Link to="/" ><button type="submit">취소하기</button></Link>

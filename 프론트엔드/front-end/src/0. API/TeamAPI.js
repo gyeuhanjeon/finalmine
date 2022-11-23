@@ -3,9 +3,9 @@ import axios from "axios";
 
 const HEADER = 'application/json';
 /* ▼ 인텔리제이용 ▼ */
-const TEAM_DOMAIN = "http://localhost:8282/";
+export const TEAM_DOMAIN = "http://localhost:8282/";
 /* ▼ 이클립스용 ▼ */
-// const TEAM_DOMAIN = "http://localhost:8111/ISOUR/";/
+// export const TEAM_DOMAIN = "http://localhost:8111/ISOUR/";/
 
 
 
@@ -30,8 +30,13 @@ const TeamAPI = {
 
   // 회원 정보 조회
   memberInfo: async function(id) {
+    const memberObj = {
+      id: id
+    };
+
     // return await axios.get(TEAM_DOMAIN + "GetMemberParam?cmd=MemberList", HEADER);
-    return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
+    // return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
+    return await axios.get(TEAM_DOMAIN + "MyPage", memberObj, HEADER);
   },
 
   // 회원 가입

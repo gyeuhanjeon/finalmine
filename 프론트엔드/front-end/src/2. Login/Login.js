@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import TeamAPI from '../api/TeamAPI';
-import '../CSS/Style_Login.css';
+import TeamAPI from '../0. API/TeamAPI';
 import logo from '../images/logo.png';
 
 const regexPw = /^\w{8,20}$/;

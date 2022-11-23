@@ -1,13 +1,6 @@
-// import { Link } from "react-router-dom";
 import styled from 'styled-components';
-// import TeamAPI from '../api/TeamAPI';
 import { useEffect, useState } from "react";
-import "../Exam/Exam.css";
-import TeamAPI from '../../api/TeamAPI';
-import reset from '../../CSS/reset.css';
-import mbti from '../../images/mbti.jpg';
-import start from '../../images/start.png';
-// import '../CSS/Style_Login.css';
+import TeamAPI from '../0. API/TeamAPI';
 
 // QuizApp 의 Line 44 에서 props를 넘겨받음.
 // props 1 ▶ mode={()=>changeMode('score')} 
@@ -304,7 +297,7 @@ const Quiz = (props) => {
   );
 }
 
-const Exam = () => {
+const MBTI = () => {
   const isLogin = window.localStorage.getItem("isLogin");
   if (isLogin === "FALSE") window.location.replace("/login");
 
@@ -351,7 +344,7 @@ const Exam = () => {
       {states.mode === 'start'
         ?
         <div>
-      <img className='mbti-btn-img' src={mbti}></img>
+      <img className='mbti-btn-img' />
 
           <button className='btn-exam-start'  onClick={() => { changeMode('quiz') }}>검 사 시 작</button>
         </div>
@@ -430,4 +423,4 @@ const OX = styled.div`
     }
 `;
 
-export default Exam;
+export default MBTI;

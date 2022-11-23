@@ -1,12 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import TeamAPI from '../../api/TeamAPI'
+import TeamAPI from '../0. API/TeamAPI';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-import imgHome from '../../images/home_button.png'
-import '../../CSS/Style_Login.css';
-import './MessageList.css';
-import SignUpModal from './SignUpModal'
+import SignUpModal from './SignUpModal';
 
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -45,10 +42,6 @@ const MessageList = () => {
   }
   height: 500px;
   `;
-
-
-
-
 
   useEffect(() => {
     const messageData = async () => {
@@ -176,7 +169,7 @@ const MessageList = () => {
           <button className='w-btn-neon2' onClick={onClickDelete}>삭제하기</button>
           <span>
             <Link  to="/home" className="link-box">
-              <img className="link-img" src={imgHome} alt="HOME" />
+              <img className="link-img" alt="HOME" />
               <span> HOME으로 이동 </span>
             </Link>
           </span>

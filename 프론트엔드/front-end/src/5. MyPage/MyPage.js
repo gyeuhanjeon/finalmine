@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import TeamAPI from '../../api/TeamAPI';
-import nowGo from '../../images/short_cut.png'
-import noImage from '../../images/no_image.gif';
-import { Link } from 'react-router-dom';
-import '../../CSS/Style_Login.css';
-import '../../CSS/MyPage.css'
+import TeamAPI, { TEAM_DOMAIN } from '../0. API/TeamAPI';
+import nowGo from '../images/logo.png';
+import noImage from '../images/logo.png';
+
 
 
 const MyPage = () => {
@@ -106,10 +104,11 @@ const MyPage = () => {
           
         </div>
         <div className="history" >
-
-            <div key={memberInfo.id}>
-              <table className='mypage-table'>
-              {/* <colgroup> 
+        {memberInfo && memberInfo.map(member => (
+          <div key={member.id}>
+            <table className='mypage-table'>
+              <div key={memberInfo.id}>
+              <colgroup> 
                 <col width="50%" /> 
                 <col width="50%" /> 
               </colgroup>
@@ -119,13 +118,13 @@ const MyPage = () => {
                 <tr>
                   <td colSpan="2" align='center' >
                     { member.fileName ?  
-                      <img src={`${DOMAIN}` + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}}/>
+                      <img src={ TEAM_DOMAIN + "MemberInfo/file/" + `${member.fileName}`} style={{borderRadius:'70%', width: '200px'}}/>
                       : <img src={noImage} style={{borderRadius:'70%', width: '200px'}} />
                     }</td>
                 </tr>
                 <tr>
                   <br />
-                </tr> */}
+                </tr>
                 <tr>
                   <th className='mypage-th' >이름</th>
                   <td className='mypage-td'>{name}</td>
@@ -165,7 +164,8 @@ const MyPage = () => {
                 <tr>
                   <br />
                 </tr>
-              </table> 
+              </div>
+            </table> 
           
             { (id !== 'admin') ?
             <div onClick={onClickUpdate}>
@@ -174,6 +174,7 @@ const MyPage = () => {
             </div>
             : ''}
           </div>
+          ))}
           <div onClick={onClickMessage}>
               <img src={nowGo} alt="화살표" />
               <span>메세지 함</span>

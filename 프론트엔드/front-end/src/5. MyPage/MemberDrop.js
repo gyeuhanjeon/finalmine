@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import TeamAPI from '../../api/TeamAPI';
+import TeamAPI from '../0. API/TeamAPI';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 

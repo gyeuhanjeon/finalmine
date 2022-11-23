@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import TeamAPI from '../api/TeamAPI';
-import hangjungdong from "../hangjungdong";
-import '../CSS/Style_SignUp.css';
+import TeamAPI from '../0. API/TeamAPI';
+import hangjungdong from '../other/hangjungdong';
 import logo from '../images/logo.png';
 
 // 정규식 - 이름, 아이디, 비밀번호
