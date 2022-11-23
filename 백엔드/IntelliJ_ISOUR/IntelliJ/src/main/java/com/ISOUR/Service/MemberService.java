@@ -1,109 +1,156 @@
-package com.ISOUR.Service;
+package com.ISOUR.service;
 
-import com.ISOUR.Entity.I_MEMBER;
-import com.ISOUR.dao.MemberRepository;
-import com.ISOUR.vo.MemberVO;
+import com.ISOUR.dto.MemberDTO;
+import com.ISOUR.entity.MemberInfo;
+import com.ISOUR.repository.MemberRepository;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Slf4j
-//@Transactional
 public class MemberService {
     private MemberRepository memberRepository;
-
     public MemberService(MemberRepository memberRepository) {
-        // 위의 memberRepo 는 매개변수로 받은 memberRepo 와 같다 라고 지정해 준 것.
         this.memberRepository = memberRepository;
     }
 
-    // 로그인
-    public boolean LoginCheck(String id, String pwd) {
-        List<I_MEMBER> memberList = memberRepository.findByIdAndPwd(id, pwd);
-        for(I_MEMBER e : memberList) {
+    /* 아이디 중복 체크(회원가입 여부 확인) 서비스 */
+    public boolean isMemberCheck(String id) {
+        log.warn("★★★★★★★★★아이디 중복체크 서비스★★★★★★★★★");
+        log.warn("입력한 아이디(id) : " + id);
+
+        MemberInfo memberInfo = memberRepository.findById(id);
+        if(memberInfo != null) return true;
+        else return false;
+    }
+
+    /* 회원가입 서비스 */
+    public boolean signUpMember(String name, String id, String pwd, String birth, String gender, String region1, String region2) {
+        MemberInfo memberInfo = new MemberInfo();
+        memberInfo.setName(name);
+        memberInfo.setId(id);
+        memberInfo.setPwd(pwd);
+        memberInfo.setBirth(birth);
+        memberInfo.setGender(gender);
+        memberInfo.setRegion1(region1);
+        memberInfo.setRegion2(region2);
+
+        MemberInfo result = memberRepository.save(memberInfo);
+        log.warn(result.toString());
+
+        return true;
+    }
+
+    /* 로그인 서비스 */
+    public boolean loginMember(String id, String pwd) {
+        log.warn("★★★★★★★★★로그인 서비스★★★★★★★★★");
+        log.warn("입력한 아이디(id) : " + id);
+        log.warn("입력한 비밀번호(pwd) : " + pwd);
+
+        List<MemberInfo> memberInfoList = memberRepository.findByIdAndPwd(id, pwd);
+        for(MemberInfo e : memberInfoList) {
             return true;
         }
         return false;
     }
 
-    // 회원 가입
-    // 프론트에서 입력 받은 값(controller 한테 받은거)
-    public boolean MemberReg(String id, String pwd, String name, String email, String birth, String gender, String region1, String region2 ) {
-        I_MEMBER i_member = new I_MEMBER();
-        i_member.setId(id);
-        i_member.setPwd(pwd);
-        i_member.setName(name);
-        i_member.setEmail(email);
-        i_member.setBirth(birth);
-        i_member.setGender(gender);
-        i_member.setRegion1(region1);
-        i_member.setRegion2(region2);
-        I_MEMBER rst = memberRepository.save(i_member);
-        log.warn(rst.toString());
+    /* MBTI 검사 결과 저장 서비스 */
+    public boolean saveMBTI(String mbti, String id) {
+        log.warn("★★★★★★★★★MBTI 검사 결과 저장 서비스★★★★★★★★★");
+        log.warn("MBTI 검사 결과(mbti) : " + mbti);
+        log.warn("아이디(id) : " + id);
+
+        MemberInfo memberInfo = memberRepository.findById(id);
+        memberInfo.setId_num(memberInfo.getId_num());
+        memberInfo.setName(memberInfo.getName());
+        memberInfo.setId(memberInfo.getId());
+        memberInfo.setPwd(memberInfo.getPwd());
+        memberInfo.setBirth(memberInfo.getBirth());
+        memberInfo.setGender(memberInfo.getGender());
+        memberInfo.setRegion1(memberInfo.getRegion1());
+        memberInfo.setRegion2(memberInfo.getRegion2());
+        memberInfo.setMbti(mbti);
+
+        memberRepository.save(memberInfo);
+
         return true;
     }
 
-    // 회원정보수정
-    // 프론트에서 입력 받을 값(controller 한테 받은거)
+    /* 회원정보 수정 서비스 */
+    public boolean MemberUpdate(String id, String pwd, String region1, String region2 ) {
+        log.warn("★★★★★★★★★회원정보 수정 서비스★★★★★★★★★");
+        log.warn("아이디(id) : " + id);
+        log.warn("변경한 비밀번호(pwd) : " + pwd);
+        log.warn("변경한 시도(region1) : " + region1);
+        log.warn("변경한 시구군(region2) : " + region2);
 
-    public boolean MemberUpdate(String id, String pwd, String name, String email, String birth, String gender, String region1, String region2 ) {
-        I_MEMBER i_member = new I_MEMBER();
-        List<I_MEMBER> memberList = memberRepository.findById(id);
-        for(I_MEMBER e : memberList) {
-            i_member.setId_num(e.getId_num());
-            i_member.setId(id);
-            i_member.setPwd(pwd);
-            i_member.setName(name);
-            i_member.setEmail(email);
-            i_member.setBirth(birth);
-            i_member.setGender(gender);
-            i_member.setRegion1(region1);
-            i_member.setRegion2(region2);
-            I_MEMBER rs = memberRepository.save(i_member);
-            log.warn(">>>>>>>>>>>>>>>>>>>>> 회원 정보 수정");
-            log.warn(rs.toString());
-        }
+        MemberInfo memberInfo = memberRepository.findById(id);
+        memberInfo.setId_num(memberInfo.getId_num());
+        memberInfo.setPwd(pwd);
+        memberInfo.setRegion1(region1);
+        memberInfo.setRegion2(region2);
+
+        memberRepository.save(memberInfo);
+
         return true;
     }
 
-    // 아이디 중복 체크
-    public boolean IdCheck(String id) {
-        List<I_MEMBER> memberList = memberRepository.findById(id);
-        for(I_MEMBER e : memberList) {
+    /* 회원탈퇴 서비스 */
+    public boolean deleteMember(String id, String pwd) {
+        log.warn("★★★★★★★★★회원탈퇴 서비스★★★★★★★★★");
+        log.warn("아이디(id) : " + id);
+        log.warn("입력한 비밀번호(pwd) : " + pwd);
+
+        List<MemberInfo> memberInfoList = memberRepository.findByIdAndPwd(id, pwd);
+        if(memberInfoList != null) {
+            memberRepository.deleteAll(memberInfoList);
             return true;
-        }
-        return false;
+        } else return false;
     }
 
-    // 아이디로 회원정보 조회
-     public List<MemberVO> getMemberList(String id) {
-        List<MemberVO> MemberList = new ArrayList<>();
-        List<I_MEMBER> memberList = memberRepository.findById(id);
-        for(I_MEMBER e : memberList) {
-            MemberVO memberVO = new MemberVO();
-            memberVO.setId_num(e.getId_num());
-            memberVO.setId(e.getId());
-            memberVO.setPwd(e.getPwd());
-            memberVO.setName(e.getName());
-            memberVO.setNickName(e.getNickName());
-            memberVO.setEmail(e.getEmail());
-            memberVO.setBirth(e.getBirth());
-            memberVO.setGender(e.getGender());
-            memberVO.setRegion1(e.getRegion1());
-            memberVO.setRegion2(e.getRegion2());
-            memberVO.setMbti(e.getMbti());
-            memberVO.setIntroduce(e.getIntroduce());
-            MemberList.add(memberVO);
-        }
-         log.warn(String.valueOf(MemberList));
-        return MemberList;
+    /* 개별 회원 조회 서비스 */
+    public MemberDTO getMemberInfo(String id) {
+        log.warn("★★★★★★★★★개별 회원 조회 서비스★★★★★★★★★");
+        log.warn("조회할 아이디(id) : " + id);
+
+        MemberInfo memberInfo = memberRepository.findById(id);
+
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setName(memberInfo.getName());
+        memberDTO.setId(memberInfo.getId());
+        memberDTO.setPwd(memberInfo.getPwd());
+        memberDTO.setBirth(memberInfo.getBirth());
+        memberDTO.setGender(memberInfo.getGender());
+        memberDTO.setRegion1(memberInfo.getRegion1());
+        memberDTO.setRegion2(memberInfo.getRegion2());
+        memberDTO.setMbti(memberInfo.getMbti());
+
+        return memberDTO;
     }
+
+    /* 전체 회원 조회 서비스 */
+    public List<MemberDTO> getMemberList() {
+        log.warn("★★★★★★★★★전체 회원 조회 서비스★★★★★★★★★");
+
+        List<MemberDTO> memberDTOS = new ArrayList<>();
+        List<MemberInfo> memberInfoList = memberRepository.findAll();
+        for(MemberInfo e : memberInfoList) {
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setName(e.getName());
+            memberDTO.setId(e.getId());
+            memberDTO.setPwd(e.getPwd());
+            memberDTO.setBirth(e.getBirth());
+            memberDTO.setRegion1(e.getRegion1());
+            memberDTO.setRegion2(e.getRegion2());
+            memberDTO.setMbti(e.getMbti());
+
+            memberDTOS.add(memberDTO);
+        }
+        return memberDTOS;
+    }
+
 
 }

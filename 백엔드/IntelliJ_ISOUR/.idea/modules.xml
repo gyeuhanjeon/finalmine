@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IntelliJ/ISOUR.iml" filepath="$PROJECT_DIR$/IntelliJ/ISOUR.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/IntelliJ.iml" filepath="$PROJECT_DIR$/.idea/IntelliJ.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IntelliJ/RestApi.iml" filepath="$PROJECT_DIR$/IntelliJ/RestApi.iml" />
     </modules>
   </component>
 </project>
