@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 public class PostDTO {
     private Long postNum;
-    private String postReceiver;
+    private String postSender;
     private String content;
     private LocalDate postTime;
 }

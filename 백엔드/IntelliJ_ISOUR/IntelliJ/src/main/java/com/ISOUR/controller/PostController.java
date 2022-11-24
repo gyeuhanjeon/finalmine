@@ -5,8 +5,10 @@ import com.ISOUR.Service.PostService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -24,10 +26,14 @@ public class PostController {
     public ResponseEntity<List<PostDTO>> postList(@RequestBody Map<String, String> resultData) {
         log.warn("★★★★★★★★★쪽지함 조회 Controller★★★★★★★★★");
 
+        log.warn("resultData : " + resultData);
+
         String getId = resultData.get("id");
         log.warn(getId + " 의 쪽지함 조회");
 
         List<PostDTO> list = postService.getPostList(getId);
+        log.warn(">> 쪽지함 조회 Controller 로 돌아왔습니다.");
+
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -52,4 +58,21 @@ public class PostController {
         else return new ResponseEntity<>(false, HttpStatus.OK);
     }
 
+    /* 쪽지 삭제 */
+    @PostMapping("/DeletePost")
+    public ResponseEntity<Boolean> postDelete(@RequestBody ArrayList<Long> PostData) {
+        log.warn("★★★★★★★★★쪽지 삭제 Controller★★★★★★★★★");
+        log.warn("삭제할 쪽지 번호 리스트(PostData) : " + PostData);
+        log.warn("PostData 의 type 확인 : " + PostData.getClass());
+
+        boolean isTrue = postService.deleteMember(PostData);
+
+        if(isTrue) {
+            log.warn(">" + isTrue + " : 쪽지 삭제 성공 ");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            log.warn(">" + isTrue + " : 쪽지 삭제 실패 ");
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+    }
 }

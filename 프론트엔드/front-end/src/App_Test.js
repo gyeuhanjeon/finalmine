@@ -10,6 +10,7 @@ import MbtiTypes from './6. MBTI/MbtiTypes';
 import MessageList from './7. PostBOX/MessageList';
 import Home from './4. Home/Home';
 import Logout from './other/Logout';
+import Postbox from './7. PostBOX/Postbox';
 
 function App_Test() {
   return (
@@ -26,6 +27,7 @@ function App_Test() {
         <Route path='/MemberUpdate' element={<MemberUpdate />} />
         <Route path='/MbtiTypes' element={<MbtiTypes />} />
         <Route path='/MessageList' element={<MessageList />} />
+        <Route path='/Postbox' element={<Postbox />} />
       </Routes>
     </Router>
   );
