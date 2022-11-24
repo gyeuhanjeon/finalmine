@@ -1,23 +1,92 @@
+@font-face {
+  font-family: "Jalnan";
+  src: url("./font/Jalnan.ttf");
+}
+/*전체 폼*/
 .App {
   position: relative;
   height: 1250px;
   margin-right: auto;
   margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px; 
-  display:flex;
   align-items: center;
   flex-direction: column;
-  max-width: 830px;
+  max-width: 1180px;
+  background-color: aqua;
+  font-family: "Jalnan";
 }
-.Match {
-  position: absolute;
-  top:100px
-}
+/*네비바*/
 .me-auto {
-  margin-left: 250px;
+  margin:auto;
   padding: 25px;
 }
-.App-Matching {
-  
+.Nav-link-font1 {
+  background-color: mintcream;
+  font-size: 20px;
+  border:1px solid;
+  border-radius: 10px;
+  border-color: white;
+  margin-right: 100px;
+}
+.Nav-link-font2 {
+  background-color: mintcream;
+  font-size: 20px;
+  border:1px solid;
+  border-radius: 10px;
+  border-color: white;
+  margin-right: 100px;
+}
+.Nav-link-font3 {
+  background-color: mintcream;
+  font-size: 20px;
+  border:1px solid;
+  border-radius: 10px;
+  border-color: white;
+  margin-right: 100px;
+}
+
+.home-button {
+  margin: 15px;
+  font-size: 30px;
+}
+
+.App-Nav {
+  width: 100%;
+  padding-bottom: 25px;
+}
+/*바디 폼*/
+.warp_body_Mainfont {
+padding-top: 20px;
+font-size: 50px;
+text-align: center;
+}
+
+.warp_body {
+  padding-top: 50px;
+}
+
+.warp_body1 {
+  float: left;
+  margin-left: 20px;
+  padding-bottom: 600px;
+  border:1px solid;
+  border-radius: 20px;
+width: 500px;
+}
+
+.warp_body2{
+  float: left;
+  margin-left: 20px;
+  padding-bottom: 600px;
+  width: 300px;
+  border:1px solid;
+  border-radius: 20px;
+}
+
+.warp_body3 {
+  float: left;
+  margin-left: 20px;
+  padding-bottom: 600px;
+  width: 300px;
+  border:1px solid;
+  border-radius: 20px;
 }
