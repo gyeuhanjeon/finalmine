@@ -20,6 +20,10 @@ ISOUR Final Project
 ♥ 조혜경
 - 쪽지 삭제 후 자동 새로고침 완료
 - 약관 진행중...
+- (2차)
+- App_Test 를 App 으로 옮기고 삭제
+- 필요없는 App.test.js 삭제
+- index.js 에서 App 으로 변경
 
 22.11.24(목)
 
