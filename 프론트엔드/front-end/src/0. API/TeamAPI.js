@@ -18,11 +18,12 @@ const TeamAPI = {
   },
 
   /* 회원가입 */
-  memberReg: async function(name, id, pwd, birth, gender, region1, region2) {
+  memberReg: async function(name, id, pwd, email, birth, gender, region1, region2) {
     const memberObj = {
       name: name,
       id: id,
       pwd: pwd,
+      email: email,
       birth: birth,
       gender: gender,
       region1: region1,
@@ -57,6 +58,20 @@ const TeamAPI = {
     // @GetMapping("/MyPage")
     return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
   },
+  
+  /* 비밀번호 찾기 */
+  findPwd: async function(id, email, birth) {
+    // @GetMapping("/FindPwd")
+    return await axios.get(TEAM_DOMAIN + `FindPwd?id=${id}&email=${email}&birth=${birth}`, HEADER);
+  },
+  
+  /* 아이디 찾기 */
+  findId: async function(email, birth) {
+    // @GetMapping("/FindId")
+    return await axios.get(TEAM_DOMAIN + `FindId?email=${email}&birth=${birth}`, HEADER);
+  },
+
+
 
   /* 회원정보 수정 */
   MemberUpdate: async function(id, name, pwd, birth, region1, region2) {

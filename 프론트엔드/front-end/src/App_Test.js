@@ -11,6 +11,7 @@ import MessageList from './7. PostBOX/MessageList';
 import Home from './4. Home/Home';
 import Logout from './other/Logout';
 import Postbox from './7. PostBOX/Postbox';
+import FindInfo from './2. Login/FindInfo';
 
 function App_Test() {
   return (
@@ -28,6 +29,7 @@ function App_Test() {
         <Route path='/MbtiTypes' element={<MbtiTypes />} />
         <Route path='/MessageList' element={<MessageList />} />
         <Route path='/Postbox' element={<Postbox />} />
+        <Route path='/FindInfo' element={<FindInfo />} />
       </Routes>
     </Router>
   );

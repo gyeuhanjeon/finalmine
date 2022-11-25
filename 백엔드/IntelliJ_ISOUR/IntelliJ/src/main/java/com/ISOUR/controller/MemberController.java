@@ -45,17 +45,18 @@ public class MemberController {
     @PostMapping("/SignUp")
     public ResponseEntity<Boolean> memberSignUp(@RequestBody Map<String, String> signUpData) {
         log.warn("★★★★★★★★★회원가입 Controller★★★★★★★★★");
-        log.warn("항목 : 이름, 아이디, 비밀번호, 생년월일, 성별, 시도, 시구군");
+        log.warn("항목 : 이름, 아이디, 비밀번호,이메일, 생년월일, 성별, 시도, 시구군");
 
         String getName = signUpData.get("name");
         String getId = signUpData.get("id");
         String getPwd = signUpData.get("pwd");
+        String getEmail = signUpData.get("email");
         String getBirth = signUpData.get("birth");
         String getGender = signUpData.get("gender");
         String getRegion1 = signUpData.get("region1");
         String getRegion2 = signUpData.get("region2");
 
-        boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getBirth, getGender, getRegion1, getRegion2);
+        boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getEmail, getBirth, getGender, getRegion1, getRegion2);
 
         if(isTrue) {
             log.warn(">" + isTrue + " : 회원가입 성공 ");
@@ -160,12 +161,36 @@ public class MemberController {
     }
 
     /* @GetMapping 모음집 - 회원 조회 */
+
     /* 개별 회원 조회 */
     @GetMapping("/MyPage")
     public ResponseEntity<MemberDTO> memberInfo(@RequestParam String id) {
         log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
         MemberDTO memberDTO = memberService.getMemberInfo(id);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+    }
+
+    /* 비밀번호 찾기 정보 조회 */
+    @GetMapping("/FindPwd")
+    public ResponseEntity<Boolean> memberInfo(@RequestParam String id, String email, String birth ) {
+        log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
+        boolean isTrue = memberService.findPwd(id,email,birth);
+        if(isTrue) {
+            log.warn(">" + isTrue + " : MBTI 검사 결과 저장 성공 ");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            log.warn(">" + isTrue + " : MBTI 검사 결과 저장 실패 ");
+            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    /* 아이디 찾기 정보 조회 */
+    @GetMapping("/FindId")
+    public ResponseEntity<MemberDTO> memberInfo(@RequestParam String email, String birth ) {
+        log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
+        MemberDTO memberDTO = memberService.findId(email,birth);
+        return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+
     }
 
     /* 전체 회원 조회 */

@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
 import SignUpModal from './SignUpModal';
-import './jjo.css';
 
 
 const Postbox = () => {

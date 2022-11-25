@@ -86,7 +86,7 @@ function Login() {
             </div>
 
             <div className="Form-item-other">
-              <a href="/">I forgot my password</a>
+              <a href="/FindInfo">아이디/비밀번호 찾기</a>
             </div>
 
             <button type="submit" onClick={onClickLogin}>Login</button>

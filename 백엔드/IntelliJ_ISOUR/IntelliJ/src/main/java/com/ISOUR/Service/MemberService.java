@@ -28,11 +28,12 @@ public class MemberService {
     }
 
     /* 회원가입 서비스 */
-    public boolean signUpMember(String name, String id, String pwd, String birth, String gender, String region1, String region2) {
+    public boolean signUpMember(String name, String id, String pwd, String email, String birth, String gender, String region1, String region2) {
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.setName(name);
         memberInfo.setId(id);
         memberInfo.setPwd(pwd);
+        memberInfo.setEmail(email);
         memberInfo.setBirth(birth);
         memberInfo.setGender(gender);
         memberInfo.setRegion1(region1);
@@ -131,6 +132,37 @@ public class MemberService {
 
         return memberDTO;
     }
+
+
+    /* 비밀번호 찾기 조회 서비스 */
+    public boolean findPwd(String id, String email, String birth) {
+        log.warn("★★★★★★★★★로그인 서비스★★★★★★★★★");
+        log.warn("입력한 아이디(id) : " + id);
+        log.warn("입력한 비밀번호(pwd) : " + email);
+        log.warn("입력한 비밀번호(pwd) : " + birth);
+
+        List<MemberInfo> memberInfoList = memberRepository.findByIdAndEmailAndBirth(id, email, birth);
+        for(MemberInfo e : memberInfoList) {
+            return true;
+        }
+        return false;
+    }
+
+    /* 아이디 찾기 조회 서비스 */
+    public MemberDTO findId(String email, String birth) {
+        log.warn("★★★★★★★★★로그인 서비스★★★★★★★★★");
+        log.warn("입력한 이메일(email) : " + email);
+        log.warn("입력한 생년월일(birth) : " + birth);
+
+        MemberInfo memberInfo = memberRepository.findByEmailAndBirth(email, birth);
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId(memberInfo.getId());
+        return memberDTO;
+    }
+
+
+
+
 
     /* 전체 회원 조회 서비스 */
     public List<MemberDTO> getMemberList() {
