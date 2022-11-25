@@ -98,6 +98,7 @@ const Postbox = () => {
         if(response.status == 200) {
           console.log("통신 성공(200)");
           alert("선택한 쪽지가 삭제되었습니다.");
+          window.location.reload();
         } else {
           console.log("통신 실패 : " + response.status);
           alert("통신 실패 : " + response.status);
