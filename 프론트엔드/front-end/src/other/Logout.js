@@ -23,7 +23,7 @@ function Logout() {
 
 
     return(
-        <button type="button" class="btn btn-outline-info" onClick={onClickLogout} style={{float : "right"}}>로그아웃</button>
+        <button type="button" class="btn btn-outline-info" onClick={onClickLogout}>로그아웃</button>
     );
 }
 

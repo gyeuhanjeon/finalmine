@@ -1,0 +1,39 @@
+/*네비바*/
+.me-auto {
+    margin:auto;
+    padding: 25px;
+  }
+  .Nav-link-font1 {
+    background-color: mintcream;
+    font-size: 20px;
+    border:1px solid;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 100px;
+  }
+  .Nav-link-font2 {
+    background-color: mintcream;
+    font-size: 20px;
+    border:1px solid;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 100px;
+  }
+  .Nav-link-font3 {
+    background-color: mintcream;
+    font-size: 20px;
+    border:1px solid;
+    border-radius: 10px;
+    border-color: white;
+    margin-right: 100px;
+  }
+  
+  .home-button {
+    margin: 15px;
+    font-size: 30px;
+  }
+  
+  .App-Nav {
+    width: 100%;
+    padding-bottom: 25px;
+  }

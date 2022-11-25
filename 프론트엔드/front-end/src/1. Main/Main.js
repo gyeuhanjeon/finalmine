@@ -1,36 +1,26 @@
 import { Link } from "react-router-dom";
+import '../1. Main/Main.css'
+import '../images/아이셔로고.png'
+import Spinner from 'react-bootstrap/Spinner';
+/* 보완 해야할 것 */
+/* 1. 버튼 마우스 갖다대면 애니메이션 효과 주기 
+   2. 전체적인 디자인 보완하기(검정은 그냥 만들어본것)
+   3. 버튼을 잘 수정하자*/
 
 function Main() {
 
     return(
-        <div className="Main-container">
-            <div className="Main-container1">
-                <div className="Main-box0">
-                    <div className="Main-font">MBTISOUR</div>
-                </div>
-
-                <div className="Main-box-font2">"인간들은 제각각 다른 성격을 가지고 있습니다."</div>
+        <div className="Main_Container">
+            <div className="Main_title">
+            <h4>MBTISOUR</h4>
+            {/* <img src="../images/아이셔로고.png"></img> */}
             </div>
-            <div className="Main-container2">
-                <div className="Main-box2">
-                <div className="Main-box2-font1">?</div>
-                <div className="Main-box2-font2">전부다 같을 수는 없지만</div>
-                <div className="Main-box2-font3">성격이 잘 맞는다면 좋은 친구가 될 수 있죠!</div>
-            </div>
-            <div className="Main-container3">
-            <div className="Main-box3">
-            <div className="Main-box3-font1">나와 비슷한 사람을 찾는다면</div>
-                <div className="Main-box3-font2">아래의 시작 버튼을 클릭해 주세요!</div>
-                </div>
-                </div>
-            </div>
-            <div className="Main-box-button1">
+            <Spinner animation="border" role="status"> /*쳇바퀴*/
             <Link to="/login"><button className="Main-box-button2">START</button></Link>
-            </div>
-        </div>
-        
-            );
+    </Spinner>
             
+        </div>
+            )
         }
-        export default Main;
+    export default Main;
 

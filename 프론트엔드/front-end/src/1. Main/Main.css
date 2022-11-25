@@ -1,0 +1,23 @@
+.Main_Container {
+    display: block;
+    position: relative;
+    max-height: 1250px;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1180px;
+    background-color: white;
+    font-family: "Jalnan";
+    text-align: center;
+}
+.Main_title {
+    color:white;
+    background-color: black;
+    padding-top: 625px ;
+}
+.Main-box-button2 {
+    border-radius: 10px;
+    font-size: 100px;
+    background-color: white;
+}

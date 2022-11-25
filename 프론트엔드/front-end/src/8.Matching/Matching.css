@@ -1,0 +1,99 @@
+/*바디 폼*/
+.Matching_Container {
+    position: relative;
+    height: 1250px;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    flex-direction: column;
+    max-width: 1180px;
+    background-color: white;
+    font-family: "Jalnan";
+}
+
+.warp_body_Mainfont {
+  padding-top: 20px;
+  font-size: 50px;
+  text-align: center;
+  border: 1px solid;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  
+  }
+  
+  .warp_body {
+    padding-top: 50px;
+    text-align: center;
+  }
+  
+  .warp_body1 {
+    float: left;
+    margin-left: 20px;
+    padding-top: 80px;
+    height: 700px;
+    border:1px solid;
+    border-radius: 20px;
+    width: 500px;
+  }
+  
+  .warp_body2{
+    float: left;
+    margin-left: 20px;
+    padding-top: 80px;
+    height: 700px;
+    width: 300px;
+    border:1px solid;
+    border-radius: 20px;
+  }
+  
+  .warp_body3 {
+    float: left;
+    margin-left: 20px;
+    padding-top: 80px;
+    height: 700px;
+    width: 300px;
+    border:1px solid;
+    border-radius: 20px;
+  }
+  /* 회원 사진 */
+  .warp_body1_img {
+    padding-top: 50px;
+    height: 300px;
+    padding-bottom: 50px;
+  }
+  .warp_body2_img {
+    padding-top: 50px;
+    height: 300px;
+    padding-bottom: 50px;
+  }
+  .warp_body3_img {
+    padding-top: 50px;
+    height: 300px;
+    padding-bottom: 50px;
+  }
+  /* 소개 글 */
+  .warp_body1_introduce {
+  
+  }
+  .warp_body2_introduce {
+  
+  }
+  .warp_body3_introduce {
+  
+  }
+  /* 좋아요,쪽지,채팅 버튼 */
+  .warp_goodbutton {
+    display: block;
+    padding-top: 120px;
+  
+  }
+  .warp_goodbutton_padding {
+    align-items:center;
+    height: 60px;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
