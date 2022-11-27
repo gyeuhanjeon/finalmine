@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import '../1. Main/Main.css'
-import '../images/아이셔로고.png'
+import '../images/아이셔용.png'
 import Spinner from 'react-bootstrap/Spinner';
 /* 보완 해야할 것 */
 /* 1. 버튼 마우스 갖다대면 애니메이션 효과 주기 
@@ -13,7 +13,7 @@ function Main() {
         <div className="Main_Container">
             <div className="Main_title">
             <h4>MBTISOUR</h4>
-            {/* <img src="../images/아이셔로고.png"></img> */}
+            {/* <img src="../images/아이셔용.png"></img> */}
             </div>
             <Spinner animation="border" role="status"> /*쳇바퀴*/
             <Link to="/login"><button className="Main-box-button2">START</button></Link>
