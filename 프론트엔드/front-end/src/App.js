@@ -12,6 +12,7 @@ import Home from './4. Home/Home';
 import Logout from './other/Logout';
 import Postbox from './7. PostBOX/Postbox';
 import FindInfo from './2. Login/FindInfo';
+import ChatPage from './9.Chat/Chat'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path='/MessageList' element={<MessageList />} />
         <Route path='/Postbox' element={<Postbox />} />
         <Route path='/FindInfo' element={<FindInfo />} />
+        <Route path='/Chat' element={<ChatPage/>}/>
       </Routes>
     </Router>
   );

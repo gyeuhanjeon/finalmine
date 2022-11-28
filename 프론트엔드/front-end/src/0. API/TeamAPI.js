@@ -129,6 +129,14 @@ const TeamAPI = {
     // @PostMapping("/DeletePost")
     return await axios.post(TEAM_DOMAIN + "DeletePost", obj, HEADER);
   },
+    //chat
+    memberChat: async function(content) {
+      const chatObj = {
+      
+        content:content
+      };
+      return await axios.put(TEAM_DOMAIN + "Chat", chatObj, HEADER);
+    },
 
   // 이미지 파일 업로드
   UploadService: async function(formData) {
