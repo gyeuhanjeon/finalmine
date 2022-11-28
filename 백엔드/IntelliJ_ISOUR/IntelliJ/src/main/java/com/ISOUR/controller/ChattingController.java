@@ -24,6 +24,7 @@ public class ChattingController {
         public ResponseEntity<Boolean> sendPost(@RequestBody Map<String, String> chatData) {
             log.warn("★★★★★★★★★쪽지 보내기 Controller★★★★★★★★★");
             String getContent = chatData.get("content");
+
             log.info(getContent);
 
 

@@ -11,4 +11,5 @@ import java.time.LocalDateTime;
 public class ChatDTO {
     private Long chatNum;
     private String content;
+    private LocalDateTime chatTime;
 }

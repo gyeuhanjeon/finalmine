@@ -1,6 +1,6 @@
 package com.ISOUR.service;
 
-import com.ISOUR.Entity.Chat;
+import com.ISOUR.entity.Chat;
 import com.ISOUR.repository.ChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ChatService {
 
         Chat chat = new Chat();
         chat.setContent(content);
-        chat.setChatNum(chat.getChatNum());
+        chat.setChatTime(LocalDateTime.now());
 
         Chat result = chatRepository.save(chat);
         log.warn(result.toString());

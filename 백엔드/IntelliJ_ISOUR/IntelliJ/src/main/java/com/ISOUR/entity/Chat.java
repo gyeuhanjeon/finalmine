@@ -1,4 +1,4 @@
-package com.ISOUR.Entity;
+package com.ISOUR.entity;
 
 import lombok.Data;
 
@@ -13,4 +13,5 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long chatNum;
     private String content;
+    private LocalDateTime chatTime;
 }
