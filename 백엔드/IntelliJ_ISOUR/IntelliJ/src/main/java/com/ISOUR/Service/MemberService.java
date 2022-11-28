@@ -1,21 +1,24 @@
-package com.ISOUR.Service;
+package com.ISOUR.service;
 
+import com.ISOUR.entity.Terms;
 import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.Entity.MemberInfo;
+import com.ISOUR.entity.MemberInfo;
 import com.ISOUR.repository.MemberRepository;
 
+import com.ISOUR.repository.TermsRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class MemberService {
-    private MemberRepository memberRepository;
-    public MemberService(MemberRepository memberRepository) {
-        this.memberRepository = memberRepository;
-    }
+    private final MemberRepository memberRepository;
+    private final TermsRepository termsRepository;
 
     /* 아이디 중복 체크(회원가입 여부 확인) 서비스 */
     public boolean isMemberCheck(String id) {
@@ -29,6 +32,8 @@ public class MemberService {
 
     /* 회원가입 서비스 */
     public boolean signUpMember(String name, String id, String pwd, String email, String birth, String gender, String region1, String region2) {
+        log.warn("★★★★★★★★★회원가입 서비스★★★★★★★★★");
+
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.setName(name);
         memberInfo.setId(id);
@@ -40,6 +45,28 @@ public class MemberService {
         memberInfo.setRegion2(region2);
 
         MemberInfo result = memberRepository.save(memberInfo);
+        log.warn(result.toString());
+
+        return true;
+    }
+
+    /* 약관 동의 서비스 */
+    public boolean agreeTerms(String id, String check_term1, String check_term2) {
+        log.warn("★★★★★★★★★약관 동의 서비스★★★★★★★★★");
+        log.warn("id : " + id);
+        log.warn("필수 동의 약관(check_term1) : " + check_term1);
+        log.warn("선택 동의 약관(check_term2) : " + check_term2);
+
+        MemberInfo memberInfo = memberRepository.findById(id);
+        log.warn(memberInfo.toString());
+
+        Terms terms = new Terms();
+        terms.setId_num(memberInfo.getId_num());
+        terms.setTerm1(check_term1);
+        terms.setTerm2(check_term2);
+        terms.setRegistrationTime(LocalDateTime.now());
+
+        Terms result = termsRepository.save(terms);
         log.warn(result.toString());
 
         return true;

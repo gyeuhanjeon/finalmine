@@ -1,7 +1,7 @@
 package com.ISOUR.controller;
 
 import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.Service.MemberService;
+import com.ISOUR.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,10 +32,10 @@ public class MemberController {
         if(isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
 
         if(isTrue) {
-            log.warn(">" + isTrue + " : 사용할 수 없는 아이디(id)입니다. ");
+            log.warn(">>" + isTrue + " : 사용할 수 없는 아이디(id)입니다. ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            log.warn(">" + isTrue + " : 사용할 수 있는 아이디(id)입니다. ");
+            log.warn(">>" + isTrue + " : 사용할 수 있는 아이디(id)입니다. ");
             return new ResponseEntity<>(false, HttpStatus.OK);
         }
 
@@ -57,12 +57,21 @@ public class MemberController {
         String getRegion2 = signUpData.get("region2");
 
         boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getEmail, getBirth, getGender, getRegion1, getRegion2);
+        if(isTrue) log.warn("I_MEMBER 테이블 DB 저장 " + isTrue);
 
-        if(isTrue) {
-            log.warn(">" + isTrue + " : 회원가입 성공 ");
+        String getCheck_term1 = signUpData.get("check_term1");
+        String getCheck_term2 = signUpData.get("check_term2");
+
+        boolean isSave = memberService.agreeTerms(getId, getCheck_term1, getCheck_term2);
+        if(isSave) log.warn("Terms 테이블 DB 저장 : " + isSave);
+
+        if(isTrue && isSave) {
+            log.warn(">> " + isTrue + " : 회원가입 성공 ");
+            log.warn(">> " + isSave + " : 약관 동의 저장 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            log.warn(">" + isTrue + " : 회원가입 실패 ");
+            log.warn(">> " + isTrue + " : 회원가입 실패 ");
+            log.warn(">> " + isSave + " : 약관 동의 저장 실패 ");
             return new ResponseEntity<>(false, HttpStatus.OK);
         }
     }

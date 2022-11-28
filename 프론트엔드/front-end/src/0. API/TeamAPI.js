@@ -18,7 +18,7 @@ const TeamAPI = {
   },
 
   /* 회원가입 */
-  memberReg: async function(name, id, pwd, email, birth, gender, region1, region2) {
+  memberReg: async function(name, id, pwd, email, birth, gender, region1, region2, check_term1, check_term2) {
     const memberObj = {
       name: name,
       id: id,
@@ -27,7 +27,9 @@ const TeamAPI = {
       birth: birth,
       gender: gender,
       region1: region1,
-      region2: region2
+      region2: region2,
+      check_term1: check_term1,
+      check_term2: check_term2
     };
     // @PostMapping("/SignUp")
     return await axios.post(TEAM_DOMAIN + "SignUp", memberObj, HEADER);

@@ -1,6 +1,6 @@
 package com.ISOUR.repository;
 
-import com.ISOUR.Entity.Postbox;
+import com.ISOUR.entity.Postbox;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

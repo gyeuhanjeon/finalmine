@@ -1,7 +1,6 @@
-package com.ISOUR.Service;
+package com.ISOUR.service;
 
-import com.ISOUR.Entity.MemberInfo;
-import com.ISOUR.Entity.Postbox;
+import com.ISOUR.entity.Postbox;
 import com.ISOUR.dto.PostDTO;
 import com.ISOUR.repository.PostboxRepository;
 
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Service

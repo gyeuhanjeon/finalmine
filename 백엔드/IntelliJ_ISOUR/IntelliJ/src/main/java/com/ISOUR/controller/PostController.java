@@ -1,14 +1,12 @@
 package com.ISOUR.controller;
 
 import com.ISOUR.dto.PostDTO;
-import com.ISOUR.Service.PostService;
+import com.ISOUR.service.PostService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:3000/")

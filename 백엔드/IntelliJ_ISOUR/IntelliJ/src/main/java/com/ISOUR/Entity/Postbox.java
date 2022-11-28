@@ -1,10 +1,9 @@
-package com.ISOUR.Entity;
+package com.ISOUR.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @Entity

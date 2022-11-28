@@ -1,10 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
 import logo from '../images/logo.png';
-
-
 
 
 
@@ -34,15 +32,21 @@ const Msg = styled.div`
 
 function SignUp() {
 
+  const [mode, setMode] = useState("agree");
+  const [checkedItems, setCheckedItems] = useState([]);
+  const [check_term1, setCheck_term1] = useState("");
+  const [check_term2, setCheck_term2] = useState("");
+
   const Terms = () => {
-    const [checkedItems, setCheckedItems] = useState([]);
-    
   
+
     const [termsList, setTermsList] = useState([
-      {termNum: 1, title: "[필수] 아이셔계정 약관"},
-      {termNum: 2, title: "[선택] 프로모션 정보 수신 동의(선택)"}
+      {termNum: 1, title: "[필수] 아이셔계정 약관", content: "테스트23"},
+      {termNum: 2, title: "[선택] 프로모션 정보 수신 동의(선택)",
+        content: "엠비티아이셔에서 제공하는 이벤트/혜택 등 다양한 정보를 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 엠비티아이셔 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다."}
     ]);
   
+
     function AllCheck() {
       return(
         <p>
@@ -89,6 +93,10 @@ function SignUp() {
       console.log("\n\n동의하고 가입하기 버튼 눌렀어요.");
   
       if(checkedItems.includes(1)) {
+        setCheck_term1("동의")
+        if(checkedItems.includes(2)) setCheck_term2("동의")
+        else setCheck_term2("비동의")
+        
         setMode("join");
   
       } else {
@@ -111,6 +119,7 @@ function SignUp() {
               onChange={(e) => handleSingleCheck(e.target.checked, ball.termNum)}
               checked={checkedItems.includes(ball.termNum) ? true : false} />
             <label htmlFor="checkbox-check_single">{ball.title}</label>
+            <div>{ball.content}</div>
           </div>
         ))}
   
@@ -118,8 +127,6 @@ function SignUp() {
       </form>
     );
   }
-
-  const [mode, setMode] = useState("agree");
 
   // 이름, 아이디, 비밀번호, 비밀번호 확인, 생년월일, 나이, 성별, 주소 1, 주소 2
   const [name, setName] = useState('');
@@ -138,6 +145,14 @@ function SignUp() {
   const [region1, setRegion1] = useState("");
   const [region2, setRegion2] = useState("");
   const [keySido, setKeySido] = useState("");
+
+  /* 
+  최초 통신(useEffect) */
+  useEffect(() => {
+    console.log("현재 mode : " + mode);
+    console.log("필수 약관 : " + check_term1);
+    console.log("선택 약관 : " + check_term2);
+  }, [mode]); 
 
   // 유효성 검사
   const [isName, setIsName] = useState(false);
@@ -177,6 +192,8 @@ function SignUp() {
   /*
   이름 변경 */
   const onChangeName = e => {
+    console.log("mode : " + mode);
+
     let temp_name = e.target.value;
     setName(temp_name);
 
@@ -391,9 +408,11 @@ function SignUp() {
     console.log("isGender : " + isGender);
     console.log("isRegion1 : " + isRegion1);
     console.log("isRegion2 : " + isRegion2);
+    console.log("check_term1 : " + check_term1);
+    console.log("check_term2 : " + check_term2);
 
     if (isName && isId && isIdcheck && isPwd && isPwdcheck && isEmail && isBirth && isGender && isRegion1 && isRegion2) {
-      const memberReg = await TeamAPI.memberReg(name, id, pwd, email, birth, gender, region1, region2);
+      const memberReg = await TeamAPI.memberReg(name, id, pwd, email, birth, gender, region1, region2, check_term1, check_term2);
 
       console.log("name : " + name);
       console.log("id : " + id);
@@ -404,6 +423,8 @@ function SignUp() {
       console.log("gender : " + gender);
       console.log("region1 : " + region1);
       console.log("region2 : " + region2);
+      console.log("필수 약관 : " + check_term1);
+      console.log("선택 약관 : " + check_term2);
       console.log("가입 성공!! \n로그인 페이지로 이동합니다.");
       alert("콘솔창 확인용");
       window.location.replace("/login");
