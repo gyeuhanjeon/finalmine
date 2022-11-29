@@ -1,15 +1,15 @@
 package com.ISOUR.controller;
 
+import com.ISOUR.dto.ChatDTO;
+import com.ISOUR.dto.MemberDTO;
 import com.ISOUR.repository.ChatRepository;
 import com.ISOUR.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000/")
@@ -36,5 +36,12 @@ public class ChattingController {
                 log.warn(">" + isTrue + " : 채팅 실패 ");
                 return new ResponseEntity<>(false, HttpStatus.OK);
             }
+    }
+    @PostMapping("/Chat")
+    public ResponseEntity<List<ChatDTO>> chatList() {
+        log.warn("★★★★★★★★★전체 회원 조회 Controller★★★★★★★★★");
+        List<ChatDTO> list = chatService.getChatList();
+        log.warn(">>>>>>>>>>" + list);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
