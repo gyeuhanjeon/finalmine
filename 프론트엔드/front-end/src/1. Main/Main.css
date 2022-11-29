@@ -1,7 +1,7 @@
 .Main_Container {
     display: block;
     position: relative;
-    max-height: 1250px;
+    height: 1250px;
     margin-right: auto;
     margin-left: auto;
     align-items: center;
@@ -11,13 +11,34 @@
     font-family: "Jalnan";
     text-align: center;
 }
+
 .Main_title {
-    color:white;
-    background-color: black;
-    padding-top: 625px ;
+    color:black;
+
 }
+
 .Main-box-button2 {
     border-radius: 10px;
-    font-size: 100px;
+    font-size: 60px;
     background-color: white;
 }
+
+.Main_font {
+font-size: 100px;
+padding-top: 320px;
+}
+.Main_font1 {
+    font-size: large;
+    text-align: center;
+}
+.box {
+    margin: auto;
+    width: 200px;
+    height: 80px;
+    border-radius: 50px;
+    background: var(--accent);
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    align-items: center;
+  }

@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import styled from 'styled-components';
 import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
-import logo from '../images/logo.png';
+import '../3. SignUp/SignUp.css'
 
 // 정규식 - 이름, 아이디, 비밀번호
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
@@ -320,14 +320,9 @@ function SignUp() {
 
   return (
     <div className="SignUp-Container">
-      <div className="SignUp-card-container">
-        <div className="SignUp-card">
+      <div className="SignUp-Main-Box">
 
-          <div className="SignUp-card-logo">
-            <img src={logo} alt="logo" />
-          </div>
-
-          <div className="SignUp-card-header">
+          <div className="SignUp-header">
             <h1>Sign Up</h1>
             <div>회원정보를 입력해주세요</div>
           </div>
@@ -336,7 +331,7 @@ function SignUp() {
             {/* 이름 */}
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
-              <span className="Form-item-icon material-symbols-rounded">person</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="text" className='Input-Name' placeholder="이름" value={name} onChange={onChangeName} required />
               <Msg>
                 {showReqName && reqName}
@@ -345,7 +340,7 @@ function SignUp() {
 
             {/* 아이디 */}
             <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">account_circle</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="text" className='Input-ID' placeholder="아이디" value={id} onChange={onChangeId} required />
               <button onClick={onClickIdCheck} className='Input-ID-check' required> 중복확인 </button>
               <Msg>
@@ -358,7 +353,7 @@ function SignUp() {
 
             {/* 비밀번호 */}
             <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">lock</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="password" placeholder="비밀번호" value={pwd} onChange={onChangePassword} />
               <Msg>
                 {showGuidePwd && guidePwd}
@@ -368,7 +363,7 @@ function SignUp() {
 
             {/* 비밀번호 확인 */}
             <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">password</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="password" placeholder="비밀번호 확인" value={pwdcheck} onChange={onChangePassword_check} disabled={!regexPw.test(pwd)} />
               <Msg>
                 {showErrorPwdcheck && errorPwdcheck}
@@ -378,7 +373,7 @@ function SignUp() {
 
             {/* 이메일 */}
             <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">email</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="text" className='Input-Name' placeholder="이메일" value={email} onChange={onChangeEmail} required />
               <Msg>
                 {showReqEmail && reqEmail}
@@ -387,7 +382,7 @@ function SignUp() {
 
             {/* 생년월일 */}
             <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">cake</span>
+              <span className="Form-item-icon material-symbols-rounded"></span>
               <input type="date" value={birth} onChange={onChangeBirth} />
               <span className='Span-Age'>만 {age}세</span>
               <Msg>생년월일을 선택하세요</Msg>
@@ -396,7 +391,7 @@ function SignUp() {
             {/* 성별 */}
             <div className="Form-item">
               <div className='Form-item-Gender'>
-                <span className="Form-item-icon material-symbols-rounded">touch_app</span>
+                <span className="Form-item-icon material-symbols-rounded"></span>
                 <label className='Label-gender'>
                   <input type="radio" name="gender" value="남자" onChange={onChangeRadio} />
                   <span>남자</span>
@@ -412,7 +407,7 @@ function SignUp() {
             {/* 주소 */}
             <div className="Form-item">
               <div className='Form-item-Address'>
-                <span className="Form-item-icon material-symbols-rounded">home</span>
+                <span className="Form-item-icon material-symbols-rounded"></span>
                 <select className='Select-Sido' onChange={onChangeRegion1}>
                   <option disabled selected>시도선택</option>
                   {sido.map((e) => (
@@ -441,8 +436,6 @@ function SignUp() {
             <button type="submit" className='Button-Submit' onClick={onClickButton}>회원가입</button>
 
           </form>
-
-        </div> {/* SignUp-card 의 끝 */}
       </div> {/* SignUp-card-container 의 끝 */}
     </div>
   );

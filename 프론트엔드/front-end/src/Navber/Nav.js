@@ -9,7 +9,7 @@ import Logout from '../other/Logout';
    3. 네비바 모든 페이지 연결 */
 function Navber() {
     return (
-        <div className='App-Nav'>
+        <nav className='App-Nav'>
              <Navbar bg="light" expand="lg">
             <Container>
               <Link to="/"><Navbar.Brand className='home-button' href="#home">MBTISOUR</Navbar.Brand></Link>
@@ -37,7 +37,7 @@ function Navber() {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-      </div>
+      </nav>
     )
     }
     export default Navber;

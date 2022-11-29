@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
-import logo from '../images/logo.png';
+import '../2. Login/Login.css';
+import '../font/Jalnan.ttf';
+import "../images/아이셔로고.png" 
+import { motion } from "framer-motion";
 
 const regexPw = /^\w{8,20}$/;
 
@@ -59,48 +62,46 @@ function Login() {
 
   return(
     <div className="Login-Container">
-      <div className="Login-card-container">
-        <div className="Login-card">
+        <div className="Login-box1">
 
-          <div className="Login-card-logo">
+          {/* <div className="Login-card-logo">
             <img src={logo} alt="logo" />
+          </div> */}
+
+          <div className="Login-Main-font">
+            <h1 >MBTISOUR</h1>
+            <p>로그인을 해주세요!</p>
           </div>
 
-          <div className="Login-card-header">
-            <h1>Sign In</h1>
-            <div>Please login to use platform</div>
-          </div>
-
-          <form action="" className="Login-card-form">
+          {/* <form action="" className="Login-card-form"> */}
 
           {/* 아이디 */}
-            <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">account_circle</span>
-              <input type="text" placeholder="Enter ID" value={id} onChange={onChangeId} required />
+            <div className="Login-Id">
+              <input className="Login-input" type="text" placeholder="Enter ID" value={id} onChange={onChangeId} required />
             </div>
 
           {/* 비밀번호 */}
-            <div className="Form-item">
-              <span className="Form-item-icon material-symbols-rounded">lock</span>
-              <input type="password" placeholder="Enter Password" value ={pwd} onChange={onChangePwd} />
+            <div className="Login-PW">
+              <input className="Login-input" type="password" placeholder="Enter Password" value ={pwd} onChange={onChangePwd} />
             </div>
+            <motion.div
+      className="Login-botton"
+      whileHover={{ scale: 1 }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: "spring", stiffness: 250, damping: 30 }}
+    ><button className="Login-botton"type="submit" onClick={onClickLogin}>Login</button></motion.div>
 
-            <div className="Form-item-other">
+
+            <div className="Login-findId">
               <a href="/FindInfo">아이디/비밀번호 찾기</a>
             </div>
 
-            <button type="submit" onClick={onClickLogin}>Login</button>
-
-          </form>
-
           <div className="Login-card-footer">
-            Don't have an account? <a href="/signup">Create a free account</a>.
+            가입하고 친구를 만들어봐요! <p><a href="/signup">회원가입</a></p>
           </div>
 
-        </div> {/* Login-card 의 끝 */}
 
         <div className="Login-card-social">
-          <div>Other Sign-in Platform</div>
 
           <div className="Login-card-social-btns">
             <a href="/">
@@ -117,10 +118,8 @@ function Login() {
               </svg>
             </a>
           </div>
-
-        </div> {/* Login-card-social 의 끝 */}
-
-      </div> {/* Login-card-container 의 끝 */}
+        </div> 
+      </div>
     </div>
   );
 }

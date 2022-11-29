@@ -12,11 +12,12 @@ import Home from './4. Home/Home';
 import Logout from './other/Logout';
 import Postbox from './7. PostBOX/Postbox';
 import FindInfo from './2. Login/FindInfo';
+import Navber from './Navber/Nav';
 
 function App_Test() {
   return (
     <Router>
-      <Logout />
+      <Navber/>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
