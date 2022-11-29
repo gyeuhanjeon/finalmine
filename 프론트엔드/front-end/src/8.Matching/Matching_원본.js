@@ -16,9 +16,14 @@ const Matching = () => {
     const [NickName, setNickName] = useState('');
     const [mbti, setMbti] = useState('');
     const [introduce, setIntroduce] = useState('');
-    const [mat_memberInfo, setMat_MemberInfo] = useState('');
+    const [mat_memberInfo, setMat_MemberInfo] = useState([]);
     const [pageNum, setPageNum] = useState(1);
 
+    // const [like_user_num, setLike_user_num] = useState('');
+    // const [like_num, setLike_num] = useState(0);
+    // const [mat_id_num, setMat_id_num] = useState('');
+
+    // 페이지 이동
     const onChangeNext = () => {
         setPageNum(pageNum + 1);
         console.log("pageNum : " + pageNum);
@@ -28,6 +33,19 @@ const Matching = () => {
         setPageNum(pageNum - 1);
         console.log("pageNum : " + pageNum);
     }
+
+    // 좋아요 버튼
+    // const Click_like = () => {
+    //     setLike_num(1);
+    //     console.log("Click_like : " + like_num);
+    // }
+
+    // const UnClick_like = (e) => {
+    //     const like_user_num = e.target.value
+    //     setLike_user_num(like_user_num);
+    //     setLike_num(0);
+    //     console.log("UnClick_like : " + like_user_num);
+    // }
 
     // 매칭 회원 정보 조회
     useEffect(() => {
@@ -97,6 +115,9 @@ const Matching = () => {
                     {/* 
                         친구 추천 테이블 
                      */}
+                    {/* 
+                        친구 추천 테이블 
+                    */}
                     { mat_memberInfo.map((mat) => (
                     <div key={mat.id}>
                         <table className='Matching-table'>
@@ -105,7 +126,7 @@ const Matching = () => {
                                 <col width="50%" /> 
                             </colgroup>
                             <tr>
-                                <td colSpan="2" align='center' style={{width:"300px", padding:'20px'}}><h2>친구 추천 </h2></td>
+                                <td colSpan="2" align='center' style={{width:"300px", padding:'20px'}}><h2>친구 추천 {mat_memberInfo.index}</h2></td>
                             </tr>
                             <tr>
                                 <td colSpan="2" align='center' >
@@ -126,6 +147,11 @@ const Matching = () => {
                                 <th className='Matching-th'>자기소개</th>
                                 <td className='Matching-td'>{mat.mat_introduce}</td>
                             </tr>
+                            
+                            {/* { like_num === 0 ?
+                                <img src={Click} onClick={Click_like} value={mat.mat_id_num} style={{width: 30}}/>
+                                : <img src={unClick} onClick={UnClick_like} value={mat.mat_id_num} style={{width: 25}} />   
+                            } */}
                             <tr>
                                 <br />
                             </tr>

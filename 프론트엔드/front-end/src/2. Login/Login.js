@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
 import '../2. Login/Login.css';
 import '../font/Jalnan.ttf';
-import "../images/아이셔로고.png" 
+import "../images/아이셔용.png" 
 import { motion } from "framer-motion";
 
 const regexPw = /^\w{8,20}$/;

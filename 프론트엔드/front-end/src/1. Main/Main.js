@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import '../1. Main/Main.css';
-import '../images/아이셔로고.png';
+import '../images/아이셔용.png';
 import { motion } from "framer-motion"
 import { ScrollContainer, ScrollPage, batch, Fade,MoveOut, Sticky, Animator,FadeIn,ZoomIn,Move,StickyIn} from "react-scroll-motion"
 /* 보완 해야할 것 */
