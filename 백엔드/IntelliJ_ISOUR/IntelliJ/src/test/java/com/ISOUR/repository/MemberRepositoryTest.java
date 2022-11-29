@@ -42,4 +42,22 @@ class MemberRepositoryTest {
 
         return true;
     }
+
+//    16 +
+//    32 +
+    @Test
+    @DisplayName("매칭용회원가입 테스트")
+    public void signUpTest_Matching() {
+        String[] MBTI = new String[] { "", "INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP" };
+        for(int i = 1; i <= 16; i++) {
+            MemberInfo memberInfo = new MemberInfo();
+            memberInfo.setName("test" + (16 +i));
+            memberInfo.setNickName("testNic" + (16 +i));
+            memberInfo.setId("test" + (16 +i));
+            memberInfo.setPwd("test" + (16 +i));
+            memberInfo.setMbti(MBTI[i]);
+            memberInfo.setIntroduce("Im test" + (16 +i) + "입니다.");
+            memberRepository.save(memberInfo);
+        }
+    }
 }
