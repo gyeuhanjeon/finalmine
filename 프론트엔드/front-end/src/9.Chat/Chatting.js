@@ -6,10 +6,10 @@ const Chat = () => {
     if(isLogin === "FALSE") window.location.replace("/login");
 
     const [nickName, setNickName] = useState('');
-    const [chatinfo,setChatinfo] = useState([]);
-    const [content, setContent] = useState([]);
+    const [content, setContent] = useState('');
+    const [chatInfo,setChatinfo] = useState([]);
     const [isText, setIsText] = useState('');
-
+  
 
 
 
@@ -20,7 +20,7 @@ const Chat = () => {
         if(textShow === '') {
             setIsText(false);
         } else {
-            // setContent(textShow);
+            setContent(textShow);
             setIsText(true);
         }
     }
@@ -36,7 +36,7 @@ const Chat = () => {
                 console.log(res.data);
 
                 if(res.data === true) {
-                    
+                    setContent('')
                 }else{
                     alert("실패")
                 }
@@ -61,8 +61,7 @@ const Chat = () => {
           let id = content;
           try {
             const response = await TeamAPI.chatInfo(id); // 원래는 전체 회원 조회용
-            setChatinfo(response.data[0]);
-            setContent(response.data.content);
+            setChatinfo(response.data);
             console.log("1111", response.data);
             // console.log("1111", response.data[1].content)
 
@@ -73,7 +72,7 @@ const Chat = () => {
           }
         };
         chatData();
-        }, []);
+        }, [onClickBTN]);
     
    
 
@@ -82,19 +81,18 @@ const Chat = () => {
         <div>
             <div>
                 <h1>채팅내용</h1>
-                <table>1
-                {chatinfo && chatinfo.map((content) => {
-                    <div key={content.id}>
+                <div>*********************</div>
+                {chatInfo && chatInfo.map((chat) => (
+                    <div key={chat.id}>
                         <tr>
-                            <td>{content.chatNum}</td>
-                            <td>{content.content}</td>
+                            <td>{chat.chatNum}</td>
+                            <td>{chat.content}</td>
+                            <td>{chat.chatTime}</td>
                         </tr>
                     </div>
-                })}
-                </table>
+                ))}
             </div>
-            <h1>1</h1>
-            <input type="text" placeholder="입력"  onChange={onChangeText}/>
+            <input type="text" placeholder="입력" value={content} onChange={onChangeText}/>
             <button onClick={onClickBTN}>보내기</button>
         </div>
     )

@@ -1,9 +1,15 @@
 package com.ISOUR.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Data
 @Entity
@@ -13,5 +19,7 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long chatNum;
     private String content;
+    @DateTimeFormat(pattern="yyyyMMddHHmmss")
     private LocalDateTime chatTime;
+
 }

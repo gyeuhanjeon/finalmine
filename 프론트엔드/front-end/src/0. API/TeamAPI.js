@@ -60,7 +60,6 @@ const TeamAPI = {
     // @GetMapping("/MyPage")
     return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
   },
-  
   /* 비밀번호 찾기 */
   findPwd: async function(id, email, birth) {
     // @GetMapping("/FindPwd")
@@ -130,13 +129,18 @@ const TeamAPI = {
     return await axios.post(TEAM_DOMAIN + "DeletePost", obj, HEADER);
   },
     //chat
-    memberChat: async function(content) {
-      const chatObj = {
-      
-        content:content
-      };
-      return await axios.put(TEAM_DOMAIN + "Chat", chatObj, HEADER);
-    },
+  memberChat: async function(content) {
+    const chatObj = {
+    
+      content:content
+    };
+    return await axios.put(TEAM_DOMAIN + `Chat?id=${content}`, chatObj, HEADER);
+  },
+
+  chatInfo: async function(content) {
+    return await axios.post(TEAM_DOMAIN + "Chat", HEADER);
+  },
+
 
   // 이미지 파일 업로드
   UploadService: async function(formData) {
@@ -150,15 +154,6 @@ const TeamAPI = {
     };
 
     return await axios.post(TEAM_DOMAIN + "UploadService", regCheck, config, HEADER);
-  },
-
-  // 매칭회원 불러오기
-  MatchingMember2: async function(id, pageNum) {
-    const regCmd = {
-      id : id,
-      pageNum: pageNum
-    }
-    return await axios.post(TEAM_DOMAIN + "Matching", regCmd, HEADER);
   },
   
 }
