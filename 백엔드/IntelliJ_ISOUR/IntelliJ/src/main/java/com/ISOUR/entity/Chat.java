@@ -19,7 +19,6 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long chatNum;
     private String content;
-    @DateTimeFormat(pattern="yyyyMMddHHmmss")
     private LocalDateTime chatTime;
 
 }

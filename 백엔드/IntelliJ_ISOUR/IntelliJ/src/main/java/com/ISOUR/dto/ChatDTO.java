@@ -15,6 +15,5 @@ import java.time.format.DateTimeFormatter;
 public class ChatDTO {
     private Long chatNum;
     private String content;
-    @DateTimeFormat(pattern="yyyyMMddHHmmss")
     private LocalDateTime chatTime;
 }

@@ -29,7 +29,7 @@ public class ChatService {
 
         Chat chat = new Chat();
         chat.setContent(content);
-        chat.setChatTime(LocalDateTime.now());
+        chat.setChatTime(LocalDateTime.now().withNano(0));
 
         Chat result = chatRepository.save(chat);
         log.warn(result.toString());
