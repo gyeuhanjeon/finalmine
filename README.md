@@ -2,6 +2,7 @@
 ISOUR Final Project
 
 22.11.29(화)
+
 < 우혜정 >
 - 매칭 친구 추천 2명씩 보이도록 구현
 - MBTI 테이블 생성(오라클, MySQL ver)
