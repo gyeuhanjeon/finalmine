@@ -26,9 +26,10 @@ public class MatchingController {
     public ResponseEntity<List<MatDTO>> Mat_MemberListPage(@RequestBody Map<String, String> PageData) {
         log.warn("★★★★★★★★★매칭 회원 조회 Controller★★★★★★★★★");
         String id = PageData.get("id");
-        Integer num = Integer.parseInt(PageData.get("pageNum"));
-        log.warn("★★★★★★★★★ 페이지넘버 : " + num);
-        List<MatDTO> list = matchingService.Mat_MemberListPage(id, num);
+        int pageNum = Integer.parseInt(PageData.get("pageNum"));
+        int id_num = Integer.parseInt(PageData.get("local_id_num"));
+        log.warn("★★★★★★★★★ 페이지넘버 : " + pageNum);
+        List<MatDTO> list = matchingService.Mat_MemberListPage(id, id_num, pageNum);
         log.warn("★★ 매칭 회원 정보 : " + list);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }

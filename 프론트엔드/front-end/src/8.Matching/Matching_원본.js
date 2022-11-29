@@ -10,9 +10,10 @@ const Matching = () => {
     if(isLogin === "FALSE") window.location.replace("/login");
     // ▲ 로그인 안 되어 있으면 로그인 페이지로
     const localId = window.localStorage.getItem("userId");
-    
+    const local_id_num = window.localStorage.getItem("id_num");
 
     const [id, setId] = useState('');
+    const [id_num, setId_num] = useState('');
     const [NickName, setNickName] = useState('');
     const [mbti, setMbti] = useState('');
     const [introduce, setIntroduce] = useState('');
@@ -58,6 +59,7 @@ const Matching = () => {
             const Mat = await TeamAPI.MatchingMember2(id, pageNum);
             console.log("****************");
             setMat_MemberInfo(Mat.data);
+            setId_num(Mat.data[0].user_id_num);
             setNickName(Mat.data[0].user_nick);
             setMbti(Mat.data[0].user_mbti);
             setIntroduce(Mat.data[0].user_introduce);

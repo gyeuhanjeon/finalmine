@@ -4,6 +4,7 @@ import TeamAPI from '../0. API/TeamAPI';
 
 const Home = () => {
   const localId = window.localStorage.getItem("userId");
+  const local_id_num = window.localStorage.getItem("id_num");
 
   const [nickName, setNickName] = useState('');
 
@@ -13,6 +14,7 @@ const Home = () => {
       try {
         const response = await TeamAPI.memberInfo(id); // 원래는 전체 회원 조회용
         setNickName(response.data.nickName);
+        window.localStorage.setItem("id_num", response.data.id_num);
         console.log(response.data)
       } catch (e) {
         console.log(e);

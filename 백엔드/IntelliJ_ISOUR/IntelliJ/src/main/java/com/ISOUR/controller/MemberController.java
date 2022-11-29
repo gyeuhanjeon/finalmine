@@ -1,7 +1,7 @@
 package com.ISOUR.controller;
 
 import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.service.MemberService;
+import com.ISOUR.Service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 

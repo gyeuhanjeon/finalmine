@@ -1,4 +1,4 @@
-package com.ISOUR.service;
+package com.ISOUR.Service;
 
 import com.ISOUR.entity.Terms;
 import com.ISOUR.dto.MemberDTO;
