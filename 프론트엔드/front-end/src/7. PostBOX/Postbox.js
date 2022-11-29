@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
 import SignUpModal from './SignUpModal';
+import yong from '../images/아이셔용.png';
 
 
 const Postbox = () => {
@@ -109,7 +110,14 @@ const Postbox = () => {
     }
   }
 
-  if (loading) { return <div>대기 중...</div> }
+  if (loading) { 
+    return (
+    <>
+      <img src={yong} alt="아이셔용"/>
+      <div>대기 중...</div> 
+    </>
+    );
+  }
 
   return (
     <>

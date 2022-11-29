@@ -1,11 +1,9 @@
-package com.ISOUR.Entity;
+package com.ISOUR.entity;
 
 import lombok.Data;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Data
 @Entity
