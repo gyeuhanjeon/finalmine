@@ -141,6 +141,13 @@ const TeamAPI = {
     return await axios.post(TEAM_DOMAIN + "Chat", HEADER);
   },
 
+  chatRoomOpen: async function(name) {
+    const chatObject = {
+      "name" : name
+    };
+    return await axios.put(TEAM_DOMAIN+"Chatting" ,chatObject, HEADER);
+  },
+
 
   // 이미지 파일 업로드
   UploadService: async function(formData) {

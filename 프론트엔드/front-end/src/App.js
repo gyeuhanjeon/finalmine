@@ -13,6 +13,7 @@ import Logout from './other/Logout';
 import Postbox from './7. PostBOX/Postbox';
 import FindInfo from './2. Login/FindInfo';
 import Chat from './9.Chat/Chatting';
+import SocketTest from './9.Chat/ChatTest';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path='/Postbox' element={<Postbox />} />
         <Route path='/FindInfo' element={<FindInfo />} />
         <Route path='/Chat' element={<Chat/>}/>
+        <Route path='/Socket' element={<SocketTest/>}/>
       </Routes>
     </Router>
   );

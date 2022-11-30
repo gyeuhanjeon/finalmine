@@ -1,54 +1,50 @@
 package com.ISOUR.service;
 
-import com.ISOUR.dto.ChatDTO;
-import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.entity.Chat;
-import com.ISOUR.entity.MemberInfo;
-import com.ISOUR.repository.ChatRepository;
+import com.ISOUR.dto.GChatDTO;
+import com.ISOUR.entity.GChat;
+import com.ISOUR.repository.GChatRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Slf4j
-public class ChatService {
-    private final ChatRepository chatRepository;
+public class GChatService {
+    private final GChatRepository GChatRepository;
 
-    public ChatService(ChatRepository chatRepository) {
-        this.chatRepository = chatRepository;
+    public GChatService(GChatRepository GChatRepository) {
+        this.GChatRepository = GChatRepository;
     }
 
     public boolean sendPost(String content) {
         log.warn("★★★★★★★★★채팅 보내기 서비스★★★★★★★★★");
         log.warn("내용(content) : " + content);
 
-        Chat chat = new Chat();
-        chat.setContent(content);
-        chat.setChatTime(LocalDateTime.now().withNano(0));
+        GChat GChat = new GChat();
+        GChat.setContent(content);
+        GChat.setChatTime(LocalDateTime.now().withNano(0));
 
-        Chat result = chatRepository.save(chat);
+        GChat result = GChatRepository.save(GChat);
         log.warn(result.toString());
 
         return true;
     }
 
-    public List<ChatDTO> getChatList() {
+    public List<GChatDTO> getChatList() {
         log.warn("★★★★★★★★★전체 회원 조회 서비스★★★★★★★★★");
 
-        List<ChatDTO> chatDTOS = new ArrayList<>();
-        List<Chat> chatInfoList = chatRepository.findAll();
-        for(Chat e : chatInfoList) {
-            ChatDTO chatDTO = new ChatDTO();
-            chatDTO.setChatNum(e.getChatNum());
-            chatDTO.setContent(e.getContent());
-            chatDTO.setChatTime(e.getChatTime());
-            chatDTOS.add(chatDTO);
+        List<GChatDTO> GChatDTOS = new ArrayList<>();
+        List<GChat> GChatInfoList = GChatRepository.findAll();
+        for(GChat e : GChatInfoList) {
+            GChatDTO GChatDTO = new GChatDTO();
+            GChatDTO.setChatNum(e.getChatNum());
+            GChatDTO.setContent(e.getContent());
+            GChatDTO.setChatTime(e.getChatTime());
+            GChatDTOS.add(GChatDTO);
         }
-        return chatDTOS;
+        return GChatDTOS;
     }
 }

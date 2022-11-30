@@ -1,54 +1,53 @@
 package com.ISOUR.service;
 
-import com.ISOUR.dto.ChatDTO;
-import com.ISOUR.dto.MemberDTO;
-import com.ISOUR.entity.Chat;
-import com.ISOUR.entity.MemberInfo;
-import com.ISOUR.repository.ChatRepository;
+import com.ISOUR.dto.ChatRoom;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.util.*;
 
-@Service
 @Slf4j
+@RequiredArgsConstructor
+@Service
 public class ChatService {
-    private final ChatRepository chatRepository;
+    //ObjectMapper 는 json 파일을 파싱하는 것
+    private final ObjectMapper objectMapper;
+    private Map<String, ChatRoom> chatRooms;
 
-    public ChatService(ChatRepository chatRepository) {
-        this.chatRepository = chatRepository;
+    // 의존성 주입 이후 초기화를 수행하는 메소드
+    @PostConstruct
+    private void init() {
+        // LinkedHashMap 을 사용해서 방을 자동생성 및 집합시킴
+        chatRooms = new LinkedHashMap<>();
+    }
+    public List<ChatRoom> findAllRoom() {
+        return new ArrayList<>(chatRooms.values());
+    }
+    public ChatRoom findRoomById(String roomId) {
+        return chatRooms.get(roomId);
     }
 
-    public boolean sendPost(String content) {
-        log.warn("★★★★★★★★★채팅 보내기 서비스★★★★★★★★★");
-        log.warn("내용(content) : " + content);
-
-        Chat chat = new Chat();
-        chat.setContent(content);
-        chat.setChatTime(LocalDateTime.now().withNano(0));
-
-        Chat result = chatRepository.save(chat);
-        log.warn(result.toString());
-
-        return true;
+    public ChatRoom createRoom(String name) {
+        String randomId = UUID.randomUUID().toString();
+        log.info("UUID : " + randomId);
+        ChatRoom chatRoom = ChatRoom.builder()
+                .roomId(randomId)
+                .name(name)
+                .build();
+        chatRooms.put(randomId, chatRoom);
+        return chatRoom;
     }
-
-    public List<ChatDTO> getChatList() {
-        log.warn("★★★★★★★★★전체 회원 조회 서비스★★★★★★★★★");
-
-        List<ChatDTO> chatDTOS = new ArrayList<>();
-        List<Chat> chatInfoList = chatRepository.findAll();
-        for(Chat e : chatInfoList) {
-            ChatDTO chatDTO = new ChatDTO();
-            chatDTO.setChatNum(e.getChatNum());
-            chatDTO.setContent(e.getContent());
-            chatDTO.setChatTime(e.getChatTime());
-            chatDTOS.add(chatDTO);
+    public <T> void sendMessage(WebSocketSession session, T message) {
+        try {
+            session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
+        } catch(IOException e) {
+            log.error(e.getMessage(), e);
         }
-        return chatDTOS;
     }
 }
