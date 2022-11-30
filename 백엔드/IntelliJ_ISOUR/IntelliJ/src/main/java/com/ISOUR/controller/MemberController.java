@@ -41,22 +41,46 @@ public class MemberController {
 
     }
 
+    /* 닉네임 중복확인 */
+    @PostMapping("/IsNicknameCheck")
+    public ResponseEntity<Boolean> isNicknameCheck(@RequestBody Map<String, String> memberData) {
+        log.warn("★★★★★★★★★닉네임 중복확인 Controller★★★★★★★★★");
+
+        String getNickname = memberData.get("nickname");
+        log.warn("중복확인할 닉네임(nickname) : " + getNickname);
+
+        boolean isTrue = memberService.isMemberCheck(getNickname);
+        if(isTrue) log.warn("중복확인할 닉네임(nickname) : " + isTrue);
+
+        if(isTrue) {
+            log.warn(">>" + isTrue + " : 사용할 수 없는 닉네임(nickname)입니다. ");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            log.warn(">>" + isTrue + " : 사용할 수 있는 닉네임(nickname)입니다. ");
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+
+    }
+
     /* 회원가입 */
     @PostMapping("/SignUp")
     public ResponseEntity<Boolean> memberSignUp(@RequestBody Map<String, String> signUpData) {
         log.warn("★★★★★★★★★회원가입 Controller★★★★★★★★★");
-        log.warn("항목 : 이름, 아이디, 비밀번호,이메일, 생년월일, 성별, 시도, 시구군");
+        log.warn("항목 : 이름, 아이디, 비밀번호, 닉네임, 이메일, 생년월일, 성별, 시도, 시구군, 자기소개");
 
         String getName = signUpData.get("name");
         String getId = signUpData.get("id");
         String getPwd = signUpData.get("pwd");
+        String getNickname = signUpData.get("nickname");
         String getEmail = signUpData.get("email");
         String getBirth = signUpData.get("birth");
         String getGender = signUpData.get("gender");
         String getRegion1 = signUpData.get("region1");
         String getRegion2 = signUpData.get("region2");
+        String getIntroduce = signUpData.get("introduce");
+        log.warn(getName, getId, getPwd, getNickname, getEmail, getBirth, getGender, getRegion1, getRegion2, getIntroduce);
 
-        boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getEmail, getBirth, getGender, getRegion1, getRegion2);
+        boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getNickname, getEmail, getBirth, getGender, getRegion1, getRegion2, getIntroduce);
         if(isTrue) log.warn("I_MEMBER 테이블 DB 저장 " + isTrue);
 
         String getCheck_term1 = signUpData.get("check_term1");

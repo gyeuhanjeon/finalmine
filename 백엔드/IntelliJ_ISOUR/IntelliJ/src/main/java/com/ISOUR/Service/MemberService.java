@@ -30,19 +30,31 @@ public class MemberService {
         else return false;
     }
 
+    /* 닉네임 중복 체크 서비스 */
+    public boolean isNicknameCheck(String nickname) {
+        log.warn("★★★★★★★★★닉네임 중복 체크 서비스★★★★★★★★★");
+        log.warn("입력한 닉네임(id) : " + nickname);
+
+        MemberInfo memberInfo = memberRepository.findByNickName(nickname);
+        if(memberInfo != null) return true;
+        else return false;
+    }
+
     /* 회원가입 서비스 */
-    public boolean signUpMember(String name, String id, String pwd, String email, String birth, String gender, String region1, String region2) {
+    public boolean signUpMember(String name, String id, String pwd, String nickname, String email, String birth, String gender, String region1, String region2, String introduce) {
         log.warn("★★★★★★★★★회원가입 서비스★★★★★★★★★");
 
         MemberInfo memberInfo = new MemberInfo();
         memberInfo.setName(name);
         memberInfo.setId(id);
         memberInfo.setPwd(pwd);
+        memberInfo.setNickName(nickname);
         memberInfo.setEmail(email);
         memberInfo.setBirth(birth);
         memberInfo.setGender(gender);
         memberInfo.setRegion1(region1);
         memberInfo.setRegion2(region2);
+        memberInfo.setIntroduce(introduce);
 
         MemberInfo result = memberRepository.save(memberInfo);
         log.warn(result.toString());

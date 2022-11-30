@@ -17,17 +17,28 @@ const TeamAPI = {
     return await axios.post(TEAM_DOMAIN + "IsMemberCheck", regCheck, HEADER);
   },
 
+  /* 닉네임 중복확인(회원가입 여부 확인) */
+  nicknameCheck: async function(nickname) {
+    const nicknameObj = {
+      nickname: nickname
+    };
+    // @PostMapping("/IsNicknameCheck")
+    return await axios.post(TEAM_DOMAIN + "IsNicknameCheck", nicknameObj, HEADER);
+  },
+
   /* 회원가입 */
-  memberReg: async function(name, id, pwd, email, birth, gender, region1, region2, check_term1, check_term2) {
+  memberReg: async function(name, id, pwd, nickname, email, birth, gender, region1, region2, introduce, check_term1, check_term2) {
     const memberObj = {
       name: name,
       id: id,
       pwd: pwd,
+      nickname: nickname,
       email: email,
       birth: birth,
       gender: gender,
       region1: region1,
       region2: region2,
+      introduce: introduce,
       check_term1: check_term1,
       check_term2: check_term2
     };

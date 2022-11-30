@@ -134,6 +134,8 @@ function SignUp() {
   const [pwd, setPwd] = useState('');
   const [pwdcheck, setPwdcheck] = useState('');
   const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [introduce, setIntroduce] = useState('');
 
   const today = new Date();
   const [birth, setBirth] = useState('');
@@ -156,8 +158,10 @@ function SignUp() {
 
   // 유효성 검사
   const [isName, setIsName] = useState(false);
+  const [isNickname, setIsNickname] = useState(false);
   const [isId, setIsId] = useState(false);
   const [isIdcheck, setIsIdcheck] = useState(false);
+  const [isNicknamecheck, setIsNicknamecheck] = useState(false);
   const [isPwd, setIsPwd] = useState(false);
   const [isEmail, setIsEmail] = useState(false);
   const [isPwdcheck, setIsPwdcheck] = useState(false);
@@ -168,6 +172,7 @@ function SignUp() {
 
   // 보여줄 문구 목록
   const reqName = "이름을 정확히 입력하세요."
+  const reqNickname = "닉네임을 정확히 입력하세요."
   const reqId = "아이디를 입력하세요."
   const guideId = "아이디를 올바르게 입력해주세요."
   const acceptId = "사용 가능한 ID 입니다.";
@@ -179,6 +184,7 @@ function SignUp() {
 
   // 보여질 문구 상태
   const [showReqName, setShowReqName] = useState(false);
+  const [showReqNickname, setShowReqNickname] = useState(false);
   const [showReqEmail, setShowReqEmail] = useState(false);
   const [showReqId, setShowReqId] = useState(false);
   const [showGuideId, setShowGuideId] = useState(false);
@@ -205,6 +211,31 @@ function SignUp() {
       setShowReqName(false); // 이름을 정확히 입력하세요.
     }
   };
+  
+  /*
+  닉네임 변경 */
+  const onChangeNickname = e => {
+
+    let temp_nickname = e.target.value;
+    setNickname(temp_nickname);
+
+    if (temp_nickname === '' || !regexName.test(temp_nickname)) {
+      setIsNickname(false);
+      setShowReqNickname(true); // 닉네임을 정확히 입력하세요.
+    } else {
+      setIsNickname(true);
+      setShowReqNickname(false); // 닉네임을 정확히 입력하세요.
+    }
+  };
+
+  /*
+  자기소개 변경 */
+  const onChangeIntroduce = e => {
+
+    let temp_introduce = e.target.value;
+    setIntroduce(temp_introduce);
+
+  };
 
   /*
   아이디 변경 */
@@ -230,7 +261,7 @@ function SignUp() {
   };
 
   /*
-  중복확인 버튼 클릭 */
+  아이디 중복확인 버튼 클릭 */
   const onClickIdCheck = async (e) => {
     e.preventDefault();
 
@@ -249,12 +280,45 @@ function SignUp() {
         console.log("memberCheck.status : " + memberCheck.status);
         // if(memberCheck.data.result === true) {
         if (memberCheck.data === true) {
-          setId("");
+          setNickname("");
           alert("이미 가입되어 있는 ID 입니다.");
           console.log("이미 가입되어 있는 ID 입니다.");
         } else {
           console.log("사용 가능한 ID 입니다.");
           alert("사용 가능한 ID 입니다.");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  /*
+  닉네임 중복확인 버튼 클릭 */
+  const onClickNicknameCheck = async (e) => {
+    e.preventDefault();
+
+    setIsNicknamecheck(false);
+    console.log("\n\n중복확인 버튼 눌렀어요.");
+
+    if (nickname === '' || !regexName.test(nickname)) {
+      console.log("닉네임을 입력하지 않았거나 정규식에 맞지 않아요.");
+      alert("먼저, 닉네임을 확인하세요.");
+    } else {
+      setIsNicknamecheck(true);
+      // 가입 여부 우선 확인
+      try {
+        const nicknameCheck = await TeamAPI.nicknameCheck(nickname);
+        console.log("nicknameCheck.data : " + nicknameCheck.data);
+        console.log("nicknameCheck.status : " + nicknameCheck.status);
+        // if(memberCheck.data.result === true) {
+        if (nicknameCheck.data === true) {
+          setNickname("");
+          alert("사용할 수 없는 닉네임 입니다.");
+          console.log("사용할 수 없는 닉네임 입니다.");
+        } else {
+          console.log("사용 가능한 닉네임 입니다.");
+          alert("사용 가능한 닉네임 입니다.");
         }
       } catch (e) {
         console.log(e);
@@ -404,29 +468,34 @@ function SignUp() {
     console.log("isId_check : " + isIdcheck);
     console.log("isPwd : " + isPwd);
     console.log("isPwdcheck : " + isPwdcheck);
+    console.log("isNickname : " + isNickname);
+    console.log("isNicknamecheck : " + isNicknamecheck);
     console.log("isBirth : " + isBirth);
     console.log("isGender : " + isGender);
     console.log("isRegion1 : " + isRegion1);
     console.log("isRegion2 : " + isRegion2);
-    console.log("check_term1 : " + check_term1);
-    console.log("check_term2 : " + check_term2);
+    console.log("isRegion2 : " + isRegion2);
+    console.log("isRegion2 : " + isRegion2);
+    console.log("introduce 값 : " + introduce);
 
-    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isEmail && isBirth && isGender && isRegion1 && isRegion2) {
-      const memberReg = await TeamAPI.memberReg(name, id, pwd, email, birth, gender, region1, region2, check_term1, check_term2);
+    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isEmail && isBirth && isGender && isRegion1 && isRegion2 && isNickname && isNicknamecheck) {
+      const memberReg = await TeamAPI.memberReg(name, id, pwd, nickname, email, birth, gender, region1, region2, introduce, check_term1, check_term2);
 
       console.log("name : " + name);
       console.log("id : " + id);
       console.log("pwd : " + pwd);
+      console.log("nickname : " + nickname);
       console.log("email : " + email);
       console.log("birth : " + birth);
       // console.log("age : " + age);
       console.log("gender : " + gender);
       console.log("region1 : " + region1);
       console.log("region2 : " + region2);
+      console.log("introduce : " + introduce);
       console.log("필수 약관 : " + check_term1);
       console.log("선택 약관 : " + check_term2);
+      alert("회원가입 성공! 콘솔창 보세요");
       console.log("가입 성공!! \n로그인 페이지로 이동합니다.");
-      alert("콘솔창 확인용");
       window.location.replace("/login");
     } else {
       console.log("잘못 입력한 값이 있거나 입력되지 않은 값이 있어요.");
@@ -489,6 +558,24 @@ function SignUp() {
                 {showErrorPwdcheck && errorPwdcheck}
                 {showAcceptPwdcheck && acceptPwdcheck}
               </Msg>
+            </div>
+
+            {/* 닉네임 */}
+            <div className="Form-item">
+              {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
+              <span className="Form-item-icon material-symbols-rounded"></span>
+              <input type="text" placeholder="닉네임(한글 2~20자)" value={nickname} onChange={onChangeNickname} required />
+              <button onClick={onClickNicknameCheck} required> 중복확인 </button>
+              <Msg>
+                {showReqNickname && reqNickname}
+              </Msg>
+            </div>
+
+            {/* 자기소개 */}
+            <div className="Form-item">
+              {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
+              <span className="Form-item-icon material-symbols-rounded"></span>
+              <input type="text" placeholder="자기소개(한글 2~20자)" value={introduce} onChange={onChangeIntroduce} />
             </div>
 
             {/* 이메일 */}
