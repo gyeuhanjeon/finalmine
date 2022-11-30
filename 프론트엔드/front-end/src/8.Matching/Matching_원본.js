@@ -56,7 +56,7 @@ const Matching = () => {
             console.log(typeof(id));
             console.log(id);
           try {
-            const Mat = await TeamAPI.MatchingMember2(id, pageNum);
+            const Mat = await TeamAPI.MatchingMember2(id, local_id_num, pageNum);
             console.log("****************");
             setMat_MemberInfo(Mat.data);
             setId_num(Mat.data[0].user_id_num);

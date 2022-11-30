@@ -148,14 +148,17 @@ public class MemberService {
         log.warn("조회할 아이디(id) : " + id);
         MemberInfo memberInfo = memberRepository.findById(id);
         MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId_num(memberInfo.getId_num());
         memberDTO.setName(memberInfo.getName());
         memberDTO.setId(memberInfo.getId());
         memberDTO.setPwd(memberInfo.getPwd());
+        memberDTO.setNickName(memberInfo.getNickName());
         memberDTO.setBirth(memberInfo.getBirth());
         memberDTO.setGender(memberInfo.getGender());
         memberDTO.setRegion1(memberInfo.getRegion1());
         memberDTO.setRegion2(memberInfo.getRegion2());
         memberDTO.setMbti(memberInfo.getMbti());
+        memberDTO.setIntroduce(memberInfo.getIntroduce());
 
         return memberDTO;
     }

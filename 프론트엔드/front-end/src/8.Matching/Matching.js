@@ -6,7 +6,7 @@ import '../font/Jalnan.ttf';
   2. Navber 연결 필요
   3. 전체적인 UI개선 */
 
-function Matching () {
+function Matching2 () {
     return (
       <div className="Matching_Container">
         <div className='warp_main_body'>
@@ -56,4 +56,4 @@ function Matching () {
     </div>
   );
 }
-export default Matching;
+export default Matching2;
