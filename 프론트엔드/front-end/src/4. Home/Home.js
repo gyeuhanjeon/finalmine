@@ -7,6 +7,7 @@ const Home = () => {
   const local_id_num = window.localStorage.getItem("id_num");
 
   const [nickName, setNickName] = useState('');
+
   const chatTest = async(name) => {
     console.log(name);
     try {
@@ -19,7 +20,24 @@ const Home = () => {
     }
     
 }
+useEffect(() => {
+        
+  const memberData = async () => {
+    console.log("\n\n현재 localStorage 에 저장된 ID : " + localId);
 
+    console.log(typeof(localId));
+    let id = localId;
+    try {
+      const response = await TeamAPI.memberInfo(id); // 원래는 전체 회원 조회용
+      setNickName(response.data.nickName)
+      window.localStorage.setItem("id_num",response.data.id_num);
+      console.log(response.data)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  memberData();
+  }, []);
    
   return(
     <>
