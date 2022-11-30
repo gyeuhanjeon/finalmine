@@ -10,7 +10,7 @@ public class MemberDTO {
     private String id;
     private String pwd;
     private String name;
-    private String nickName;
+    private String nickname;
     private String email;
     private String birth;
     private String gender;
@@ -18,4 +18,5 @@ public class MemberDTO {
     private String region2;
     private String mbti;
     private String introduce;
+    private String face;
 }

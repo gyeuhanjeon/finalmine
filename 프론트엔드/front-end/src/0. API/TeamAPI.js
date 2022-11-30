@@ -66,6 +66,16 @@ const TeamAPI = {
     return await axios.post(TEAM_DOMAIN + "MBTI", resultObj, HEADER);
   },
 
+  /* 프로필 이미지 변경 */
+  changeFace: async function(url, localId) {
+    const faceObj = {
+      url: url,
+      id: localId
+    };
+    // @PostMapping("/changeFace")
+    return await axios.post(TEAM_DOMAIN + "changeFace", faceObj, HEADER);
+  },
+
   /* 회원 조회 */
   memberInfo: async function(id) {
     // @GetMapping("/MyPage")
@@ -86,12 +96,13 @@ const TeamAPI = {
 
 
   /* 회원정보 수정 */
-  MemberUpdate: async function(id, name, pwd, birth, region1, region2) {
+  memberUpdate: async function(id, pwd, nickname, introduce, email, region1, region2) {
     const memberObj = {
       id: id,
-      name: name,
       pwd: pwd,
-      birth: birth,
+      nickname: nickname,
+      introduce: introduce,
+      email: email,
       region1: region1,
       region2: region2
     };

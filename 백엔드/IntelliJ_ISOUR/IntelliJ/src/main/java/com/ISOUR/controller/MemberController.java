@@ -142,26 +142,46 @@ public class MemberController {
         }
     }
 
+    /* 프로필 이미지 변경 */
+    @PostMapping("/changeFace")
+    public ResponseEntity<Boolean> faceSave(@RequestBody Map<String, String> faceData) {
+        log.warn("★★★★★★★★★프로필 이미지 변경 Controller★★★★★★★★★");
+
+        String getId = faceData.get("id");
+        String getUrl = faceData.get("url");
+        log.warn("아이디(id) : " + getId);
+        log.warn("저장할 URL : " + getUrl);
+
+        boolean isTrue = memberService.saveFace(getId, getUrl);
+
+        if(isTrue) {
+            log.warn(">" + isTrue + " : 프로필 이미지 변경 성공 ");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            log.warn(">" + isTrue + " : 프로필 이미지 변경 실패 ");
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+    }
+
     /* 회원정보 수정 */
     @PutMapping("/MyPage")
     // 객체 타입이 와야하기 때문에 Boolean 대문자
-    public ResponseEntity<Boolean> MemberUpdate_Ctrl(@RequestBody Map<String, String> regData) {
+    public ResponseEntity<Boolean> memberUpdate(@RequestBody Map<String, String> memberData) {
         log.warn("★★★★★★★★★회원정보 수정 Controller★★★★★★★★★");
-        String getId = regData.get("id");
-        String getPwd = regData.get("pwd");
-        String getName = regData.get("name");
-        String getGender = regData.get("gender");
-        String getNickName = regData.get("NickName");
-        String getRegion1 = regData.get("region1");
-        String getRegion2 = regData.get("region2");
-        String getIntroduce = regData.get("introduce");
+        String getId = memberData.get("id");
+        String getPwd = memberData.get("pwd");
+        String getNickName = memberData.get("nickname");
+        String getIntroduce = memberData.get("introduce");
+        String getEmail = memberData.get("email");
+        String getRegion1 = memberData.get("region1");
+        String getRegion2 = memberData.get("region2");
         log.warn("아이디(id) : " + getId);
         log.warn("변경한 비밀번호(pwd) : " + getPwd);
         log.warn("변경한 시도(region1) : " + getRegion1);
         log.warn("변경한 시구군(region2) : " + getRegion2);
         log.warn("변경한 자기소개(introduce) : " + getIntroduce);
 
-        boolean isTrue = memberService.MemberUpdate(getId, getPwd, getName, getNickName, getGender, getRegion1, getRegion2, getIntroduce);
+        boolean isTrue = memberService.updateMember(getId, getPwd, getNickName, getIntroduce, getEmail, getRegion1, getRegion2);
 
         if(isTrue) {
             log.warn(">" + isTrue + " : 회원정보 수정 성공 ");

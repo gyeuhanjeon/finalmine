@@ -20,11 +20,12 @@ public class MemberInfo {
     private String name;
     @Column(updatable = false)
     private String birth;
-    private String nickName;
+    private String nickname;
     private String email;
     private String gender;
     private String region1;
     private String region2;
     private String mbti;
     private String introduce;
+    private String face;
 }

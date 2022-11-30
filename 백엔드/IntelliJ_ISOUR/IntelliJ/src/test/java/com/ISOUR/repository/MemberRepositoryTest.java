@@ -52,7 +52,7 @@ class MemberRepositoryTest {
         for(int i = 1; i <= 16; i++) {
             MemberInfo memberInfo = new MemberInfo();
             memberInfo.setName("test" + (16 +i));
-            memberInfo.setNickName("testNic" + (16 +i));
+            memberInfo.setNickname("testNic" + (16 +i));
             memberInfo.setId("test" + (16 +i));
             memberInfo.setPwd("test" + (16 +i));
             memberInfo.setMbti(MBTI[i]);

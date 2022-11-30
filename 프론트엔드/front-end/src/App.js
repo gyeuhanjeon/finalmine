@@ -15,6 +15,7 @@ import FindInfo from './2. Login/FindInfo';
 import Chat from './9.Chat/Chatting';
 import SocketTest from './9.Chat/ChatTest';
 import Matching from './8.Matching/Matching_원본';
+import My from './5. MyPage/My';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path='/Chat' element={<Chat/>}/>
         <Route path='/Socket' element={<SocketTest/>}/>
         <Route path='/Matching' element={<Matching/>}/>
+        <Route path='/My' element={<My/>}/>
       </Routes>
     </Router>
   );

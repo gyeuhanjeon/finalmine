@@ -21,7 +21,7 @@ public class ChatController {
         ChatRoom room = chatService.createRoom(name);
         log.info(room.getRoomId());
         System.out.println(room.getRoomId());
-        return new ResponseEntity(room.getRoomId(), HttpStatus.OK);
+        return new ResponseEntity<>(room.getRoomId(), HttpStatus.OK);
     }
     @GetMapping
     public List<ChatRoom> findAllRoom() {

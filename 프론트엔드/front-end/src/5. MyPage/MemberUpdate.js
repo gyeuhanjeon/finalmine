@@ -20,6 +20,8 @@ function MemberUpdate() {
 
   const [files, SetFiles] = useState({logo});
   const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [introduce, setIntroduce] = useState('');
   const [birth, setBirth] = useState('');
   const [age, setAge] = useState("");
   const [gender, setGender] = useState('');
@@ -87,12 +89,17 @@ function MemberUpdate() {
     memberData();
 }, []);
 
-const onChangeName = e => { 
-  let temp_name = e.target.value;
-  setName(temp_name); 
+const onChangeNickname = e => { 
+  let temp_nickname = e.target.value;
+  setNickname(temp_nickname); 
 }
 
-const onChangePwd = e => {
+const onChangeIntroduce = e => { 
+  let temp_introduce = e.target.value;
+  setIntroduce(temp_introduce); 
+}
+
+const onClickChangePwd = e => {
   let temp_pwd = e.target.value;
   setPwd(temp_pwd);
 }
@@ -238,17 +245,27 @@ const [imageSrc, setImageSrc] = useState('');
                   </form>
                 </td> 
               </tr>
+              {/* 변경 X : 아이디, 이름, 생년월일, 성별 */}
+              {/* 변경되는 항목 : 비밀번호, 주소, 닉네임, 자기소개, 이메일, 프사 */}
               <tr>
                 <th>이름</th>
-                <td><input type="text" value={name} onChange={onChangeName}/></td>
+                <td><input type="text" value={name} disabled/></td>
+              </tr>
+              <tr>
+                <th>닉네임</th>
+                <td><input type="text" value={nickname} onChange={onChangeNickname}/></td>
+              </tr>
+              <tr>
+                <th>자기소개</th>
+                <td><input type="text" value={introduce} onChange={onChangeIntroduce}/></td>
               </tr>
               <tr>
                 <th>아이디</th>
-                <td><input type="text" value={id} disabled id="inputId" readOnly /></td>
+                <td><input type="text" value={id} disabled id="inputId" /></td>
               </tr>
               <tr>
                 <th>비밀번호</th>
-                <td><input type="password" value={pwd} disabled readOnly /></td>
+                <td><button onClick={onClickChangePwd}>비밀번호 변경</button></td>
               </tr>
               <tr>
                 <th>생년월일</th>
@@ -302,12 +319,12 @@ const [imageSrc, setImageSrc] = useState('');
                   <input type="text" value={mbti} disabled />
                 </td>
               </tr>
-              <tr>
+              {/* <tr>
                 <th>자기소개</th>
                 <td>
                   <textarea style={{width: '212px', height: '136px'}} placeholder='임시로 만들어 둠'/>
                 </td>
-              </tr>
+              </tr> */}
               <tr>
                 <br />
               </tr>

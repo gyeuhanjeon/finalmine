@@ -35,7 +35,7 @@ public class MemberService {
         log.warn("★★★★★★★★★닉네임 중복 체크 서비스★★★★★★★★★");
         log.warn("입력한 닉네임(id) : " + nickname);
 
-        MemberInfo memberInfo = memberRepository.findByNickName(nickname);
+        MemberInfo memberInfo = memberRepository.findByNickname(nickname);
         if(memberInfo != null) return true;
         else return false;
     }
@@ -48,7 +48,7 @@ public class MemberService {
         memberInfo.setName(name);
         memberInfo.setId(id);
         memberInfo.setPwd(pwd);
-        memberInfo.setNickName(nickname);
+        memberInfo.setNickname(nickname);
         memberInfo.setEmail(email);
         memberInfo.setBirth(birth);
         memberInfo.setGender(gender);
@@ -119,23 +119,51 @@ public class MemberService {
         return true;
     }
 
+    /* 프로필 이미지 변경 서비스 */
+    public boolean saveFace(String id, String url) {
+        log.warn("★★★★★★★★★프로필 이미지 변경 서비스★★★★★★★★★");
+        log.warn("아이디(id) : " + id);
+        log.warn("저장할 URL : " + url);
+
+        MemberInfo memberInfo = memberRepository.findById(id);
+        memberInfo.setId_num(memberInfo.getId_num());
+        memberInfo.setId(memberInfo.getId());
+        memberInfo.setPwd(memberInfo.getPwd());
+        memberInfo.setName(memberInfo.getName());
+        memberInfo.setBirth(memberInfo.getBirth());
+        memberInfo.setNickname(memberInfo.getNickname());
+        memberInfo.setEmail(memberInfo.getEmail());
+        memberInfo.setGender(memberInfo.getGender());
+        memberInfo.setRegion1(memberInfo.getRegion1());
+        memberInfo.setRegion2(memberInfo.getRegion2());
+        memberInfo.setMbti(memberInfo.getMbti());
+        memberInfo.setIntroduce(memberInfo.getIntroduce());
+        memberInfo.setFace(url);
+
+        memberRepository.save(memberInfo);
+
+        return true;
+    }
+
     /* 회원정보 수정 서비스 */
-    public boolean MemberUpdate(String id, String pwd, String name, String NickName, String gender, String region1, String region2, String introduce ) {
+    public boolean updateMember(String id, String pwd, String nickname, String introduce, String email, String region1, String region2) {
         log.warn("★★★★★★★★★회원정보 수정 서비스★★★★★★★★★");
         log.warn("아이디(id) : " + id);
         log.warn("변경한 비밀번호(pwd) : " + pwd);
+        log.warn("변경한 닉네임(nickname) : " + nickname);
+        log.warn("변경한 자기소개(introduce) : " + introduce);
+        log.warn("변경한 이메일(email) : " + email);
         log.warn("변경한 시도(region1) : " + region1);
         log.warn("변경한 시구군(region2) : " + region2);
 
         MemberInfo memberInfo = memberRepository.findById(id);
         memberInfo.setId_num(memberInfo.getId_num());
         memberInfo.setPwd(pwd);
-        memberInfo.setName(name);
-        memberInfo.setNickName(NickName);
-        memberInfo.setGender(gender);
+        memberInfo.setNickname(nickname);
+        memberInfo.setIntroduce(introduce);
+        memberInfo.setEmail(email);
         memberInfo.setRegion1(region1);
         memberInfo.setRegion2(region2);
-        memberInfo.setIntroduce(introduce);
         memberRepository.save(memberInfo);
 
         return true;
@@ -164,14 +192,18 @@ public class MemberService {
         memberDTO.setName(memberInfo.getName());
         memberDTO.setId(memberInfo.getId());
         memberDTO.setPwd(memberInfo.getPwd());
-        memberDTO.setNickName(memberInfo.getNickName());
+        memberDTO.setNickname(memberInfo.getNickname());
         memberDTO.setBirth(memberInfo.getBirth());
+        memberDTO.setEmail(memberInfo.getEmail());
         memberDTO.setGender(memberInfo.getGender());
         memberDTO.setRegion1(memberInfo.getRegion1());
         memberDTO.setRegion2(memberInfo.getRegion2());
         memberDTO.setMbti(memberInfo.getMbti());
         memberDTO.setIntroduce(memberInfo.getIntroduce());
+        memberDTO.setFace(memberInfo.getFace());
 
+        log.warn("생년월일 궁금해 : " + memberInfo.getBirth());
+        log.warn("닉네임 궁금해 : " + memberInfo.getNickname());
         return memberDTO;
     }
 
