@@ -16,12 +16,13 @@ import Chat from './9.Chat/Chatting';
 import SocketTest from './9.Chat/ChatTest';
 import Matching from './8.Matching/Matching_원본';
 import My from './5. MyPage/My';
+import Navber from './Navber/Nav';
 
 
 function App() {
   return (
     <Router>
-      <Logout />
+      <Navber/>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<Login />} />
