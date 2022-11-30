@@ -162,6 +162,16 @@ const TeamAPI = {
 
     return await axios.post(TEAM_DOMAIN + "UploadService", regCheck, config, HEADER);
   },
+
+  // 매칭회원 불러오기
+  MatchingMember2: async function(id, local_id_num, pageNum) {
+    const regCmd = {
+      id : id,
+      local_id_num: local_id_num,
+      pageNum: pageNum
+    }
+    return await axios.post(TEAM_DOMAIN + "Matching", regCmd, HEADER);
+  },
   
 }
 

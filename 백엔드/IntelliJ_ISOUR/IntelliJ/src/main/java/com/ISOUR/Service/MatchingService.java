@@ -1,8 +1,6 @@
 package com.ISOUR.Service;
 
-import com.ISOUR.entity.MemberInfo;
 import com.ISOUR.dto.MatDTO;
-import com.ISOUR.dto.MemberDTO;
 import com.ISOUR.repository.MatchingRepository;
 import com.ISOUR.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -67,7 +65,7 @@ public class MatchingService {
 //    }
 
     // MySql 버전
-    public List<MatDTO> Mat_MemberListPage(String id, Integer num) {
+    public List<MatDTO> Mat_MemberListPage(String id, int id_num, int num) {
         log.warn("★★★★★★★★★매칭 회원 조회 서비스★★★★★★★★★");
         log.warn("★★★★★★★★ 아이디 : " + id);
         log.warn("★★★★★★★★ 페이지넘버 : " + num);
@@ -89,7 +87,8 @@ public class MatchingService {
                 "\t                INNER JOIN I_MEMBER im2\n" +
                 "\t                ON im2.MBTI = m.MAT_MBTI\n" +
                 "                WHERE im.ID = ? \n" +
-                "                ORDER BY m.ORDER_MBTI) PG1\n" +
+                "                \tand m.ORDER_MBTI <= 1 \n" +
+                "                ORDER BY rand(?)) PG1\n" +
                 "        WHERE (@rownum \\:= 0) = 0 <= /*count*/2 * /*startNum*/?) PG2\n" +
                 "WHERE R_NUM > /*count*/2 * (/*startNum*/? - 1)                     \n" +
                 "limit /*count*/2";
@@ -97,12 +96,27 @@ public class MatchingService {
         JpaResultMapper result2 = new JpaResultMapper();
         Query query2 = em.createNativeQuery(sql2)
                 .setParameter(1, id)
-                .setParameter(2, num)
-                .setParameter(3, num);
+                .setParameter(2, id_num)
+                .setParameter(3, num)
+                .setParameter(4, num);
         List<MatDTO> list = result2.list(query2, MatDTO.class);
 //        log.warn("매칭 결과 : " + list);
         return list;
     }
+
+    /* 좋아요 조회 서비스 */
+//    public MemberDTO Mat_MyInfo(String id) {
+//        log.warn("★★★★★★★★★ 매칭 내 정보 조회 서비스★★★★★★★★★");
+//        log.warn("조회할 아이디(id) : " + id);
+//        MemberInfo memberInfo = memberRepository.findById(id);
+//        MemberDTO memberDTO = new MemberDTO();
+//        memberDTO.setId_num(memberInfo.getId_num());
+//        memberDTO.setNickName(memberInfo.getNickName());
+//        memberDTO.setMbti(memberInfo.getMbti());
+//        memberDTO.setIntroduce(memberInfo.getIntroduce());
+//
+//        return memberDTO;
+//    }
 
 }
 

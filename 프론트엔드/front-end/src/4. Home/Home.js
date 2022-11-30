@@ -4,6 +4,7 @@ import TeamAPI from '../0. API/TeamAPI';
 
 const Home = () => {
   const localId = window.localStorage.getItem("userId");
+  const local_id_num = window.localStorage.getItem("id_num");
 
   const [nickName, setNickName] = useState('');
   const chatTest = async(name) => {
