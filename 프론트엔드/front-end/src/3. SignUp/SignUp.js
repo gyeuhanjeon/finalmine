@@ -4,6 +4,7 @@ import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
 import '../3. SignUp/SignUp.css';
 import { useMediaQuery } from "react-responsive";
+import EmailModal from './EmailModal';
 
 
 // // 반응형 쿼리 900까지는 모바일 화면 출력
