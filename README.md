@@ -25,6 +25,9 @@ ISOUR Final Project
 - I_MEMBER 테이블에서 id, nickname, email unique 속성 추가, pwd 업데이트 가능하게 속성 변경
 - 회원탈퇴 모달창 구현, 탈퇴 가능
 - 비밀번호 모달창 구현 완료, 수정 가능
+- (4차)
+- 안 쓰는 MemberUpdate, MemberDrop 파일 삭제
+- 작업중이던 My 파일을 Mypage로 바꿈
 
 22.11.30(수)
 
