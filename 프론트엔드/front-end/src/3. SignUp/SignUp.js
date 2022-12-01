@@ -141,6 +141,7 @@ function SignUp() {
   const [introduce, setIntroduce] = useState('');
   const [emailModalOn, setEmailModalOn] = useState(false);
   const [open,setOpen] = useState(false);
+  
 
 
   const today = new Date();
@@ -430,6 +431,7 @@ function SignUp() {
       console.log("emailResult.status : " + emailResult.status);
       if (emailResult.status === 200) {
         setOpen(true);
+        setEmail(email);
       } else {
         setEmail("");
       }
@@ -634,7 +636,7 @@ function SignUp() {
             {/* 이메일 */}
             <div className="Form-item">
                 <span className="Form-item-icon material-symbols-rounded"></span>
-                <input type="text" className='Input-Name' placeholder="이메일" value={email} onChange={onChangeEmail} required />
+                <input type="text" className='Input-Name' placeholder="이메일" value={email} onChange={onChangeEmail}  disabled={emailDoubleCheck ? true : false} />
                 {isEmail&&<button onClick={onClickEmailCheck} > 이메일 중복확인 </button>}
                 {emailDoubleCheck&&<button onClick={onClickEmailAdress}> 이메일인증</button>}
                 <Msg>

@@ -88,9 +88,9 @@ const TeamAPI = {
   },
 
   /* 아이디 찾기 */
-  findId: async function (email, birth) {
+  findId: async function (name, email, birth) {
     // @GetMapping("/FindId")
-    return await axios.get(TEAM_DOMAIN + `FindId?email=${email}&birth=${birth}`, HEADER);
+    return await axios.get(TEAM_DOMAIN + `FindId?name=${name}&email=${email}&birth=${birth}`, HEADER);
   },
 
 

@@ -223,12 +223,13 @@ public class MemberService {
     }
 
     /* 아이디 찾기 조회 서비스 */
-    public MemberDTO findId(String email, String birth) {
+    public MemberDTO findId(String name, String email, String birth) {
         log.warn("★★★★★★★★★로그인 서비스★★★★★★★★★");
+        log.warn("입력한 이름(name) : " + name);
         log.warn("입력한 이메일(email) : " + email);
         log.warn("입력한 생년월일(birth) : " + birth);
 
-        MemberInfo memberInfo = memberRepository.findByEmailAndBirth(email, birth);
+        MemberInfo memberInfo = memberRepository.findByNameAndEmailAndBirth(name, email, birth);
         MemberDTO memberDTO = new MemberDTO();
         memberDTO.setId(memberInfo.getId());
         return memberDTO;

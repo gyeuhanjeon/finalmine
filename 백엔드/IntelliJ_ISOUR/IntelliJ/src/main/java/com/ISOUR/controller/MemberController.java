@@ -239,9 +239,9 @@ public class MemberController {
 
     /* 아이디 찾기 정보 조회 */
     @GetMapping("/FindId")
-    public ResponseEntity<MemberDTO> memberInfo(@RequestParam String email, String birth ) {
+    public ResponseEntity<MemberDTO> findInfo(@RequestParam String name, String email, String birth ) {
         log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
-        MemberDTO memberDTO = memberService.findId(email,birth);
+        MemberDTO memberDTO = memberService.findId(name,email,birth);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
 
     }
