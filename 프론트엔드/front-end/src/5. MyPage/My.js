@@ -1,18 +1,18 @@
-import { useState, useEffect, useRef } from 'react';
-import TeamAPI, { TEAM_DOMAIN } from '../0. API/TeamAPI';
+import { useState, useEffect } from 'react';
+import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
-// import { Link } from 'react-router-dom';
-// import axios from 'axios';
 import face from '../images/기본 프로필.png'
-import { Modal } from '../99. Modal/MyPageModal';
+import { ChangePwdModal } from '../99. Modal/ChangePwdModal';
+import { UnregisterModal } from '../99. Modal/UnregisterModal';
 
-// 파이어베이스
+// 파이어베이스 설치 ☞ yarn add firebase
 import { storage } from '../firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
+
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 
-function My() {
+const My = () => {
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
   const isLogin = window.localStorage.getItem("isLogin");
   if(isLogin === "FALSE") window.location.replace("/login");
@@ -20,7 +20,9 @@ function My() {
 
   const localId = window.localStorage.getItem("userId");
 
-  const [modalOpen, setModalOpen] = useState(false);
+  const [changePwdModalOpen, setChangePwdModalOpen] = useState(false);
+  const [unregisterModalOpen, setUnregisterModalOpen] = useState(false);
+
   const [memberInfo, setMemberInfo] = useState(""); // 현재 로그인 되어 있는 회원의 정보 저장용
   
   // 이름, 아이디, 비밀번호, 비밀번호 확인, 생년월일, 나이, 성별, 주소 1, 주소 2
@@ -29,6 +31,7 @@ function My() {
   const [name, setName] = useState('');
   const [id, setId] = useState('');
   const [pwd, setPwd] = useState('');
+  const [inputPwd, setInputPwd] = useState('');
   const [nickname, setNickname] = useState('');
   const [introduce, setIntroduce] = useState('');
   const [birth, setBirth] = useState('');
@@ -43,14 +46,10 @@ function My() {
   const [isNicknamecheck, setIsNicknamecheck] = useState(false);
 
   // 변경 여부 변수 선언
-  const [isChangePwd, setIsChangePwd] = useState(false);
   const [isChangeNickname, setIsChangeNickname] = useState(false);
   const [isChangeIntroduce, setIsChangeIntroduce] = useState(false);
   const [isChangeEmail, setIsChangeEmail] = useState(false);
   const [isChangeAddress, setIsChangeAddress] = useState(false);
-
-  const openModal = () => { setModalOpen(true); };
-  const closeModal = () => { setModalOpen(false); };
   
   /* 
   최초 통신(useEffect) */
@@ -92,7 +91,7 @@ function My() {
   }, []);
 
   // 프사 변경 및 미리보기
-  const handleImageChange = (e) => {
+  const onChangeFace = (e) => {
     const preview = URL.createObjectURL(e.target.files[0]);
     setUrl(preview);
     if(e.target.files[0]) {
@@ -101,103 +100,100 @@ function My() {
   };
 
   // 프사 저장 버튼
-  const handleSubmit = async () => {
+  const onSaveFace = async() => {
     const imageRef = ref(storage, localId);
 
     uploadBytes(imageRef, image).then(() => {
       getDownloadURL(imageRef).then(async(url) => {
-        console.log("여기 url : " + url);
+        console.log("\nURL : " + url);
         setUrl(url);
-        // 여기부터는 통신
-    //
-    //
-    //
-    //
-    try {
-      const response = await TeamAPI.changeFace(url, localId);
-      console.log(response.data.result);
-      if(response.status == 200) {
-        console.log("통신 성공(200)");
-        alert("url 저장 성공함");
-      } else {
-        console.log("통신 실패 : " + response.status);
-        alert("통신 실패 : " + response.status);
-      }
-    } catch (e) {
-      console.log(e);
-      console.log("캐치 !! 이미지 url 저장 실패..");
-    }
-      })
-      .catch((error) => {
+
+      /* ----- (시작) 통신 ----- */
+        try {
+          const response = await TeamAPI.changeFace(url, localId);
+          console.log(response.data.result);
+          if(response.status == 200) {
+            console.log("통신 성공(200)");
+            alert("프사 저장 성공");
+          } else {
+            console.log("\n>> 통신 실패 : " + response.status);
+            alert("통신 실패 : " + response.status);
+          }
+        } catch (e) {
+          console.log(e);
+          console.log("캐치 !! 이미지 url 저장 실패..");
+        } // try-catch 문의 끝
+      /* ----- (끝) 통신 ----- */
+
+      }).catch((error) => {
         console.log(error.message, "error getting the image url");
       });
       setImage(null);
-    })
-    .catch((error) => {
+    }).catch((error) => {
       console.log(error.message);
     });
-    console.log("url : " + url);
 
-    
+    console.log("순서가 이상한 URL : " + url);
   };
 
   // 프사 삭제 버튼
-  const handleDelete = async() => {
-
-    if(url === null) alert("삭제할 이미지가 없습니다.")
+  const onDeleteFace = async() => {
+    if(url === null) alert("삭제할 프사가 없습니다.")
     else {
-    setUrl(null);
-    const temp_url = null;
+      const temp_url = null;
+      setUrl(temp_url);
 
-    try {
-      const response = await TeamAPI.changeFace(temp_url, localId);
-      console.log(response.data.result);
-      if(response.status == 200) {
-        console.log("통신 성공(200)");
-        alert("url 저장 성공함");
-      } else {
-        console.log("통신 실패 : " + response.status);
-        alert("통신 실패 : " + response.status);
+      try {
+        const response = await TeamAPI.changeFace(temp_url, localId);
+        console.log(response.data.result);
+
+        if(response.status == 200) {
+          console.log("통신 성공(200)");
+          alert("프사 삭제 성공");
+        } else {
+          console.log("\n>> 통신 실패 : " + response.status);
+          alert("통신 실패 : " + response.status);
+        }
+
+      } catch (e) {
+        console.log(e);
+        console.log("캐치 !! 이미지 url 저장 실패..");
       }
-    } catch (e) {
-      console.log(e);
-      console.log("캐치 !! 이미지 url 저장 실패..");
-    }
-  }
+
+    } // if-else 문의 끝
   }
 
   /**
 ▶ 변경 가능 항목(비밀번호, 닉네임, 자기소개, 이메일, 주소) 
   */
 
-  /* 비밀번호 변경 */
-  const onChangePwd = e => { 
-    let temp_pwd = e.target.value;
-    setPwd(temp_pwd); 
-  }
+ /* 비밀번호 저장 */
+  const getPwd = (pwd) => { setPwd(pwd); }
+  const openChangePwdModal = () => { setChangePwdModalOpen(true); };
+  const closeChangePwdModal = () => { setChangePwdModalOpen(false); };
+  const onSavePwd = async(e) => { 
+    console.log("변경한 pwd :" + pwd);
+    console.log("변경한 e :" + e);
 
-  /* 비밀번호 저장 */
-  const onSavePwd = async(e) => {
-    e.preventDefault();
-    setPwd(pwd);
-    setIsChangePwd(false);
+      // e.preventDefault();
 
-    try {
-      const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
-      console.log("id : " + id);
-      console.log("password : " + pwd);
-      console.log("nickname : " + nickname);
-      console.log("introduce : " + introduce);
-      console.log("email : " + email);
-      console.log("region1 : " + region1);
-      console.log("region2 : " + region2);
+      try {
+        const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
+        console.log("id : " + id);
+        console.log("password : " + pwd);
+        console.log("nickname : " + nickname);
+        console.log("introduce : " + introduce);
+        console.log("email : " + email);
+        console.log("region1 : " + region1);
+        console.log("region2 : " + region2);
 
-      if(response.status == 200) {
-        console.log("통신 성공(200)");
-        alert("정보 수정 완료!!");
-        console.log("\n\n업데이트 완!!");
-      } 
-    } catch (e) {console.log(e);}
+        if(response.status == 200) {
+          console.log("통신 성공(200)");
+          console.log("\n>> 비밀번호 수정 완료");
+          alert("비밀번호 수정 완료!!");
+        } 
+      } catch (e) {console.log(e);}
+
   }
 
   /* 닉네임 변경 */
@@ -382,20 +378,61 @@ function My() {
     window.location.replace("/MBTI");
   }
 
+  /* 탈퇴하기 */
+  const getInputPwd = (pwd) => { setInputPwd(pwd); }
+  const openUnregisterModal = () => { setUnregisterModalOpen(true); };
+  const closeUnregisterModal = () => { setUnregisterModalOpen(false); };
+  const onDeleteMember = async(e) => {
+    console.log("입력한 비밀번호(inputPwd) : " + inputPwd);
+
+    const recheck = "해당 아이디로 재가입이 불가능합니다."
+                  + "\n탈퇴시 모든 정보가 삭제되며 복구가 어렵습니다."
+                  + "\n정말로 탈퇴하시겠습니까?"
+    let recheckResult = window.confirm(recheck);
+    console.log("\n>> 최종 탈퇴 여부 : " + recheckResult);
+
+    if(recheckResult) {
+      try {
+        const response = await TeamAPI.memberDelete(localId, inputPwd);
+        console.log("response.data : " + response.data);
+  
+        // if(res.data.result === "OK") {
+        if(response.data === true) {
+          console.log("통신 성공(200)");
+          console.log("\n회원 탈퇴 성공");
+          window.localStorage.setItem("userId", "");
+          window.localStorage.setItem("userPw", "");
+          window.localStorage.setItem("isLogin", "FALSE");
+          closeUnregisterModal();
+          alert("회원 탈퇴 성공");
+          window.location.replace("/");
+        } else {
+          alert("비밀번호를 확인하세요.");
+        }
+      } catch (e) {
+        alert("오류 발생!!");
+        console.log("탈퇴 에러!! 왜 또 안 될까..?");
+      }
+    } else {
+      console.log("\n>> 탈퇴하기를 취소합니다.");
+    }
+  };
+  
   return(
     <>
-      <Modal open={modalOpen} close={closeModal} header="비밀번호 변경"></Modal>
+      <ChangePwdModal open={changePwdModalOpen} close={closeChangePwdModal} getPwd={getPwd} onSavePwd={onSavePwd}></ChangePwdModal>
+      <UnregisterModal open={unregisterModalOpen} close={closeUnregisterModal} id={id} getInputPwd={getInputPwd} onDeleteMember={onDeleteMember}></UnregisterModal>
       <h1>마이페이지</h1>
       <h6>프로필 사진 미리보기 가능</h6>
       {url != null 
-      ? <img  src={url} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/>
-      : <img  src={face} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/> }
+      ? <img src={url} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/>
+      : <img src={face} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/> }
       <div>
-      <input type="file" accept="image/*" onChange={handleImageChange}/>
-      <button onClick={handleSubmit}>저장</button>
-      <button onClick={handleDelete}>삭제</button>
-
+      <input type="file" accept="image/*" onChange={onChangeFace}/>
+      <button onClick={onSaveFace}>저장</button>
+      <button onClick={onDeleteFace}>삭제</button>
       </div>
+
       <div className="Form-item">
         <span>이름</span>
         <input type="text" value ={name} disabled/>
@@ -422,7 +459,7 @@ function My() {
       <div className="Form-item">
         <span>비밀번호</span>
         <input type="password" value ={pwd} />
-        <button onClick={openModal}>수정</button>
+        <button onClick={openChangePwdModal}>수정</button>
       </div>
 
       {/* 닉네임 */}
@@ -511,6 +548,8 @@ function My() {
       </div>
       }
       </>
+
+      <button onClick={openUnregisterModal}>탈퇴하기</button>
     </>
   );
   

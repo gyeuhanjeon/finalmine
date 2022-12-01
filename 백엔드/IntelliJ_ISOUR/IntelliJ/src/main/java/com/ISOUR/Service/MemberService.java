@@ -176,7 +176,8 @@ public class MemberService {
         log.warn("입력한 비밀번호(pwd) : " + pwd);
 
         List<MemberInfo> memberInfoList = memberRepository.findByIdAndPwd(id, pwd);
-        if(memberInfoList != null) {
+        log.warn(memberInfoList.toString());
+        if(memberInfoList.size() == 1) {
             memberRepository.deleteAll(memberInfoList);
             return true;
         } else return false;
@@ -202,8 +203,6 @@ public class MemberService {
         memberDTO.setIntroduce(memberInfo.getIntroduce());
         memberDTO.setFace(memberInfo.getFace());
 
-        log.warn("생년월일 궁금해 : " + memberInfo.getBirth());
-        log.warn("닉네임 궁금해 : " + memberInfo.getNickname());
         return memberDTO;
     }
 

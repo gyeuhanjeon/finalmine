@@ -81,6 +81,7 @@ const TeamAPI = {
     // @GetMapping("/MyPage")
     return await axios.get(TEAM_DOMAIN + `MyPage?id=${id}`, HEADER);
   },
+
   /* 비밀번호 찾기 */
   findPwd: async function (id, email, birth) {
     // @GetMapping("/FindPwd")
@@ -111,13 +112,13 @@ const TeamAPI = {
   },
 
   /* 회원 탈퇴 */
-  memberDrop: async function (id, pwd) {
-    const dropObj = {
+  memberDelete: async function (id, pwd) {
+    const goodbyeObj = {
       id: id,
       pwd: pwd
     };
     // @PostMapping("/Goodbye")
-    return await axios.post(TEAM_DOMAIN + "Goodbye", dropObj, HEADER);
+    return await axios.post(TEAM_DOMAIN + "Goodbye", goodbyeObj, HEADER);
   },
 
   // ========= PostController =========

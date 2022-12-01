@@ -13,14 +13,17 @@ public class MemberInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id_num;
+    @Column(unique = true)
     private String id;
 //    @Column(insertable=false, updatable=false)
-    @Column(updatable = false)
+//    @Column(updatable = false)
     private String pwd;
     private String name;
     @Column(updatable = false)
     private String birth;
+    @Column(unique = true)
     private String nickname;
+    @Column(unique = true)
     private String email;
     private String gender;
     private String region1;
