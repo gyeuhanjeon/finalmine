@@ -49,7 +49,7 @@ public class MemberController {
         String getNickname = memberData.get("nickname");
         log.warn("중복확인할 닉네임(nickname) : " + getNickname);
 
-        boolean isTrue = memberService.isMemberCheck(getNickname);
+        boolean isTrue = memberService.isNicknameCheck(getNickname);
         if(isTrue) log.warn("중복확인할 닉네임(nickname) : " + isTrue);
 
         if(isTrue) {

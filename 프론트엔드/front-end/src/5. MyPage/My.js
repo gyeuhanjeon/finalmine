@@ -4,10 +4,13 @@ import hangjungdong from '../other/hangjungdong';
 // import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import face from '../images/기본 프로필.png'
+import { Modal } from '../99. Modal/MyModal';
 
 // 파이어베이스
 import { storage } from '../firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+
+const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 
 function My() {
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
@@ -16,16 +19,12 @@ function My() {
   // ▲ 로그인 안 되어 있으면 로그인 페이지로
 
   const localId = window.localStorage.getItem("userId");
-  const localPw = window.localStorage.getItem("userPw");
-  
 
-
-
-
+  const [modalOpen, setModalOpen] = useState(false);
   const [memberInfo, setMemberInfo] = useState(""); // 현재 로그인 되어 있는 회원의 정보 저장용
   
   // 이름, 아이디, 비밀번호, 비밀번호 확인, 생년월일, 나이, 성별, 주소 1, 주소 2
-  const [image, setImage] = useState(null);// 여기에 기본 이미지 넣어야지
+  const [image, setImage] = useState(null);
   const [url, setUrl] = useState(null);
   const [name, setName] = useState('');
   const [id, setId] = useState('');
@@ -41,40 +40,52 @@ function My() {
   const [mbti, setMbti] = useState("");
   const [keySido, setKeySido] = useState("");
 
+  const [isNicknamecheck, setIsNicknamecheck] = useState(false);
+
   // 변경 여부 변수 선언
   const [isChangePwd, setIsChangePwd] = useState(false);
   const [isChangeNickname, setIsChangeNickname] = useState(false);
   const [isChangeIntroduce, setIsChangeIntroduce] = useState(false);
   const [isChangeEmail, setIsChangeEmail] = useState(false);
   const [isChangeAddress, setIsChangeAddress] = useState(false);
- 
+
+  const openModal = () => { setModalOpen(true); };
+  const closeModal = () => { setModalOpen(false); };
+  
   /* 
   최초 통신(useEffect) */
   useEffect(() => {  
     const memberData = async () => {
+      console.log("\n>> 회원 정보 조회(useEffect)");
       console.log("localId : "+ localId);
-    try {
-      const response = await TeamAPI.memberInfo(localId); // 회원 정보 조회
-      setMemberInfo(response.data);
-      console.log(response.data)
+      try {
+        const response = await TeamAPI.memberInfo(localId); // 회원 정보 조회
+        if(response.status == 200) {
+          console.log("통신 성공(200)");
+          const member = response.data;
+          setMemberInfo(member);
+          console.log(member)
+          console.log("------------------");
 
-      setName(response.data.name);
-      setNickname(response.data.nickname);
-      setUrl(response.data.face);
-      console.log("-----------" + response.data.nickname);
-      setId(response.data.id);
-      setEmail(response.data.email);
-      setPwd(response.data.pwd);
-      setBirth(response.data.birth);
-      setGender(response.data.gender);
-      console.log("생일 확인 : " + response.data.birth)
-      setRegion1(response.data.region1);
-      setRegion2(response.data.region2);
-      setMbti(response.data.mbti);
-      setIntroduce(response.data.introduce);
-      console.log("기존 회원 정보 가져오기 완료")
+          // 프사, 이름, 아이디, 생년월일, 성별, MBTI, 비밀번호, 닉네임, 자기소개, 이메일, 주소
+          setUrl(member.face);
+          setName(member.name);
+          setId(member.id);
+          setBirth(member.birth);
+          setGender(member.gender);
+          setMbti(member.mbti);
+          setPwd(member.pwd);
+          setNickname(member.nickname);
+          setIntroduce(member.introduce);
+          setEmail(member.email);
+          setRegion1(member.region1);
+          setRegion2(member.region2);
+          console.log("기존 회원 정보 가져오기 완료")
+        } else {
+          console.log("통신 실패("+ response.status + ")");
+        }
       } catch (e) {
-          console.log(e);
+        console.log(e);
       }
     };
   memberData();
@@ -155,39 +166,119 @@ function My() {
   }
   }
 
-  /*
-  변경 가능 항목(비밀번호, 닉네임, 자기소개, 이메일, 주소) */
+  /**
+▶ 변경 가능 항목(비밀번호, 닉네임, 자기소개, 이메일, 주소) 
+  */
 
-  const onClickChangePwd = e => {
+  /* 비밀번호 변경 */
+  const onChangePwd = e => { 
     let temp_pwd = e.target.value;
-    setPwd(temp_pwd);
+    setPwd(temp_pwd); 
   }
 
+  /* 비밀번호 저장 */
+  const onSavePwd = async(e) => {
+    e.preventDefault();
+    setPwd(pwd);
+    setIsChangePwd(false);
 
+    try {
+      const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
+      console.log("id : " + id);
+      console.log("password : " + pwd);
+      console.log("nickname : " + nickname);
+      console.log("introduce : " + introduce);
+      console.log("email : " + email);
+      console.log("region1 : " + region1);
+      console.log("region2 : " + region2);
 
-  
+      if(response.status == 200) {
+        console.log("통신 성공(200)");
+        alert("정보 수정 완료!!");
+        console.log("\n\n업데이트 완!!");
+      } 
+    } catch (e) {console.log(e);}
+  }
+
+  /* 닉네임 변경 */
   const onChangeNickname = e => { 
     let temp_nickname = e.target.value;
     setNickname(temp_nickname); 
   }
-  
+
+  /* 닉네임 중복확인 버튼 클릭 */
+  const onClickNicknameCheck = async (e) => {
+    e.preventDefault();
+    setIsNicknamecheck(false);
+    console.log("\n>> 닉네임 중복확인 버튼 눌렀어요.");
+
+    if (nickname === '' || !regexName.test(nickname)) {
+      console.log("닉네임을 입력하지 않았거나 정규식에 맞지 않아요.");
+      alert("먼저, 닉네임을 확인하세요.");
+    } else {
+      try {
+        const nicknameCheck = await TeamAPI.nicknameCheck(nickname);
+        console.log("nicknameCheck.data : " + nicknameCheck.data);
+        console.log("nicknameCheck.status : " + nicknameCheck.status);
+        // if(memberCheck.data.result === true) {
+        if (nicknameCheck.data === true) {
+          setNickname("");
+          alert("사용할 수 없는 닉네임 입니다.");
+          console.log("사용할 수 없는 닉네임 입니다.");
+        } else {
+          console.log("사용 가능한 닉네임 입니다.");
+          setIsNicknamecheck(true);
+          alert("사용 가능한 닉네임 입니다.");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  /* 닉네임 저장 */
+  const onSaveNickname = async(e) => {
+    console.log("\n>> 닉네임 저장 버튼 눌렀어요.");
+    if(!isNicknamecheck) {
+      alert("닉네임을 다시 확인하거나 중복확인이 필요합니다.")
+      return;
+    }
+
+    e.preventDefault();
+    setNickname(nickname);
+    setIsChangeNickname(false);
+
+    try {
+      const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
+      console.log("id : " + id);
+      console.log("password : " + pwd);
+      console.log("nickname : " + nickname);
+      console.log("introduce : " + introduce);
+      console.log("email : " + email);
+      console.log("region1 : " + region1);
+      console.log("region2 : " + region2);
+
+      if(response.status == 200) {
+        console.log("통신 성공(200)");
+        console.log("\n>> 닉네임 수정 완료");
+        alert("닉네임 수정 완료!!");
+      } 
+
+    } catch (e) {console.log(e);}
+  } 
+
+  /* 자기소개 변경 */
   const onChangeIntroduce = e => { 
     let temp_introduce = e.target.value;
     setIntroduce(temp_introduce); 
   }
-  /*
-  이메일 변경 */
-  const onChangeEmail = e => { 
-    let temp_email = e.target.value;
-    setEmail(temp_email); 
-  }
 
-  /*
-  이메일 저장 */
-  const onSaveEmail = async(e) => {
+  /* 자기소개 저장 */
+  const onSaveIntroduce = async(e) => {
     e.preventDefault();
-    setEmail(email);
-    setIsChangeEmail(false);
+    setIntroduce(introduce);
+    setIsChangeIntroduce(false);
+    console.log("\n>> 자기소개 저장 버튼 눌렀어요.");
 
     try {
       const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
@@ -200,15 +291,45 @@ function My() {
         console.log("region2 : " + region2);
         if(response.status == 200) {
           console.log("통신 성공(200)");
-          alert("정보 수정 완료!!");
-          console.log("\n\n업데이트 완!!");
+          console.log("\n>> 자기소개 수정 완료");
+          alert("자기소개 수정 완료!!");
+      } 
+
+    } catch (e) {console.log(e);}
+  } 
+
+  /* 이메일 변경 */
+  const onChangeEmail = e => { 
+    let temp_email = e.target.value;
+    setEmail(temp_email); 
+  }
+
+  /* 이메일 저장 */
+  const onSaveEmail = async(e) => {
+    e.preventDefault();
+    setEmail(email);
+    setIsChangeEmail(false);
+    console.log("\n>> 이메일 저장 버튼 눌렀어요.");
+
+    try {
+      const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
+        console.log("id : " + id);
+        console.log("password : " + pwd);
+        console.log("nickname : " + nickname);
+        console.log("introduce : " + introduce);
+        console.log("email : " + email);
+        console.log("region1 : " + region1);
+        console.log("region2 : " + region2);
+        if(response.status == 200) {
+          console.log("통신 성공(200)");
+          console.log("\n>> 이메일 수정 완료");
+          alert("이메일 수정 완료!!");
       } 
 
     } catch (e) {console.log(e);}
   }
 
-  /*
-  시도 변경 */
+  /* 주소 ☞ 시도 변경 */
   const onChangeRegion1 = (e) => {
 
     let temp_region1 = e.target.value;
@@ -221,8 +342,7 @@ function My() {
     setKeySido(temp_keySido);
   };
 
-  /*
-  시구군 변경 */
+  /* 주소 ☞ 시구군 변경 */
   const onChangeRegion2 = (e) => {
 
     let temp_region2 = e.target.value;
@@ -230,12 +350,12 @@ function My() {
     setRegion2(temp_region2);
   }
 
-  /*
-  주소 저장 */
+  /* 주소 저장 */
   const onSaveAddress = async(e) => {
     setRegion1(region1);
     setRegion2(region2);
     setIsChangeAddress(false);
+    console.log("\n>> 주소 저장 버튼 눌렀어요.");
 
     try {
       const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
@@ -248,43 +368,25 @@ function My() {
         console.log("region2 : " + region2);
         if(response.status == 200) {
           console.log("통신 성공(200)");
-          alert("정보 수정 완료!!");
-          console.log("\n\n업데이트 완!!");
+          console.log("\n>> 주소 수정 완료");
+          alert("주소 수정 완료!!");
       } 
 
     } catch (e) {console.log(e);}
   }
 
-
+  /* MBTI 검사하기 */
   const onClickTestStart = () => {
-    console.log("검사하기 버튼 눌렀어요.");
+    console.log("\n>> 검사하기 버튼 눌렀어요.");
     // alert("콘솔 확인하세요.")
     window.location.replace("/MBTI");
   }
 
-  const OnClickButton = async() => {
-    try {
-      const memberUpdate = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
-  
-        console.log("id : " + id);
-        console.log("password : " + pwd);
-        console.log("nickname : " + nickname);
-        console.log("introduce : " + introduce);
-        console.log("email : " + email);
-        console.log("region1 : " + region1);
-        console.log("region2 : " + region2);
-        console.log("업데이트 완!!");
-
-    } catch (e) {console.log(e);}
-        // window.location.replace("/mypage");
-    // } else {
-    //   console.log("잘못 입력한 값이 있거나 입력되지 않은 값이 있어요.");
-    //   alert('입력된 값을 확인하세요.');
-  }
-
   return(
     <>
+      <Modal open={modalOpen} close={closeModal} header="Modal heading"></Modal>
       <h1>마이페이지</h1>
+      <h6>프로필 사진 미리보기 가능</h6>
       {url != null 
       ? <img  src={url} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/>
       : <img  src={face} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/> }
@@ -315,21 +417,48 @@ function My() {
         { mbti ? <input type="text" value ={mbti} />
           : <button onClick={onClickTestStart}>검사하기</button>}
       </div>
+
+      {/* 비밀번호 */}
       <div className="Form-item">
         <span>비밀번호</span>
         <input type="password" value ={pwd} />
-        <button onClick={onClickChangePwd}>수정</button>
+        <button onClick={openModal}>수정</button>
       </div>
+
+      {/* 닉네임 */}
       <div className="Form-item">
         <span>닉네임</span>
-        <input type="text" value ={nickname} />
-        <button onClick={onChangeNickname}>수정</button>
+        {!isChangeNickname ?
+        <>
+          <input type="text" value ={nickname} />
+          <button onClick={e => setIsChangeNickname(true)}>수정</button>
+        </>
+        :
+        <>
+          <input type="text" onChange={onChangeNickname}/>
+          <button onClick={onClickNicknameCheck}>중복확인</button>
+          <button onClick={onSaveNickname}>저장</button>
+        </>
+        }
       </div>
+
+      {/* 자기소개 */}
       <div className="Form-item">
         <span>자기소개</span>
-        <input type="text" value ={introduce} />
-        <button onClick={onChangeIntroduce}>수정</button>
+        {!isChangeIntroduce ?
+        <>
+          <input type="text" value ={introduce} />
+          <button onClick={e => setIsChangeIntroduce(true)}>수정</button>
+        </>
+        :
+        <>
+          <input type="text" onChange={onChangeIntroduce}/>
+          <button onClick={onSaveIntroduce}>저장</button>
+        </>
+        }
       </div>
+
+      {/* 이메일 */}
       <div className="Form-item">
         <span>이메일</span>
         {!isChangeEmail ?
@@ -344,6 +473,7 @@ function My() {
         </>
         }
       </div>
+
       {/* 주소 */}
       <>
       {isChangeAddress ?
