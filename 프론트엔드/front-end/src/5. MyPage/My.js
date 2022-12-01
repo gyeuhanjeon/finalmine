@@ -4,7 +4,7 @@ import hangjungdong from '../other/hangjungdong';
 // import { Link } from 'react-router-dom';
 // import axios from 'axios';
 import face from '../images/기본 프로필.png'
-import { Modal } from '../99. Modal/MyModal';
+import { Modal } from '../99. Modal/MyPageModal';
 
 // 파이어베이스
 import { storage } from '../firebase'
@@ -91,7 +91,7 @@ function My() {
   memberData();
   }, []);
 
-  // 이미지 변경
+  // 프사 변경 및 미리보기
   const handleImageChange = (e) => {
     const preview = URL.createObjectURL(e.target.files[0]);
     setUrl(preview);
@@ -100,7 +100,7 @@ function My() {
     }
   };
 
-  // 업로드 버튼
+  // 프사 저장 버튼
   const handleSubmit = async () => {
     const imageRef = ref(storage, localId);
 
@@ -141,7 +141,7 @@ function My() {
     
   };
 
-  // 삭제 버튼
+  // 프사 삭제 버튼
   const handleDelete = async() => {
 
     if(url === null) alert("삭제할 이미지가 없습니다.")
@@ -384,7 +384,7 @@ function My() {
 
   return(
     <>
-      <Modal open={modalOpen} close={closeModal} header="Modal heading"></Modal>
+      <Modal open={modalOpen} close={closeModal} header="비밀번호 변경"></Modal>
       <h1>마이페이지</h1>
       <h6>프로필 사진 미리보기 가능</h6>
       {url != null 
@@ -392,7 +392,7 @@ function My() {
       : <img  src={face} alt="프로필 이미지" style={{width: "150px", height: "150px", borderRadius: "70%", overflow: "hidden", objectFit: "cover"}}/> }
       <div>
       <input type="file" accept="image/*" onChange={handleImageChange}/>
-      <button onClick={handleSubmit}>변경</button>
+      <button onClick={handleSubmit}>저장</button>
       <button onClick={handleDelete}>삭제</button>
 
       </div>
