@@ -13,8 +13,8 @@ const EmailModal = ({ open, show, onHide, modalName, modalContent }) => {
         onHide();
     }
 
-    const onClickReply = async () => {
-        console.log("답장하기 버튼 눌렀어요.");
+    const onClickReply = async (e) => {
+        e.preventDefault();
         console.log(code);
         if (code !== null) {
             const emailConfirm = await TeamAPI.emailCode(code);

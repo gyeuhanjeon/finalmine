@@ -73,7 +73,7 @@ const ChangePwdModal = ({ open2, show, onHide, modalName, modalContent }) => {
     }
 
     const onClickPwdChange = async () => {
-        console.log("답장하기 버튼 눌렀어요.");
+        console.log("비밀번호 변경 버튼을 눌렀어요");
         console.log(pwd);
         console.log(pwdcheck);
         if (setIsPwd&&setIsPwdcheck) {

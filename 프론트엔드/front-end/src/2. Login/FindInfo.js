@@ -169,19 +169,19 @@ const FindInfo = () => {
     };
 
 
-    const onClickPwdChange = async () => {
+    const onClickPwdChange = async (e) => {
+        e.preventDefault();
         console.log("답장하기 버튼 눌렀어요.");
         console.log(pwd);
         console.log(pwdcheck);
         if (setIsPwd && setIsPwdcheck) {
-            const emailConfirm = await TeamAPI.emailCode(pwd);
+            const emailConfirm = await TeamAPI.memberUpdate(id,pwd);
             console.log(emailConfirm);
             alert("코드 보내기 성공!!");
             if (emailConfirm.data === 1) {
                 alert("인증이 완료되었습니다.")
 
             } else {
-                alert("인증코드가 일치하지 않습니다. 다시 입력해주세요.");
                 setPwd("");
                 setPwdcheck("");
             }
@@ -280,10 +280,10 @@ const FindInfo = () => {
         e.preventDefault();
         console.log("\n\nemail 인증 버튼을 눌렀어요");
         try {
-            const emailResult = await TeamAPI.emailCheck(email);
-            console.log("emailResult.data : " + emailResult.data);
-            console.log("emailResult.status : " + emailResult.status);
-            if (emailResult.status === 200) {
+            const changeResult = await TeamAPI.memberUpdate(id,pwd);
+            console.log("emailResult.data : " + changeResult.data);
+            console.log("emailResult.status : " + changeResult.status);
+            if (changeResult.status === 200) {
                 setOpen(true);
                 setEmail(email);
             } else {
