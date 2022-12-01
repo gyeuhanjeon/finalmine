@@ -1,10 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Main from './1. Main/Main';
 import Login from './2. Login/Login';
-import MyPage from './5. MyPage/MyPage';
-import MemberDrop from './5. MyPage/MemberDrop';
 import SignUp from './3. SignUp/SignUp';
-import MemberUpdate from './5. MyPage/MemberUpdate';
 import MBTI from './6. MBTI/MBTI';
 import MbtiTypes from './6. MBTI/MbtiTypes';
 import MessageList from './7. PostBOX/MessageList';
@@ -15,7 +12,7 @@ import FindInfo from './2. Login/FindInfo';
 import Chat from './9.Chat/Chatting';
 import SocketTest from './9.Chat/ChatTest';
 import Matching from './8.Matching/Matching_원본';
-import My from './5. MyPage/My';
+import Mypage from './5. MyPage/Mypage';
 import Navber from './Navber/Nav';
 import Test from './test/test';
 import '../src/App.css';
@@ -30,10 +27,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/home' element={<Home />} />
-        <Route path='/mypage' element={<MyPage />} />
-        <Route path='/MemberDrop' element={<MemberDrop />} />
+        <Route path='/mypage' element={<Mypage />} />
         <Route path='/MBTI' element={<MBTI />} />
-        <Route path='/MemberUpdate' element={<MemberUpdate />} />
         <Route path='/MbtiTypes' element={<MbtiTypes />} />
         <Route path='/MessageList' element={<MessageList />} />
         <Route path='/Postbox' element={<Postbox />} />
@@ -41,7 +36,6 @@ function App() {
         <Route path='/Chat' element={<Chat/>}/>
         <Route path='/Socket' element={<SocketTest/>}/>
         <Route path='/Matching' element={<Matching/>}/>
-        <Route path='/My' element={<My/>}/>
         <Route path='/test' element={<Test/>}/>
       </Routes>
     </Router>
