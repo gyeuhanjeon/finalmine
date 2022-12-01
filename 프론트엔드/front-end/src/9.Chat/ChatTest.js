@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
+import { firestore } from "../firebase";
+
 
 const SocketTest = () => {
     
@@ -7,20 +9,21 @@ const SocketTest = () => {
     const [rcvMsg, setRcvMsg] = useState("");
     const webSocketUrl = `ws://localhost:8282/ws/chatting`;
     const roomId = window.localStorage.getItem("chatRoomId");
-    const sender = "곰돌이사육사";
+    const sender = "gomdol";
     let ws = useRef(null);
     const [items, setItems] = useState([]);
 
-    const onChangMsg = (e) => {
-        setInputMsg(e.target.value)
+    const onChangMsg = (message) => {
+        setInputMsg(message.target.value)
     }
 
     const onEnterKey = (e) => {
         if(e.key === 'Enter') onClickMsgSend(e);
     }
 
-    const onClickMsgSend = (e) => {
+    const onClickMsgSend = async(e) => {
         e.preventDefault();
+        
         ws.current.send(
             JSON.stringify({
             "type":"TALK",
@@ -28,6 +31,7 @@ const SocketTest = () => {
             "sender": sender,
             "message":inputMsg}));
             setInputMsg("");
+            
     }
     const onClickMsgClose = () => {
         ws.current.send(
@@ -53,7 +57,6 @@ const SocketTest = () => {
                 JSON.stringify({
                 "type":"ENTER",
                 "roomId": roomId,
-                "sender": sender,
                 "message":"처음으로 접속 합니다."}));
         }
         ws.current.onmessage = (evt) => {
@@ -61,18 +64,39 @@ const SocketTest = () => {
             console.log(data.message);
             // setRcvMsg(data.message);
             setItems((prevItems) => [...prevItems, data]);
+           
       };
     }, [socketConnected]);
-
+    
+    useEffect(() => {
+        
+        const bucket = firestore.collection("chat");
+        //bucket은 컬렉션이름
+        bucket.add({content : inputMsg})
+      },[onClickMsgSend]);
+    // 데이터값 불러오는건 잘됨
+    // useEffect(() => {
+    //     const query = ref(db, "users/message/")
+    //     return onValue(query, (snapshot)=>{ 
+    //         const datas =snapshot.val();
+    //         if(snapshot.exists()) {
+    //             Object.values(datas).map((item)=>{
+    //                 console.log(datas);
+    //                 <div>{datas}</div>
+    //             });
+    //         }
+    //     },[])
+    // });
     return (
         <div >
-            <div>socket</div>
+            {/* <div>socket</div>
             <div>socket connected : {`${socketConnected}`}</div>
-            <div>방번호: {roomId}</div>
-            <h2>소켓으로 문자 전송하기 테스트</h2>
+            <div>방번호: {roomId}</div> */}
+            {/* <h2>소켓으로 문자 전송하기 테스트</h2> */}
+       
             <div>
                 {items.map((item) => {
-                return <div>{`${item.sender} > ${item.message}`}</div>;
+                return <div>{`${item.sender} : ${item.message}`}</div>;
                 })}
             </div>
             <input className="msg_input" placeholder="문자 전송" value ={inputMsg} onChange={onChangMsg} onKeyUp={onEnterKey}/>
