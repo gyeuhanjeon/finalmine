@@ -12,7 +12,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 
-const Mypage = () => {
+const MyPage = () => {
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
   const isLogin = window.localStorage.getItem("isLogin");
   if(isLogin === "FALSE") window.location.replace("/login");
@@ -559,4 +559,4 @@ const Mypage = () => {
 
 }
 
-export default Mypage;
+export default MyPage;

@@ -12,7 +12,7 @@ import FindInfo from './2. Login/FindInfo';
 import Chat from './9.Chat/Chatting';
 import SocketTest from './9.Chat/ChatTest';
 import Matching from './8.Matching/Matching_원본';
-import Mypage from './5. MyPage/Mypage';
+import MyPage from './5. MyPage/MyPage';
 import Navber from './Navber/Nav';
 import Test from './test/test';
 import '../src/App.css';
@@ -27,7 +27,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/home' element={<Home />} />
-        <Route path='/mypage' element={<Mypage />} />
+        <Route path='/mypage' element={<MyPage />} />
         <Route path='/MBTI' element={<MBTI />} />
         <Route path='/MbtiTypes' element={<MbtiTypes />} />
         <Route path='/MessageList' element={<MessageList />} />
