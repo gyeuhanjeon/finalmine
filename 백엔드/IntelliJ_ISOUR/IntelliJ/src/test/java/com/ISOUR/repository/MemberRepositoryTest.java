@@ -45,18 +45,19 @@ class MemberRepositoryTest {
 
 //    16 +
 //    32 +
+//    48 +
     @Test
     @DisplayName("매칭용회원가입 테스트")
     public void signUpTest_Matching() {
         String[] MBTI = new String[] { "", "INTJ", "INTP", "ENTJ", "ENTP", "INFJ", "INFP", "ENFJ", "ENFP", "ISTJ", "ISFJ", "ESTJ", "ESFJ", "ISTP", "ISFP", "ESTP", "ESFP" };
         for(int i = 1; i <= 16; i++) {
             MemberInfo memberInfo = new MemberInfo();
-            memberInfo.setName("test" + (16 +i));
-            memberInfo.setNickname("testNic" + (16 +i));
-            memberInfo.setId("test" + (16 +i));
-            memberInfo.setPwd("test" + (16 +i));
+            memberInfo.setName("test" + (48 + i));
+            memberInfo.setNickname("testNic" + (48 + i));
+            memberInfo.setId("test" + (48 + i));
+            memberInfo.setPwd("test" + (48 + i));
             memberInfo.setMbti(MBTI[i]);
-            memberInfo.setIntroduce("Im test" + (16 +i) + "입니다.");
+            memberInfo.setIntroduce("Im test" + (48 + i) + "입니다.");
             memberRepository.save(memberInfo);
         }
     }

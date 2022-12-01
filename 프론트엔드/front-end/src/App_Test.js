@@ -28,7 +28,7 @@ function App_Test() {
         <Route path='/MBTI' element={<MBTI />} />
         <Route path='/MemberUpdate' element={<MemberUpdate />} />
         <Route path='/MbtiTypes' element={<MbtiTypes />} />
-        <Route path='/MessageList' element={<MessageList />} />
+        {/* <Route path='/MessageList' element={<MessageList />} /> */}
         <Route path='/Postbox' element={<Postbox />} />
         <Route path='/FindInfo' element={<FindInfo />} />
       </Routes>

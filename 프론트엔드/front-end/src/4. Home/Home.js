@@ -29,7 +29,7 @@ useEffect(() => {
     let id = localId;
     try {
       const response = await TeamAPI.memberInfo(id); // 원래는 전체 회원 조회용
-      setNickName(response.data.nickName)
+      setNickName(response.data.nickname)
       window.localStorage.setItem("id_num",response.data.id_num);
       console.log(response.data)
     } catch (e) {

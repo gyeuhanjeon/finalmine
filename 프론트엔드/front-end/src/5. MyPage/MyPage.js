@@ -70,7 +70,7 @@ const MyPage = () => {
   const onClickUpdate = () => {
     console.log("수정하기 버튼 눌렀어요.");
     // alert("콘솔 확인하세요.")
-    window.location.replace("/MemberUpdate");
+    window.location.replace("/my");
   }
 
   const onClickTestStart = () => {
@@ -152,14 +152,14 @@ const MyPage = () => {
               <span>회원정보 수정</span>
             </div>
           </div>
-          <div onClick={onClickMessage}>
-              <img src={nowGo} alt="화살표" />
+          <a onClick={onClickMessage}>
+              <img src={nowGo} style={{width:30}} alt="화살표" />
               <span>메세지 함</span>
-            </div>
-          <div onClick={onClickDrop}>
-              <img src={nowGo} alt="화살표" />
+            </a>
+          <a onClick={onClickDrop}>
+              <img src={nowGo} style={{width:30}} alt="화살표" />
               <span>탈퇴하기</span>
-            </div>
+            </a>
           
     </div>
   );

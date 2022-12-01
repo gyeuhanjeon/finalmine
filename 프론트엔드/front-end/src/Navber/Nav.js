@@ -12,25 +12,25 @@ function Navber() {
         <nav className='App-Nav'>
              <Navbar bg="light" expand="lg">
             <Container>
-              <Link to="/"><Navbar.Brand className='home-button' href="#home">MBTISOUR</Navbar.Brand></Link>
+              <Navbar.Brand className='home-button' href="/">MBTISOUR</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link className='Nav-link-font1' href="#home">About</Nav.Link>
-                  <Link to="/MBTI"><Nav.Link className='Nav-link-font2'href="#link">MBTI</Nav.Link></Link>
-                  <Nav.Link className='Nav-link-font3'href="#link">게시판</Nav.Link>
+                <Nav.Link className='Nav-link-font1' href="/home">HOME</Nav.Link>
+
+                  <NavDropdown className='Nav-link-font2' title="MBTI">
+                    <NavDropdown.Item href="/MBTI">MBTI 검사하기</NavDropdown.Item>
+                    <NavDropdown.Item href="/MBTITypes">MBTI 설명</NavDropdown.Item>
+                  </NavDropdown>
+                  <Nav.Link className='Nav-link-font3'href="/Socket">(임시)채팅방</Nav.Link>
+
                   <NavDropdown title="더 보기" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">내 정보</NavDropdown.Item>
-                    <Link to="MBTITypes"><NavDropdown.Item href="#action/3.2">
-                      MBTI 설명
-                    </NavDropdown.Item></Link>
-                    <NavDropdown.Item href="#action/3.3">메시지 함</NavDropdown.Item>
+                    <NavDropdown.Item href="/mypage">내 정보</NavDropdown.Item>
+                    <NavDropdown.Item href="/Postbox">메시지 함</NavDropdown.Item>
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">
-                      고객 소리함
-                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.4">고객 소리함</NavDropdown.Item>
                     <NavDropdown.Item href="#action/3.5">
-                    <Logout />
+                      <Logout />
                     </NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
