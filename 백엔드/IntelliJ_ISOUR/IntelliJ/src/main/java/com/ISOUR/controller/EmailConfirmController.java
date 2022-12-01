@@ -1,8 +1,12 @@
 package com.ISOUR.controller;
 
+import com.ISOUR.Service.MemberService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.ISOUR.Service.EmailServiceImpl;
@@ -10,13 +14,17 @@ import com.ISOUR.Service.EmailService;
 
 import java.util.Map;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/service/*")
 public class EmailConfirmController {
     @Autowired
     EmailService service;
-
+    private MemberService memberService;
+    public EmailConfirmController(MemberService memberService) {
+        this.memberService = memberService;
+    }
     private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
     @PostMapping("/mail")
@@ -37,7 +45,30 @@ public class EmailConfirmController {
         if(EmailServiceImpl.ePw.equals(getEmailCode)) {
             result =1;
         }
-
         return result;
     }
+
+
+    @PostMapping("/IsEmailCheck")
+    public ResponseEntity<Boolean> IsEmailCheck(@RequestBody Map<String, String> memberData) {
+        log.warn("★★★★★★★★★이메일 중복확인 Controller★★★★★★★★★");
+
+        String getId = memberData.get("email");
+        log.warn("중복확인할 아이디(email : " + getId);
+
+        boolean isTrue = memberService.isMemberCheck(getId);
+        if(isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
+
+        if(isTrue) {
+            log.warn(">>" + isTrue + " : 사용할 수 없는 아이디(id)입니다. ");
+            return new ResponseEntity<>(true, HttpStatus.OK);
+        } else {
+            log.warn(">>" + isTrue + " : 사용할 수 있는 아이디(id)입니다. ");
+            return new ResponseEntity<>(false, HttpStatus.OK);
+        }
+
+    }
+
+
+
 }
