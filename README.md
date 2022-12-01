@@ -28,6 +28,8 @@ ISOUR Final Project
 - (4차)
 - 안 쓰는 MemberUpdate, MemberDrop 파일 삭제
 - 작업중이던 My 파일을 Mypage로 바꿈
+- (5차)
+- 파일 이름은 MyPage.js 인데 안에는 Mypage로 만들고 Mypage로 임포트함(그래서 오류났었음)
 
 22.11.30(수)
 
