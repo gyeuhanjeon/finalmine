@@ -5,6 +5,7 @@ import '../font/Jalnan.ttf';
 import "../images/아이셔용.png" 
 import { motion } from "framer-motion";
 
+
 const regexPw = /^\w{8,20}$/;
 
 function Login() {

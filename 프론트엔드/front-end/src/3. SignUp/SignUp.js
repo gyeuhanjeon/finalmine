@@ -140,6 +140,7 @@ function SignUp() {
   const [nickname, setNickname] = useState('');
   const [introduce, setIntroduce] = useState('');
   const [emailModalOn, setEmailModalOn] = useState(false);
+  const [open,setOpen] = useState(false);
 
 
   const today = new Date();
@@ -174,6 +175,7 @@ function SignUp() {
   const [isGender, setIsGender] = useState(false);
   const [isRegion1, setIsRegion1] = useState(false);
   const [isRegion2, setIsRegion2] = useState(false);
+  const [emailDoubleCheck,setEmailDoubleCheck]=useState(false);
 
   // 보여줄 문구 목록
   const reqName = "이름을 정확히 입력하세요."
@@ -395,6 +397,29 @@ function SignUp() {
     }
   };
 
+
+  /*이메일 중복확인*/
+  const onClickEmailCheck = async(e)=>{
+    e.preventDefault();
+    console.log("\n\nemail 인증 버튼을 눌렀어요");
+    try {
+      const emailResult = await TeamAPI.emailDuplicateCheck(email);
+      console.log("emailResult.data : " + emailResult.data);
+      console.log("emailResult.status : " + emailResult.status);
+      if (emailResult.data === false) {
+        alert('사용 가능한 이메일 입니다. 이메일 인증을 진행해주세요.')
+        setIsEmail(false);
+        setEmailDoubleCheck(true);
+      } else {
+        alert('중복된 이메일 입니다. 다른 이메일을 입력해주세요.')
+        setEmail("");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+
   /*이메일 인증*/
   const onClickEmailAdress = async (e) => {
     e.preventDefault();
@@ -404,7 +429,7 @@ function SignUp() {
       console.log("emailResult.data : " + emailResult.data);
       console.log("emailResult.status : " + emailResult.status);
       if (emailResult.status === 200) {
-        setEmailModalOn(true);
+        setOpen(true);
       } else {
         setEmail("");
       }
@@ -503,7 +528,7 @@ function SignUp() {
     console.log("isRegion2 : " + isRegion2);
     console.log("introduce 값 : " + introduce);
 
-    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isEmail && isBirth && isGender && isRegion1 && isRegion2 && isNickname && isNicknamecheck&&emailConfirm) {
+    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isBirth && isGender && isRegion1 && isRegion2 && isNickname && isNicknamecheck&&emailConfirm) {
       const memberReg = await TeamAPI.memberReg(name, id, pwd, nickname, email, birth, gender, region1, region2, introduce, check_term1, check_term2);
 
       console.log("name : " + name);
@@ -544,7 +569,7 @@ function SignUp() {
           <form action="" className="SignUp-card-form">
 
             {/* 이메일 인증 모달창 */}
-            <EmailModal modalName={email} show={emailModalOn} modalContent={()=>setEmailConfirm(true)} onHide={() => setEmailModalOn(false)} />
+            <EmailModal open={open} modalName={email} modalContent={()=>setEmailConfirm(true)} onHide={() => setOpen(false)} />
             {/* 이름 */}
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
@@ -610,7 +635,8 @@ function SignUp() {
             <div className="Form-item">
                 <span className="Form-item-icon material-symbols-rounded"></span>
                 <input type="text" className='Input-Name' placeholder="이메일" value={email} onChange={onChangeEmail} required />
-                {isEmail&&<button onClick={onClickEmailAdress} className='Input-ID-check' required> 이메일인증 </button>}
+                {isEmail&&<button onClick={onClickEmailCheck} > 이메일 중복확인 </button>}
+                {emailDoubleCheck&&<button onClick={onClickEmailAdress}> 이메일인증</button>}
                 <Msg>
                   {showReqEmail && reqEmail}
                   {emailConfirm && confirmEmail}

@@ -258,6 +258,15 @@ public class MemberService {
         }
         return memberDTOS;
     }
+    /*이메일 중복 확인 서비스*/
+    public boolean isEmailCheck(String email) {
+        log.warn("★★★★★★★★★이메일 중복체크 서비스★★★★★★★★★");
+        log.warn("입력한 이메일(email) :" + email);
+
+        MemberInfo memberInfo = memberRepository.findByEmail(email);
+        if(memberInfo != null) return true;
+        else return false;
+    }
 
 
 }

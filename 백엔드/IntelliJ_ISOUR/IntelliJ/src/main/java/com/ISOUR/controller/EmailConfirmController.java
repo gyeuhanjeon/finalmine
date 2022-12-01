@@ -49,24 +49,23 @@ public class EmailConfirmController {
     }
 
 
-    @PostMapping("/IsEmailCheck")
+    @PostMapping("/isEmailCheck")
     public ResponseEntity<Boolean> IsEmailCheck(@RequestBody Map<String, String> memberData) {
         log.warn("★★★★★★★★★이메일 중복확인 Controller★★★★★★★★★");
 
-        String getId = memberData.get("email");
-        log.warn("중복확인할 아이디(email : " + getId);
+        String getEmail = memberData.get("email");
+        log.warn("중복확인할 이메일 주소(email : " + getEmail);
 
-        boolean isTrue = memberService.isMemberCheck(getId);
-        if(isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
+        boolean isTrue = memberService.isEmailCheck(getEmail);
+        if(isTrue) log.warn("중복확인할 이메일(email) boolean 값 : " + isTrue);
 
         if(isTrue) {
             log.warn(">>" + isTrue + " : 사용할 수 없는 이메일 입니다. ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
-            log.warn(">>" + isTrue + " : 사용할 수 있는 아이디(id)입니다. ");
+            log.warn(">>" + isTrue + " : 사용할 수 있는 이메일입니다. ");
             return new ResponseEntity<>(false, HttpStatus.OK);
         }
-
     }
 
 
