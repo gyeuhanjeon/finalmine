@@ -60,7 +60,7 @@ public class EmailConfirmController {
         if(isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
 
         if(isTrue) {
-            log.warn(">>" + isTrue + " : 사용할 수 없는 아이디(id)입니다. ");
+            log.warn(">>" + isTrue + " : 사용할 수 없는 이메일 입니다. ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
             log.warn(">>" + isTrue + " : 사용할 수 있는 아이디(id)입니다. ");
