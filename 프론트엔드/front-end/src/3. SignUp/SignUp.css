@@ -10,26 +10,89 @@
     background-color: white;
 }
 
+@media screen and (max-width:990px) {
+    .SignUp-Container{
+        padding: 25px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 20px;
+        align-items: center;
+        text-align: center;
+        max-width: 990px;
+    }
+}
+
 .SignUp-Main-Box {
     border: 1px solid;
-    border-radius: 20px;
     height: 700px;
+    width: 500px;
     padding: 25px;
-    margin-top: 200px;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 100px;
     scroll-padding-right: 10px;
-    background-color: white;
+    border-radius: 20px;
+    overflow-y: auto;
+    min-width: 600px;
 }
 
 .SignUp-header {
     margin-bottom: 30px;
 }
 
+.SigUp-header-font {
+    font-size: 50px;
+}
+
 .Input-border {
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-1 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-2 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-4 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-5 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-6 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-7 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+    margin-top: 24px;
 }
 
 .Input-border-Id {
@@ -39,4 +102,3 @@
 .Input-border-introduce {
     margin-bottom: 25px;
 }
-

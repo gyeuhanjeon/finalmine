@@ -1,0 +1,23 @@
+
+        body {
+            background: url(../images/아이셔용.png) no-repeat fixed;  /* 기본 배경 이미지 지정 */
+            background-size: cover;
+        }
+        @media screen and (max-width:900px) {
+            body {
+                background: url(../images/중재자.png) no-repeat fixed;  /* 가로가 1024px 이하면 bg1.jpg 지정 */
+                background-size: cover;
+            }
+        }
+        @media screen and (max-width:768px) {
+            body {
+                background: url(../images/집정관.png) no-repeat fixed;  /* 가로가 768px 이하면 bg2.jpg 지정 */
+                background-size:cover;
+            }
+        }
+        @media screen and (max-width:320px) {
+            body {
+                background: url(../images/활동가.png) no-repeat fixed;  /* 가로가 320px 이하면 bg3.jpg 지정 */
+                background-size: cover; 
+            }
+        }

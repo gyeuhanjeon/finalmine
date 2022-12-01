@@ -1,28 +1,45 @@
 .Login-Container{
-    position: relative;
-    margin-right: auto;
-    margin-left: auto;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-    max-width: 1180px;
-    font-family: "Jalnan";
-    background-color: white;
-  }
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  max-width: 1180px;
+  font-family: "Jalnan";
+  background-color: white;
+}
+  
+  @media screen and (max-width:990px) {
+    .Login-Container{
+        padding: 25px;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 20px;
+        align-items: center;
+        text-align: center;
+        max-width: 990px;
+    }
+
+}
   .Login-box1 {
-    margin: auto;
     border: 1px solid;
     height: 700px;
+    width: 500px;
     padding: 25px;
     margin: 200px;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: auto;
+    margin-right: auto;
     scroll-padding-right: 10px;
     border-radius: 20px;
   }
 
   .Login-Main-font{
     margin: 30px;
+  }
+
+  .Login-Main-Word{
+    font-size: 50px;
   }
 
   .Login-Id {
@@ -68,9 +85,7 @@
     margin-bottom: 50px;
   }
 
-  .Login-card-social-btns {
-    padding: 30px;
-  }
+
 
 
 

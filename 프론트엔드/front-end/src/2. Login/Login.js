@@ -4,9 +4,10 @@ import '../2. Login/Login.css';
 import '../font/Jalnan.ttf';
 import "../images/아이셔용.png" 
 import { motion } from "framer-motion";
-
+import { useMediaQuery } from "react-responsive"
 
 const regexPw = /^\w{8,20}$/;
+
 
 function Login() {
   // ▼ 로그인되어 있으면 바로 HOME 으로 이동 
@@ -61,6 +62,7 @@ function Login() {
     }
   }
 
+  
 
   return(
     <div className="Login-Container">
@@ -71,7 +73,7 @@ function Login() {
           </div> */}
 
           <div className="Login-Main-font">
-            <h1 >MBTISOUR</h1>
+            <p className='Login-Main-Word'>MBTISOUR</p>
             <p>로그인을 해주세요!</p>
           </div>
 
@@ -121,7 +123,6 @@ function Login() {
             </a>
           </div>
         </div> 
-   
       </div>
     </div>
   );

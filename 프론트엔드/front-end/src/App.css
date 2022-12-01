@@ -1,9 +1,6 @@
-@font-face {
-  font-family: "Jalnan";
-  src: url("./font/Jalnan.ttf");
-}
+
 /*전체 폼*/
-.App {
+/* .App {
   position: relative;
   height: 1250px;
   margin-right: auto;
@@ -13,4 +10,9 @@
   max-width: 1180px;
   background-color: white;
   font-family: "Jalnan";
+} */
+
+@font-face {
+  font-family: "Jalnan";
+  src: url("./font/Jalnan.ttf");
 }

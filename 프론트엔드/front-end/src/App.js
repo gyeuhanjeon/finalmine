@@ -17,6 +17,8 @@ import SocketTest from './9.Chat/ChatTest';
 import Matching from './8.Matching/Matching_원본';
 import My from './5. MyPage/My';
 import Navber from './Navber/Nav';
+import Test from './test/test';
+import '../src/App.css';
 
 
 function App() {
@@ -40,6 +42,7 @@ function App() {
         <Route path='/Socket' element={<SocketTest/>}/>
         <Route path='/Matching' element={<Matching/>}/>
         <Route path='/My' element={<My/>}/>
+        <Route path='/test' element={<Test/>}/>
       </Routes>
     </Router>
   );

@@ -1,5 +1,19 @@
 import { useState } from 'react';
+import '../3. SignUp/Terms.css';
+import { StyledComponent } from 'styled-components';
 
+
+const SignUpContainer = div`
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  max-width: 1180px;
+  font-family: "Jalnan";
+  background-color: white;
+`
 const Terms = (props) => {
   const [checkedItems, setCheckedItems] = useState([]);
   
@@ -63,7 +77,7 @@ const Terms = (props) => {
   }
 
   return(
-    <form>
+    <SignUpContainer>
       <div>
         <input type="checkbox" id="checkbox-check_all"
           onChange={(e) => handleAllCheck(e.target.checked)}
@@ -81,7 +95,7 @@ const Terms = (props) => {
       ))}
 
       <button type="button" onClick={onClickAgree}>동의하고 가입하기</button> 
-    </form>
+    </SignUpContainer>
   );
 }
 

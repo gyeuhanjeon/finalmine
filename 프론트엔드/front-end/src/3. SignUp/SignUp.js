@@ -2,13 +2,24 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
-import '../3. SignUp/SignUp.css'
-import EmailModal from './EmailModal';
+import '../3. SignUp/SignUp.css';
+import { useMediaQuery } from "react-responsive";
 
 
-
-
-
+// // 반응형 쿼리 900까지는 모바일 화면 출력
+// export const Mobile = ({ children }) => {
+//   const isMoile = useMediaQuery({
+//     query: "(max-width:900px)"
+//   });
+//   return <>{isMobile && children}</>
+// }
+// // 반응형 쿼리 901부터는 pc 화면 출력
+// export const Pc = ({ children }) => {
+//   const isMoile = useMediaQuery({
+//     query: "(max-width:901px)"
+//   });
+//   return <>{isPc && children}</>
+// }
 
 // 정규식 - 이름, 아이디, 비밀번호
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
@@ -560,12 +571,13 @@ function SignUp() {
     mode === 'agree' ? 
       <Terms/> 
     : 
+    
     <div className="SignUp-Container">
       <div className="SignUp-Main-Box">
 
           <div className="SignUp-header">
-            <h1>Sign Up</h1>
-            <div>회원정보를 입력해주세요</div>
+            <p className='SigUp-header-font'>Sign Up</p>
+            <p>회원정보를 입력해주세요</p>
           </div>
 
           <form action="" className="SignUp-card-form">
@@ -576,7 +588,7 @@ function SignUp() {
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border" type="text" placeholder="이름" value={name} onChange={onChangeName} required />
+              <input className="Input-border-1" type="text" placeholder="이름" value={name} onChange={onChangeName} required />
               <Msg>
                 {showReqName && reqName}
               </Msg>
@@ -585,7 +597,7 @@ function SignUp() {
             {/* 아이디 */}
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border" type="text" placeholder="아이디" value={id} onChange={onChangeId} required />
+              <input className="Input-border-2" type="text" placeholder="아이디" value={id} onChange={onChangeId} required />
               <button onClick={onClickIdCheck} className='Input-ID-check' required> 중복확인 </button>
               <Msg>
                 {showReqId && reqId}
@@ -598,7 +610,7 @@ function SignUp() {
             {/* 비밀번호 */}
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border" type="password" placeholder="비밀번호" value={pwd} onChange={onChangePassword} />
+              <input className="Input-border-3" type="password" placeholder="비밀번호" value={pwd} onChange={onChangePassword} />
               <Msg>
                 {showGuidePwd && guidePwd}
                 {showAcceptPwd && acceptPwd}
@@ -608,7 +620,7 @@ function SignUp() {
             {/* 비밀번호 확인 */}
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border" type="password" placeholder="비밀번호 확인" value={pwdcheck} onChange={onChangePassword_check} disabled={!regexPw.test(pwd)} />
+              <input className="Input-border-4" type="password" placeholder="비밀번호 확인" value={pwdcheck} onChange={onChangePassword_check} disabled={!regexPw.test(pwd)} />
               <Msg>
                 {showErrorPwdcheck && errorPwdcheck}
                 {showAcceptPwdcheck && acceptPwdcheck}
@@ -619,7 +631,7 @@ function SignUp() {
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border" type="text" placeholder="닉네임(한글 2~20자)" value={nickname} onChange={onChangeNickname} required />
+              <input className="Input-border-5" type="text" placeholder="닉네임(한글 2~20자)" value={nickname} onChange={onChangeNickname} required />
               <button onClick={onClickNicknameCheck} required> 중복확인 </button>
               <Msg>
                 {showReqNickname && reqNickname}
@@ -630,20 +642,20 @@ function SignUp() {
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
               <span className="Form-item-icon material-symbols-rounded"></span>
-              <input className="Input-border-interduce" type="text" placeholder="자기소개(한글 2~20자)" value={introduce} onChange={onChangeIntroduce} />
+              <input className="Input-border-6" type="text" placeholder="자기소개(한글 2~20자)" value={introduce} onChange={onChangeIntroduce} />
             </div>
 
             {/* 이메일 */}
             <div className="Form-item">
-                <span className="Form-item-icon material-symbols-rounded"></span>
-                <input type="text" className='Input-Name' placeholder="이메일" value={email} onChange={onChangeEmail}  disabled={emailDoubleCheck ? true : false} />
+              <span className="Form-item-icon material-symbols-rounded"></span>
+                <input className="Input-border-7" type="text" placeholder="이메일" value={email} onChange={onChangeEmail}  disabled={emailDoubleCheck ? true : false} />
                 {isEmail&&<button onClick={onClickEmailCheck} > 이메일 중복확인 </button>}
                 {emailDoubleCheck&&<button onClick={onClickEmailAdress}> 이메일인증</button>}
-                <Msg>
-                  {showReqEmail && reqEmail}
+              <Msg>
+                {showReqEmail && reqEmail}
                   {emailConfirm && confirmEmail}
-                </Msg>
-              </div>
+              </Msg>
+            </div>
 
             {/* 생년월일 */}
             <div className="Form-item">
@@ -702,6 +714,7 @@ function SignUp() {
 
           </form>
       </div> {/* SignUp-card-container 의 끝 */}
+      
     </div>
   );
 }
