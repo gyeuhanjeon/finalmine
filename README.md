@@ -2,6 +2,8 @@
 ISOUR Final Project
 
 22.12.01(목)
+
+♥ 이동균
 - 로그인 박스 사이즈 픽스
 - 전반적인 input,text 비율 조절
 
