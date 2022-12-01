@@ -97,7 +97,7 @@ function Login() {
               <a href="/FindInfo">아이디/비밀번호 찾기</a>
             </div>
 
-          <div className="Login-card-footer">
+          <div className="Login-footer">
             가입하고 친구를 만들어봐요! <p><a href="/signup">회원가입</a></p>
           </div>
 

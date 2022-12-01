@@ -1,14 +1,13 @@
 .SignUp-Container {
-    display: block;
     position: relative;
-    height: 1250px;
+    margin-right: auto;
+    margin-left: auto;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     max-width: 1180px;
-    background-color: white;
     font-family: "Jalnan";
-    text-align: center;
-    background-color: black;
+    background-color: white;
 }
 
 .SignUp-Main-Box {
@@ -16,13 +15,28 @@
     border-radius: 20px;
     height: 700px;
     padding: 25px;
+    margin-top: 200px;
     margin-left: 300px;
     margin-right: 300px;
     scroll-padding-right: 10px;
-    overflow-y: auto;
     background-color: white;
 }
 
 .SignUp-header {
     margin-bottom: 30px;
 }
+
+.Input-border {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+.Input-border-Id {
+    margin-right: 30px;
+}
+
+.Input-border-introduce {
+    margin-bottom: 25px;
+}
+

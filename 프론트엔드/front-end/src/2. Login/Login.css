@@ -18,7 +18,7 @@
     margin-left: 300px;
     margin-right: 300px;
     scroll-padding-right: 10px;
-    overflow-y: auto;
+    border-radius: 20px;
   }
 
   .Login-Main-font{
@@ -42,7 +42,7 @@
     height: 30px;
     border-radius: 20px;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     padding-bottom: 30px;
   }
 
@@ -51,7 +51,29 @@
     border-left: 0px;
     border-right: 0px;
     width: 300px;
+    }
+
+  .Login-footer {
+    margin-top: 90px;
+    font-size: 20px;
   }
+
+
+  .Login-Id {
+    margin-top:50px;
+    margin-bottom: 50px;
+  }
+
+  .Login-PW  {
+    margin-bottom: 50px;
+  }
+
+  .Login-card-social-btns {
+    padding: 30px;
+  }
+
+
+
 
 
   
