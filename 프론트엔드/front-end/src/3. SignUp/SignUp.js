@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
 import '../3. SignUp/SignUp.css';
-import { useMediaQuery } from "react-responsive";
 import EmailModal from './EmailModal';
 
 

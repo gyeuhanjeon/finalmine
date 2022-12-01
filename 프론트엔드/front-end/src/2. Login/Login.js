@@ -4,7 +4,6 @@ import '../2. Login/Login.css';
 import '../font/Jalnan.ttf';
 import "../images/아이셔용.png" 
 import { motion } from "framer-motion";
-import { useMediaQuery } from "react-responsive"
 
 const regexPw = /^\w{8,20}$/;
 
