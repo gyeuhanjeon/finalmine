@@ -1,18 +1,42 @@
 import React, { useEffect, useState, useRef } from "react";
+import TeamAPI from "../0. API/TeamAPI";
 import { firestore } from "../firebase";
 
 
 const SocketTest = () => {
+    const localId = window.localStorage.getItem("userId");
     
     const [socketConnected, setSocketConnected] = useState(false);
     const [inputMsg, setInputMsg] = useState("");
     const [rcvMsg, setRcvMsg] = useState("");
     const webSocketUrl = `ws://localhost:8282/ws/chatting`;
     const roomId = window.localStorage.getItem("chatRoomId");
-    const sender = "gomdol";
     let ws = useRef(null);
     const [items, setItems] = useState([]);
+    const local_id_num = window.localStorage.getItem("id_num");
+    const [nickName, setNickName] = useState('');
 
+useEffect(() => {
+        
+  const memberData = async () => {
+    console.log("\n\n현재 localStorage 에 저장된 ID : " + localId);
+
+    console.log(typeof(localId));
+    let id = localId;
+    try {
+      const response = await TeamAPI.memberInfo(id); // 원래는 전체 회원 조회용
+      setNickName(response.data.nickname)
+      window.localStorage.setItem("id_num",response.data.id_num);
+      console.log(response.data)
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  memberData();
+  }, []);
+
+    const sender = nickName;
+        console.log("닉네임", sender);
     const onChangMsg = (message) => {
         setInputMsg(message.target.value)
     }
@@ -57,7 +81,10 @@ const SocketTest = () => {
                 JSON.stringify({
                 "type":"ENTER",
                 "roomId": roomId,
-                "message":"처음으로 접속 합니다."}));
+                "sender": sender,
+                "message": "채팅을 시작합니다"
+
+                }));
         }
         ws.current.onmessage = (evt) => {
             const data = JSON.parse(evt.data);
@@ -93,10 +120,10 @@ const SocketTest = () => {
             <div>socket connected : {`${socketConnected}`}</div>
             <div>방번호: {roomId}</div> */}
             {/* <h2>소켓으로 문자 전송하기 테스트</h2> */}
-       
+            <div>{sender}님이 입장하셨습니다</div>
             <div>
                 {items.map((item) => {
-                return <div>{`${item.sender} : ${item.message}`}</div>;
+                return <div>{`${item.sender} > ${item.message}`}</div>;
                 })}
             </div>
             <input className="msg_input" placeholder="문자 전송" value ={inputMsg} onChange={onChangMsg} onKeyUp={onEnterKey}/>
