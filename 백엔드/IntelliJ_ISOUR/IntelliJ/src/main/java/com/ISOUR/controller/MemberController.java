@@ -14,6 +14,8 @@ import java.util.*;
 @RestController
 @Slf4j
 public class MemberController {
+
+
     // Service(서비스) 로직 연결
     private MemberService memberService;
     public MemberController(MemberService memberService) {
@@ -225,22 +227,16 @@ public class MemberController {
 
     /* 비밀번호 찾기 정보 조회 */
     @GetMapping("/FindPwd")
-    public ResponseEntity<Boolean> memberInfo(@RequestParam String id, String email, String birth ) {
-        log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
-        boolean isTrue = memberService.findPwd(id,email,birth);
-        if(isTrue) {
-            log.warn(">" + isTrue + " : MBTI 검사 결과 저장 성공 ");
-            return new ResponseEntity<>(true, HttpStatus.OK);
-        } else {
-            log.warn(">" + isTrue + " : MBTI 검사 결과 저장 실패 ");
-            return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<MemberDTO> memberInfo(@RequestParam String id, String email, String birth ) {
+        log.warn("★★★★★★★★★비밀번호 찾기 정보 조회Controller★★★★★★★★★");
+        MemberDTO memberDTO = memberService.findPwd(id, email,birth);
+        return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 
     /* 아이디 찾기 정보 조회 */
     @GetMapping("/FindId")
     public ResponseEntity<MemberDTO> findInfo(@RequestParam String name, String email, String birth ) {
-        log.warn("★★★★★★★★★개별 회원 조회 Controller★★★★★★★★★");
+        log.warn("★★★★★★★★★아이디 찾기 정보 조회 Controller★★★★★★★★★");
         MemberDTO memberDTO = memberService.findId(name,email,birth);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
 

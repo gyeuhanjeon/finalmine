@@ -208,17 +208,30 @@ public class MemberService {
 
 
     /* 비밀번호 찾기 조회 서비스 */
-    public boolean findPwd(String id, String email, String birth) {
-        log.warn("★★★★★★★★★로그인 서비스★★★★★★★★★");
-        log.warn("입력한 아이디(id) : " + id);
-        log.warn("입력한 비밀번호(pwd) : " + email);
-        log.warn("입력한 비밀번호(pwd) : " + birth);
+    public MemberDTO findPwd(String id, String email, String birth) {
+        log.warn("★★★★★★★★★개별 회원 조회 서비스★★★★★★★★★");
+        log.warn("조회할 아이디(id) : " + id);
+        log.warn("조회할 이메일(email) : " + email);
+        log.warn("조회할 생년월일(birth) : " + birth);
+        MemberInfo memberInfo = memberRepository.findByIdAndEmailAndBirth(id, email, birth);
+        MemberDTO memberDTO = new MemberDTO();
+        memberDTO.setId_num(memberInfo.getId_num());
+        memberDTO.setName(memberInfo.getName());
+        memberDTO.setId(memberInfo.getId());
+        memberDTO.setPwd(memberInfo.getPwd());
+        memberDTO.setNickname(memberInfo.getNickname());
+        memberDTO.setBirth(memberInfo.getBirth());
+        memberDTO.setEmail(memberInfo.getEmail());
+        memberDTO.setGender(memberInfo.getGender());
+        memberDTO.setRegion1(memberInfo.getRegion1());
+        memberDTO.setRegion2(memberInfo.getRegion2());
+        memberDTO.setMbti(memberInfo.getMbti());
+        memberDTO.setIntroduce(memberInfo.getIntroduce());
+        memberDTO.setFace(memberInfo.getFace());
 
-        List<MemberInfo> memberInfoList = memberRepository.findByIdAndEmailAndBirth(id, email, birth);
-        for(MemberInfo e : memberInfoList) {
-            return true;
-        }
-        return false;
+
+        log.warn("memberDTO: " + memberDTO.getBirth());
+        return memberDTO;
     }
 
     /* 아이디 찾기 조회 서비스 */

@@ -148,3 +148,4 @@ export const ChangePwdModal = (props) => {
   );
 };
 
+export default ChangePwdModal;
