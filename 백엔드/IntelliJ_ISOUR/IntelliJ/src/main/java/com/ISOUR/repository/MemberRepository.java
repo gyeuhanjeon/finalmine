@@ -13,7 +13,7 @@ public interface MemberRepository extends JpaRepository<MemberInfo, Long> {
     MemberInfo findById(String id);
     MemberInfo findByEmail(String email);
     MemberInfo findByNickname(String nickname);
-    List<MemberInfo> findByIdAndEmailAndBirth(String id, String email, String birth);
+    MemberInfo findByIdAndEmailAndBirth(String id, String email, String birth);
 
     MemberInfo findByNameAndEmailAndBirth(String name, String email, String birth);
 

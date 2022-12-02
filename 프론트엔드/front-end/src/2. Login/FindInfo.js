@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import TeamAPI from '../0. API/TeamAPI';
 import FindInfoModal from './FindInfoModal';
 import EmailModal from './EmailModal';
-import ChangePwdModal from './ChangePwdModal';
-
+import ChangePwdModal from '../99. Modal/ChangePwdModal';
 
 const Find_Container = styled.div`
     width:500px;
@@ -60,14 +59,6 @@ const Input = styled.input`
     margin: 0 auto;
 `
 
-const ChangePwdContainer = styled.div`
-    border: 1px solid black;
-    width: 350px;
-    height: 250px;
-    margin: 50px auto 50px;
-
-`
-
 
 
 const FindInfo = () => {
@@ -85,6 +76,16 @@ const FindInfo = () => {
     const [email, setEmail] = useState('');
     const [birth, setBirth] = useState('');
     const [name, setName] = useState('');
+    const [inputPwd, setInputPwd] = useState('');
+    const [nickname, setNickname] = useState('');
+    const [introduce, setIntroduce] = useState('');
+    const [gender, setGender] = useState('');
+    const [region1, setRegion1] = useState("");
+    const [region2, setRegion2] = useState("");
+    const [url,setUrl] = useState("");
+    const [mbti,setMbti] = useState("");
+
+
 
     const [isName, setIsName] = useState(false);
     const [isId, setIsId] = useState(false);
@@ -108,87 +109,39 @@ const FindInfo = () => {
 
     const [pwd, setPwd] = useState('');
     const [pwdcheck, setPwdcheck] = useState('');
-
-    const [isPwd, setIsPwd] = useState(false);
-    const [isPwdcheck, setIsPwdcheck] = useState(false);
-
-    const acceptPwd = "사용 가능한 비밀번호입니다."
-    const errorPwdcheck = "비밀번호가 일치하지 않습니다."
-    const acceptPwdcheck = "비밀번호가 일치합니다."
-
-    const [showGuidePwd, setShowGuidePwd] = useState(false);
-    const [showAcceptPwd, setShowAcceptPwd] = useState(false);
-    const [showErrorPwdcheck, setShowErrorPwdcheck] = useState(false);
-    const [showAcceptPwdcheck, setShowAcceptPwdcheck] = useState(false);
-
-    /*비밀번호 변경 */
-    const onChangePassword = e => {
-        setIsPwd(false);
-        setIsPwdcheck(false);
-
-        let temp_pwd = e.target.value;
-        setPwd(temp_pwd);
-
-        if (regexPw.test(temp_pwd)) {
-            setIsPwd(true);
-            setShowAcceptPwd(true); // 사용 가능한 비밀번호입니다.
-            setShowGuidePwd(false); // 임시 정규식 : 8~20자
-        } else {
-            setIsPwd(false);
-            setShowAcceptPwd(false); // 사용 가능한 비밀번호입니다.
-            setShowGuidePwd(true); // 임시 정규식 : 8~20자
-        }
-
-        if (pwdcheck == '') console.log(pwdcheck);
-        else if (pwdcheck !== '' && (temp_pwd !== '' && temp_pwd === pwdcheck)) {
-            setIsPwdcheck(true);
-            setShowAcceptPwdcheck(true); // 비밀번호가 일치합니다.
-            setShowErrorPwdcheck(false); // 비밀번호가 일치하지 않습니다.
-        } else {
-            setIsPwdcheck(false);
-            setShowErrorPwdcheck(true); // 비밀번호가 일치하지 않습니다.
-            setShowAcceptPwdcheck(false); // 비밀번호가 일치합니다.
-        }
-    };
-
-    /*
-    비밀번호 확인 변경 */
-    const onChangePassword_check = e => {
-        const temp_pwdcheck = e.target.value;
-        setPwdcheck(temp_pwdcheck);
-
-        if (pwd === temp_pwdcheck) {
-            setIsPwdcheck(true);
-            setShowAcceptPwdcheck(true); // 비밀번호가 일치합니다.
-            setShowErrorPwdcheck(false); // 비밀번호가 일치하지 않습니다.
-        } else {
-            setIsPwdcheck(false);
-            setShowErrorPwdcheck(true); // 비밀번호가 일치하지 않습니다.
-            setShowAcceptPwdcheck(false); // 비밀번호가 일치합니다.
-        }
-    };
+    const [changePwdModalOpen, setChangePwdModalOpen] = useState(false);
 
 
-    const onClickPwdChange = async (e) => {
-        e.preventDefault();
-        console.log("답장하기 버튼 눌렀어요.");
-        console.log(pwd);
-        console.log(pwdcheck);
-        if (setIsPwd && setIsPwdcheck) {
-            const emailConfirm = await TeamAPI.memberUpdate(id,pwd);
-            console.log(emailConfirm);
-            alert("코드 보내기 성공!!");
-            if (emailConfirm.data === 1) {
-                alert("인증이 완료되었습니다.")
 
-            } else {
-                setPwd("");
-                setPwdcheck("");
+
+    /* 비밀번호 저장 */
+    const getPwd = (pwd) => { setPwd(pwd); }
+    const openChangePwdModal = () => { setChangePwdModalOpen(true); };
+    const closeChangePwdModal = () => { setChangePwdModalOpen(false); };
+    const onSavePwd = async (e) => {
+        console.log("변경한 pwd :" + pwd);
+        console.log("변경한 e :" + e);
+
+        // e.preventDefault();
+
+        try {
+            const response = await TeamAPI.memberUpdate(id, pwd, nickname, introduce, email, region1, region2);
+            console.log("id : " + id);
+            console.log("password : " + pwd);
+            console.log("nickname : " + nickname);
+            console.log("introduce : " + introduce);
+            console.log("email : " + email);
+            console.log("region1 : " + region1);
+            console.log("region2 : " + region2);
+
+            if (response.status == 200) {
+                console.log("통신 성공(200)");
+                console.log("\n>> 비밀번호 수정 완료");
+                alert("비밀번호 수정 완료!!");
+                window.location.replace('/login');
             }
-        } else {
-            console.log("\n\n 비밀번호를 제대로 입력해주세요.");
-            alert("비밀번호 양식과 비밀번호 확인과 일치시켜주세요...^^");
-        }
+        } catch (e) { console.log(e); }
+
     }
 
 
@@ -257,11 +210,23 @@ const FindInfo = () => {
 
             console.log(findPwd.data);
 
-            if (findPwd.data === true) {
+            if (findPwd.status === 200) {
                 alert("입력 정보가 맞습니다.");
                 console.log("입력 정보가 맞습니다.");
                 setFindDate(true);
                 setIsBirth(false);
+                setName(findPwd.data.name);
+                setId(findPwd.data.id);
+                setBirth(findPwd.data.birth);
+                setGender(findPwd.data.gender);
+                setPwd(findPwd.data.pwd);
+                setNickname(findPwd.data.nickname);
+                setIntroduce(findPwd.data.introduce);
+                setEmail(findPwd.data.email);
+                setRegion1(findPwd.data.region1);
+                setRegion2(findPwd.data.region2);
+                setUrl(findPwd.data.face);
+                setMbti(findPwd.data.mbti);
             } else {
                 setId("");
                 setEmail("");
@@ -280,7 +245,7 @@ const FindInfo = () => {
         e.preventDefault();
         console.log("\n\nemail 인증 버튼을 눌렀어요");
         try {
-            const changeResult = await TeamAPI.memberUpdate(id,pwd);
+            const changeResult = await TeamAPI.emailCheck(email);
             console.log("emailResult.data : " + changeResult.data);
             console.log("emailResult.status : " + changeResult.status);
             if (changeResult.status === 200) {
@@ -379,7 +344,8 @@ const FindInfo = () => {
                     </Select_Mode2>
                     <Input_Container>
                         <form>
-                            <EmailModal open={open} modalName={email} modalContent={() => setOpen2(true)} onHide={() => setOpen(false)} />
+                            <EmailModal open={open} modalName={email} modalContent={() => setChangePwdModalOpen(true)} onHide={() => setOpen(false)} />
+                            <ChangePwdModal open={changePwdModalOpen} close={closeChangePwdModal} getPwd={getPwd} onSavePwd={onSavePwd}></ChangePwdModal>
                             <div>
                                 <label >아이디</label>
                                 <Input type="text" placeholder="아이디" value={id} onChange={onChangeId} required />
@@ -395,19 +361,6 @@ const FindInfo = () => {
                                 <label>생년월일</label>
                                 <Input type="date" value={birth} onChange={onChangeBirth} />
                             </div>
-                            {open2&&<ChangePwdContainer>
-                                <div>
-                                    <label>비밀 번호</label>
-                                    <input placeholder="비밀번호를 입력해주세요" value={pwd} onChange={onChangePassword} required></input>
-                                </div>
-                                <div>
-                                    <label>비밀번호 확인</label>
-                                    <input placeholder="비밀번호를 다시 입력해주세요." value={pwdcheck} onChange={onChangePassword_check} required ></input>
-                                </div>
-                                <button onClick={onClickPwdChange}>
-                                    변경하기
-                                </button>
-                            </ChangePwdContainer>}
                         </form>
                         {isId && isEmail && isBirth && <button onClick={onClickFindPwd}>정보 조회 하기</button>}
 
