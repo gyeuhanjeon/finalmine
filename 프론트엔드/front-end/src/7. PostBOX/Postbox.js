@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
-import SignUpModal from './SignUpModal';
+import PostModal from '../99. Modal/PostModal';
 import yong from '../images/아이셔용.png';
 
 
@@ -121,7 +121,7 @@ const Postbox = () => {
 
   return (
     <>
-      <SignUpModal modalName={postSender} modalContent={content} show={postModalOn} onHide={() => setPostModalOn(false)} />
+      <PostModal modalName={postSender} modalContent={content} show={postModalOn} onHide={() => setPostModalOn(false)} />
       <div className='Post-Container'>
         <div>Post Box</div>
         <button onClick={onClickDelete}>삭제</button>

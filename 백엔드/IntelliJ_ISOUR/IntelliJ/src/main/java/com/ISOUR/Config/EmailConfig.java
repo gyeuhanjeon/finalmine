@@ -1,4 +1,4 @@
-package com.ISOUR.config;
+package com.ISOUR.Config;
 
 import java.util.Properties;
 

@@ -3,9 +3,8 @@ package com.ISOUR.Service;
 import com.ISOUR.entity.Terms;
 import com.ISOUR.dto.MemberDTO;
 import com.ISOUR.entity.MemberInfo;
-import com.ISOUR.repository.MemberRepository;
+import com.ISOUR.repository.*;
 
-import com.ISOUR.repository.TermsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

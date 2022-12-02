@@ -36,7 +36,7 @@ useEffect(() => {
   }, []);
 
     const sender = nickName;
-        console.log("닉네임", sender);
+        // console.log("닉네임", sender);
     const onChangMsg = (message) => {
         setInputMsg(message.target.value)
     }
@@ -55,6 +55,16 @@ useEffect(() => {
             "sender": sender,
             "message":inputMsg}));
             setInputMsg("");
+
+            const bucket = firestore.collection("chat");
+            //bucket은 컬렉션이름
+            bucket.add({
+                "content" : inputMsg,
+                "roomId" : roomId,
+                "nickName" : nickName
+    
+            })
+
             
     }
     const onClickMsgClose = () => {
@@ -96,11 +106,10 @@ useEffect(() => {
     }, [socketConnected]);
     
     useEffect(() => {
-        
-        const bucket = firestore.collection("chat");
-        //bucket은 컬렉션이름
-        bucket.add({content : inputMsg})
-      },[onClickMsgSend]);
+
+
+ 
+      },[]);
     // 데이터값 불러오는건 잘됨
     // useEffect(() => {
     //     const query = ref(db, "users/message/")

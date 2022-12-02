@@ -1,8 +1,7 @@
 package com.ISOUR.webSocket;
 
-import com.ISOUR.dto.ChatDTO;
-import com.ISOUR.dto.ChatRoom;
-import com.ISOUR.service.ChatService;
+import com.ISOUR.dto.*;
+import com.ISOUR.Service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

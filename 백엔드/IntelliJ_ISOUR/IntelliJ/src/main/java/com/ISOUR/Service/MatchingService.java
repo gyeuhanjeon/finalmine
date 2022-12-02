@@ -1,16 +1,13 @@
 package com.ISOUR.Service;
 
 import com.ISOUR.dto.MatDTO;
-import com.ISOUR.repository.MatchingRepository;
-import com.ISOUR.repository.MemberRepository;
+import com.ISOUR.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.qlrm.mapper.JpaResultMapper;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -69,15 +66,19 @@ public class MatchingService {
         log.warn("★★★★★★★★★매칭 회원 조회 서비스★★★★★★★★★");
         log.warn("★★★★★★★★ 아이디 : " + id);
         log.warn("★★★★★★★★ 페이지넘버 : " + num);
+        log.warn("★★★★★★★★ 아이디넘 : " + id_num);
+        
         String sql2 = "SELECT PG2.*\n" +
                 "FROM ( SELECT PG1.*, @ROWNUM \\:= @ROWNUM + 1 as R_NUM\n" +
                 "       FROM (SELECT\n" +
                 "\t          \t\tim.ID_NUM AS user_id_num,\n" +
-                "\t                im.NICK_NAME AS user_nick,\n" +
+                "\t          \t\tim.FACE AS user_face,\n" +
+                "\t                im.NICKNAME AS user_nick,\n" +
                 "\t                im.MBTI AS user_mbti,\n" +
                 "\t                im.INTRODUCE AS user_introduce,\n" +
                 "\t                im2.ID_NUM AS mat_id_num,\n" +
-                "\t                im2.NICK_NAME AS mat_nick,\n" +
+                "\t                im2.NICKNAME AS mat_nick,\n" +
+                "\t                im2.FACE AS mat_face,\n" +
                 "\t                im2.MBTI AS mat_mbti,\n" +
                 "\t                im2.INTRODUCE AS mat_introduce,\n" +
                 "\t                m.ORDER_MBTI AS order_mbti\n" +
@@ -100,7 +101,7 @@ public class MatchingService {
                 .setParameter(3, num)
                 .setParameter(4, num);
         List<MatDTO> list = result2.list(query2, MatDTO.class);
-//        log.warn("매칭 결과 : " + list);
+        log.warn("매칭 결과 : " + list);
         return list;
     }
 

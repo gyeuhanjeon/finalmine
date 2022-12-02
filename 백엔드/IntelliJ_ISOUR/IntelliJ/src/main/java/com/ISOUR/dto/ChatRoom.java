@@ -1,6 +1,6 @@
 package com.ISOUR.dto;
 
-import com.ISOUR.service.ChatService;
+import com.ISOUR.Service.ChatService;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.web.socket.WebSocketSession;

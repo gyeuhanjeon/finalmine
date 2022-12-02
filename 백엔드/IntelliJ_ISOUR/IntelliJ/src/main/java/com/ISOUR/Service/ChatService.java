@@ -1,4 +1,4 @@
-package com.ISOUR.service;
+package com.ISOUR.Service;
 
 import com.ISOUR.dto.ChatRoom;
 import com.fasterxml.jackson.databind.ObjectMapper;
