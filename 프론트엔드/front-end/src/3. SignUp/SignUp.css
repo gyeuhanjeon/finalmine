@@ -12,28 +12,15 @@
     background-color: white;
 }
 
-@media screen and (max-width:990px) {
-    .SignUp-Container{
-        padding: 25px;
-        margin-top: 200px;
-        margin-bottom: 200px;
-        border-radius: 20px;
-        align-items: center;
-        text-align: center;
-        max-width: 990px;
-    }
-}
-
 .SignUp-Main-Box {
     border: 1px solid;
     height: 700px;
-    width: 800px;
+    width: 100%;
     margin: 200px;
     margin-left: auto;
     margin-right: auto;
     padding: 50px;
     padding-top: 80px;
-    scroll-padding-right: 10px;
     border-radius: 20px;
     overflow-y: auto;
     min-width: 600px;
@@ -127,7 +114,6 @@
 }
 
 .checkbox-check-btn {
-    padding-left: 560px;
     margin-bottom: 20px;
 }
 
