@@ -72,11 +72,13 @@ public class MatchingService {
                 "FROM ( SELECT PG1.*, @ROWNUM \\:= @ROWNUM + 1 as R_NUM\n" +
                 "       FROM (SELECT\n" +
                 "\t          \t\tim.ID_NUM AS user_id_num,\n" +
+                "\t          \t\tim.ID AS user_id,\n" +
                 "\t          \t\tim.FACE AS user_face,\n" +
                 "\t                im.NICKNAME AS user_nick,\n" +
                 "\t                im.MBTI AS user_mbti,\n" +
                 "\t                im.INTRODUCE AS user_introduce,\n" +
                 "\t                im2.ID_NUM AS mat_id_num,\n" +
+                "\t                im2.ID AS mat_id,\n" +
                 "\t                im2.NICKNAME AS mat_nick,\n" +
                 "\t                im2.FACE AS mat_face,\n" +
                 "\t                im2.MBTI AS mat_mbti,\n" +

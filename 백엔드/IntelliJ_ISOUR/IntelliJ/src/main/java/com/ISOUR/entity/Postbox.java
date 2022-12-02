@@ -3,7 +3,7 @@ package com.ISOUR.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.*;
 
 @Data
 @Entity
@@ -16,5 +16,5 @@ public class Postbox {
     private String postSender;
     private String content;
     @Column(updatable = false)
-    private LocalDate postTime;
+    private LocalDateTime postTime;
 }

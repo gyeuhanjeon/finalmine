@@ -1,22 +1,24 @@
 package com.ISOUR.Service;
 
+import com.ISOUR.entity.MemberInfo;
 import com.ISOUR.entity.Postbox;
 import com.ISOUR.dto.PostDTO;
+import com.ISOUR.repository.MemberRepository;
 import com.ISOUR.repository.PostboxRepository;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.*;
 import java.util.*;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class PostService {
-    private PostboxRepository postboxRepository;
-    public PostService(PostboxRepository postboxRepository) {
-        this.postboxRepository = postboxRepository;
-    }
+    private final PostboxRepository postboxRepository;
+    private final MemberRepository memberRepository;
 
     /* 쪽지함 조회 서비스 */
     public List<PostDTO> getPostList(String id) {
@@ -25,12 +27,15 @@ public class PostService {
 
         List<PostDTO> postDTOS = new ArrayList<>();
         List<Postbox> postboxList = postboxRepository.findByPostReceiver(id);
+        log.warn(postboxList.toString());
         log.warn(">> 쪽지함 조회 서비스 로 돌아왔습니다.");
 
         for(Postbox e : postboxList) {
             PostDTO postDTO = new PostDTO();
             postDTO.setPostNum(e.getPostNum());
-            postDTO.setPostSender(e.getPostSender());
+            String getSender = e.getPostSender();
+            MemberInfo memberInfo = memberRepository.findById(getSender);
+            postDTO.setPostSender(memberInfo.getNickname());
             postDTO.setContent(e.getContent());
             postDTO.setPostTime(e.getPostTime());
 
@@ -47,11 +52,12 @@ public class PostService {
         log.warn("받는 사람(receiverId) : " + receiverId);
         log.warn("내용(content) : " + content);
 
+        LocalDateTime currentTime = LocalDateTime.now();
         Postbox postbox = new Postbox();
         postbox.setPostSender(id);
         postbox.setPostReceiver(receiverId);
         postbox.setContent(content);
-        postbox.setPostTime(LocalDate.now());
+        postbox.setPostTime(LocalDateTime.now().withNano(0));
 
         Postbox result = postboxRepository.save(postbox);
         log.warn(result.toString());

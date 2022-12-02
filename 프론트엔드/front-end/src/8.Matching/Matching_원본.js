@@ -17,7 +17,7 @@ const Matching = () => {
   const local_id_num = window.localStorage.getItem("id_num");
 
   const [url, setUrl] = useState(null);
-  const [id, setId] = useState('');
+  const [myId, setMyId] = useState('');
   const [id_num, setId_num] = useState('');
   const [myFace, setMyFace] = useState('');
   const [myNickname, setMyNickname] = useState('');
@@ -75,6 +75,7 @@ const Matching = () => {
         const my = Mat.data[0];
         setMyInfo(my);
         setId_num(my.user_id_num);
+        setMyId(my.user_id);
         setMyFace(my.user_face);
         setMyNickname(my.user_nick);
         setMyMbti(my.user_mbti);
@@ -96,7 +97,8 @@ const Matching = () => {
   };
 
   /* 쪽지 기능 구현 */
-  const [receiver, setReceiver] = useState("");
+  const [receiverId, setReceiverId] = useState("");
+  const [receiverNickname, setReceiverNickname] = useState("");
   const [inputContent, setInputContent] = useState('');
 
   const [modalOn, setModalOn] = useState(false);
@@ -105,12 +107,14 @@ const Matching = () => {
   const openModal = () => { setModalOn(true); };
   const closeModal = () => { setModalOn(false); };
 
-  const onClickPostIcon = (receiver) => {
+  const onClickPostIcon = (receiverId, receiverNickname) => {
     alert("쪽지보내실?");
     console.log("\n>> 쪽지 아이콘 눌렀어요.");
 
-    console.log("받을 사람(receiver) : " + receiver);
-    setReceiver(receiver);
+    setReceiverId(receiverId);
+    console.log("받는 사람 ID(receiverId) : " + receiverId);
+    setReceiverNickname(receiverNickname);
+    console.log("받는 사람 닉네임(receiverNickname) : " + receiverNickname);
 
     setModalOn(true);
   };
@@ -119,15 +123,16 @@ const Matching = () => {
   const onSendPost = async(e) => {
     // e.preventDefault();
     try {
-      const response = await TeamAPI.messageReg(myNickname, receiver, inputContent);
-      console.log("\n보내는 사람(myNickname) : " + myNickname);
-      console.log("받는 사람(receiver) : " + receiver);
-      console.log("쪽지 내용(content) : " + inputContent);
+      const response = await TeamAPI.sendPost(myId, receiverId, inputContent);
+      console.log("\n보내는 사람(id) : " + myId);
+      console.log("받는 사람(receiverId) : " + receiverId);
+      console.log("쪽지 내용(inputContent) : " + inputContent);
 
       if(response.status == 200) {
         console.log("통신 성공(200)");
         console.log("\n>> 쪽지 보내기 성공!!");
         alert("쪽지 보내기 성공!!");
+        closeModal();
       }
     } catch (e) {
       console.log(e);
@@ -136,7 +141,7 @@ const Matching = () => {
 
   return (
     <StyleMat>
-    <MatchingPostModal open={modalOn} close={closeModal} myNickname={myNickname} receiver={receiver} getInputContent={getInputContent} onSendPost={onSendPost}/>
+    <MatchingPostModal open={modalOn} close={closeModal} receiver={receiverNickname} getInputContent={getInputContent} onSendPost={onSendPost}/>
     <div className='Matching-Container'>
 
     {/* MyProfile-Container 의 시작 */}
@@ -182,7 +187,7 @@ const Matching = () => {
       <div>
         <FavoriteIcon onClick={()=>alert("좋아요")}/>
         <SmsIcon onClick={onClickChat}/>
-        <EmailIcon onClick={()=>onClickPostIcon(mat.mat_nick)}/>
+        <EmailIcon onClick={()=>onClickPostIcon(mat.mat_id, mat.mat_nick)}/>
       </div>
             
       {/* { like_num === 0 ?
