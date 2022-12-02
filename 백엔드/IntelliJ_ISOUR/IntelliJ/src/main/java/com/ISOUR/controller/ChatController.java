@@ -1,7 +1,7 @@
 package com.ISOUR.controller;
 
 import com.ISOUR.dto.ChatRoom;
-import com.ISOUR.service.ChatService;
+import com.ISOUR.Service.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

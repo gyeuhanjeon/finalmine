@@ -4,7 +4,7 @@ import { propTypes } from "react-bootstrap/esm/Image";  // yarn add react-bootst
 import TeamAPI from '../0. API/TeamAPI';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const SignUpModal = ( { show, onHide, modalName, modalContent }) => {
+const PostModal = ( { show, onHide, modalName, modalContent }) => {
   const [signUpModalOn, setSignUpModalOn] = useState(false);
   const localId = window.localStorage.getItem("userId");
   let sendMessage;
@@ -83,4 +83,4 @@ const SignUpModal = ( { show, onHide, modalName, modalContent }) => {
   );
 }
 
-export default SignUpModal;
+export default PostModal;

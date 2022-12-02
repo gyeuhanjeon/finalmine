@@ -38,11 +38,13 @@ SELECT PG2.*
 FROM ( SELECT PG1.*, @ROWNUM := @ROWNUM + 1 as R_NUM
        FROM (SELECT
 	          		im.ID_NUM AS user_id_num,
-	                im.NICK_NAME AS user_nick,
+                    im.FACE AS user_face,
+	                im.NICKNAME AS user_nick,
 	                im.MBTI AS user_mbti,
 	                im.INTRODUCE AS user_introduce,
 	                im2.ID_NUM AS mat_id_num,
-	                im2.NICK_NAME AS mat_nick,
+                    im2.FACE AS mat_face,
+	                im2.NICKNAME AS mat_nick,
 	                im2.MBTI AS mat_mbti,
 	                im2.INTRODUCE AS mat_introduce,
 	                m.ORDER_MBTI AS order_mbti
@@ -51,8 +53,9 @@ FROM ( SELECT PG1.*, @ROWNUM := @ROWNUM + 1 as R_NUM
 	                ON im.MBTI = m.USER_MBTI
 	                INNER JOIN I_MEMBER im2
 	                ON im2.MBTI = m.MAT_MBTI
-                WHERE im.ID = "test17" 
-                ORDER BY m.ORDER_MBTI) PG1
+                WHERE im.ID = "test49" 
+                and m.ORDER_MBTI <= 1
+                ORDER BY rand(1)) PG1
         WHERE (@rownum := 0) = 0 <= /*count*/2 * /*startNum*/1) PG2
 WHERE R_NUM > /*count*/2 * (/*startNum*/1 - 1)                     
 limit /*count*/2;
