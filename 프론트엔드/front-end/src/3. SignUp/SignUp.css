@@ -1,8 +1,9 @@
 .SignUp-Container {
     position: relative;
     display: flex;
-    margin-right: auto;
-    margin-left: auto;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    margin:0 auto;
     align-items: center;
     text-align: center;
     flex-direction: column;
@@ -14,8 +15,8 @@
 @media screen and (max-width:990px) {
     .SignUp-Container{
         padding: 25px;
-        margin-right: auto;
-        margin-left: auto;
+        margin-top: 200px;
+        margin-bottom: 200px;
         border-radius: 20px;
         align-items: center;
         text-align: center;
@@ -26,16 +27,17 @@
 .SignUp-Main-Box {
     border: 1px solid;
     height: 700px;
-    width: 500px;
-    padding: 25px;
+    width: 800px;
     margin: 200px;
     margin-left: auto;
     margin-right: auto;
-    padding: 100px;
+    padding: 50px;
+    padding-top: 80px;
     scroll-padding-right: 10px;
     border-radius: 20px;
     overflow-y: auto;
     min-width: 600px;
+    background-color: rgb(250, 244, 160);
 }
 
 .SignUp-header {
@@ -46,13 +48,6 @@
     font-size: 50px;
 }
 
-.Input-border {
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    width: 380px;
-}
-
 .Input-border-1 {
     border-top: 0px;
     border-left: 0px;
@@ -61,6 +56,13 @@
 }
 
 .Input-border-2 {
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    width: 380px;
+}
+
+.Input-border-3{
     border-top: 0px;
     border-left: 0px;
     border-right: 0px;
@@ -103,3 +105,36 @@
 .Input-border-introduce {
     margin-bottom: 25px;
 }
+
+/*tarms*/
+
+.checkbox-check-all {
+    border: 1px solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: rgb(226, 243, 181);
+}
+
+.checkbox-check-single {
+    border: 1px solid;
+}
+
+.checkbox-check-single {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    background-color: rgb(226, 243, 181);
+}
+
+.checkbox-check-btn {
+    padding-left: 560px;
+    margin-bottom: 20px;
+}
+
+.Terms-agree-btn {
+    border-radius: 30px;
+    font-size: 35px;
+    margin-top: 50px;
+}
+
+

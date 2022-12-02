@@ -5,22 +5,6 @@ import hangjungdong from '../other/hangjungdong';
 import '../3. SignUp/SignUp.css';
 import EmailModal from './EmailModal';
 
-
-// // 반응형 쿼리 900까지는 모바일 화면 출력
-// export const Mobile = ({ children }) => {
-//   const isMoile = useMediaQuery({
-//     query: "(max-width:900px)"
-//   });
-//   return <>{isMobile && children}</>
-// }
-// // 반응형 쿼리 901부터는 pc 화면 출력
-// export const Pc = ({ children }) => {
-//   const isMoile = useMediaQuery({
-//     query: "(max-width:901px)"
-//   });
-//   return <>{isPc && children}</>
-// }
-
 // 정규식 - 이름, 아이디, 비밀번호
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 const regexId = /^\w{5,20}$/;
@@ -120,24 +104,36 @@ function SignUp() {
   
     return(
       <form>
-        <div>
-          <input type="checkbox" id="checkbox-check_all"
+        <div className='SignUp-Container'>
+          <div className='SignUp-Main-Box'>
+        <div className='checkbox-check-all'>
+        <AllCheck />
+        </div>
+        <div className='checkbox-check-btn'>
+        <input type="checkbox" id="checkbox-check_all"
             onChange={(e) => handleAllCheck(e.target.checked)}
             checked={termsList.length === checkedItems.length ? true : false} />
-          <label htmlFor="checkbox-check_all">모두 동의합니다.</label>
-        </div>
-        <AllCheck />
+            <label htmlFor="checkbox-check_all">모두 동의합니다.</label>
+            </div>
         {termsList?.map(ball => (
           <div>
+            <div className='checkbox-check-single'>
+            <label htmlFor="checkbox-check_single">{ball.title}</label>
+            <div>{ball.content}</div>
+            </div>
+            <div className='checkbox-check-btn'>
             <input type="checkbox" id="checkbox-check_single"
               onChange={(e) => handleSingleCheck(e.target.checked, ball.termNum)}
               checked={checkedItems.includes(ball.termNum) ? true : false} />
-            <label htmlFor="checkbox-check_single">{ball.title}</label>
-            <div>{ball.content}</div>
-          </div>
+            <label htmlFor="checkbox-check_all">동의합니다.</label>
+            </div>
+            </div>
         ))}
-  
+        <div className='Terms-agree-btn'>
         <button type="button" onClick={onClickAgree}>동의하고 가입하기</button> 
+        </div>
+        </div>
+        </div>
       </form>
     );
   }
@@ -713,7 +709,7 @@ function SignUp() {
             <button type="submit" className='Button-Submit' onClick={onClickButton}>회원가입</button>
 
           </form>
-      </div> {/* SignUp-card-container 의 끝 */}
+      </div>
       
     </div>
   );

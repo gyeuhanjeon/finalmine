@@ -10,9 +10,11 @@
   max-width: 1180px;
   font-family: "Jalnan";
   background-color: white;
+  justify-content:center;
 }
   
   @media screen and (max-width:990px) {
+
     .Login-Container{
         padding: 25px;
         margin-right: auto;
@@ -20,16 +22,28 @@
         border-radius: 20px;
         align-items: center;
         text-align: center;
-        max-width: 990px;
+        min-width: 600px;
     }
 
+    .Login-box1 {
+      border: 1px solid;
+      height: 700px;
+      width: 500px;
+      padding: 25px;
+      margin: 200px;
+      margin-left: auto;
+      margin-right: auto;
+      scroll-padding-right: 10px;
+      border-radius: 20px;
+    }
 }
+
   .Login-box1 {
     border: 1px solid;
     height: 700px;
-    width: 500px;
+    width: 800px;
     padding: 25px;
-    margin:200px;
+    margin: 200px;
     margin-left: auto;
     margin-right: auto;
     scroll-padding-right: 10px;

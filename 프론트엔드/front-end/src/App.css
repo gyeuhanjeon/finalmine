@@ -10,9 +10,9 @@
   max-width: 1180px;
   background-color: white;
   font-family: "Jalnan";
-} */
-
+  */
 @font-face {
   font-family: "Jalnan";
+  font-weight: 100;
   src: url("./font/Jalnan.ttf");
 }
