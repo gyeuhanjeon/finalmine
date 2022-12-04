@@ -213,13 +213,23 @@ const TeamAPI = {
   },
 
 
-    //이메일 중복확인
-    emailDuplicateCheck: async function (email) {
-      const regCmd = {
-        email: email
-      }
-      return await axios.post(TEAM_DOMAIN + "service/isEmailCheck", regCmd, HEADER);
-    },
+  //이메일 중복확인
+  emailDuplicateCheck: async function (email) {
+    const regCmd = {
+      email: email
+    }
+    return await axios.post(TEAM_DOMAIN + "service/isEmailCheck", regCmd, HEADER);
+  },
+
+  //구글 이메일 중복확인
+  googleInfo: async function (googleEmail) {
+    const regCmd = {
+      email: googleEmail
+    }
+    //@PostMapping("/GoogleInfo")
+
+    return await axios.post(TEAM_DOMAIN + "GoogleInfo", regCmd, HEADER);
+  },
 
 
 

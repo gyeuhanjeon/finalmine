@@ -18,6 +18,7 @@ public class MemberController {
 
     // Service(서비스) 로직 연결
     private MemberService memberService;
+
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -31,9 +32,9 @@ public class MemberController {
         log.warn("중복확인할 아이디(id) : " + getId);
 
         boolean isTrue = memberService.isMemberCheck(getId);
-        if(isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
+        if (isTrue) log.warn("중복확인할 아이디(id) : " + isTrue);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">>" + isTrue + " : 사용할 수 없는 아이디(id)입니다. ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -52,9 +53,9 @@ public class MemberController {
         log.warn("중복확인할 닉네임(nickname) : " + getNickname);
 
         boolean isTrue = memberService.isNicknameCheck(getNickname);
-        if(isTrue) log.warn("중복확인할 닉네임(nickname) : " + isTrue);
+        if (isTrue) log.warn("중복확인할 닉네임(nickname) : " + isTrue);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">>" + isTrue + " : 사용할 수 없는 닉네임(nickname)입니다. ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -83,15 +84,15 @@ public class MemberController {
         log.warn(getName, getId, getPwd, getNickname, getEmail, getBirth, getGender, getRegion1, getRegion2, getIntroduce);
 
         boolean isTrue = memberService.signUpMember(getName, getId, getPwd, getNickname, getEmail, getBirth, getGender, getRegion1, getRegion2, getIntroduce);
-        if(isTrue) log.warn("I_MEMBER 테이블 DB 저장 " + isTrue);
+        if (isTrue) log.warn("I_MEMBER 테이블 DB 저장 " + isTrue);
 
         String getCheck_term1 = signUpData.get("check_term1");
         String getCheck_term2 = signUpData.get("check_term2");
 
         boolean isSave = memberService.agreeTerms(getId, getCheck_term1, getCheck_term2);
-        if(isSave) log.warn("Terms 테이블 DB 저장 : " + isSave);
+        if (isSave) log.warn("Terms 테이블 DB 저장 : " + isSave);
 
-        if(isTrue && isSave) {
+        if (isTrue && isSave) {
             log.warn(">> " + isTrue + " : 회원가입 성공 ");
             log.warn(">> " + isSave + " : 약관 동의 저장 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
@@ -114,7 +115,7 @@ public class MemberController {
 
         boolean isTrue = memberService.loginMember(getId, getPwd);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">" + isTrue + " : 로그인 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -135,7 +136,7 @@ public class MemberController {
 
         boolean isTrue = memberService.saveMBTI(getMbti, getId);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">" + isTrue + " : MBTI 검사 결과 저장 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -156,7 +157,7 @@ public class MemberController {
 
         boolean isTrue = memberService.saveFace(getId, getUrl);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">" + isTrue + " : 프로필 이미지 변경 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -185,7 +186,7 @@ public class MemberController {
 
         boolean isTrue = memberService.updateMember(getId, getPwd, getNickName, getIntroduce, getEmail, getRegion1, getRegion2);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">" + isTrue + " : 회원정보 수정 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -206,7 +207,7 @@ public class MemberController {
 
         boolean isTrue = memberService.deleteMember(getId, getPwd);
 
-        if(isTrue) {
+        if (isTrue) {
             log.warn(">" + isTrue + " : 회원탈퇴 성공 ");
             return new ResponseEntity<>(true, HttpStatus.OK);
         } else {
@@ -227,17 +228,17 @@ public class MemberController {
 
     /* 비밀번호 찾기 정보 조회 */
     @GetMapping("/FindPwd")
-    public ResponseEntity<MemberDTO> memberInfo(@RequestParam String id, String email, String birth ) {
+    public ResponseEntity<MemberDTO> memberInfo(@RequestParam String id, String email, String birth) {
         log.warn("★★★★★★★★★비밀번호 찾기 정보 조회Controller★★★★★★★★★");
-        MemberDTO memberDTO = memberService.findPwd(id, email,birth);
+        MemberDTO memberDTO = memberService.findPwd(id, email, birth);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
     }
 
     /* 아이디 찾기 정보 조회 */
     @GetMapping("/FindId")
-    public ResponseEntity<MemberDTO> findInfo(@RequestParam String name, String email, String birth ) {
+    public ResponseEntity<MemberDTO> findInfo(@RequestParam String name, String email, String birth) {
         log.warn("★★★★★★★★★아이디 찾기 정보 조회 Controller★★★★★★★★★");
-        MemberDTO memberDTO = memberService.findId(name,email,birth);
+        MemberDTO memberDTO = memberService.findId(name, email, birth);
         return new ResponseEntity<>(memberDTO, HttpStatus.OK);
 
     }
@@ -249,5 +250,20 @@ public class MemberController {
         List<MemberDTO> list = memberService.getMemberList();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
+
+    /* 구글 이메일 회원 확인 및 아이디 조회*/
+    @PostMapping("/GoogleInfo")
+    public ResponseEntity<MemberDTO> googleInfo(@RequestBody Map<String, String> memberData) {
+        log.warn("★★★★★★★★★구글 이메일 중복확인 Controller★★★★★★★★★");
+
+        String getEmail = memberData.get("email");
+        log.warn("중복확인할 구글 이메일 주소(email : " + getEmail);
+
+        MemberDTO memberDTO = memberService.findInfoByGoogle(getEmail);
+
+        log.warn("뭐가 담겨 있니? : " + memberDTO);
+        return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+    }
+
 
 }

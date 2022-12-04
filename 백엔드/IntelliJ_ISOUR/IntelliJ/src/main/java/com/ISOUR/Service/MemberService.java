@@ -270,6 +270,7 @@ public class MemberService {
         }
         return memberDTOS;
     }
+
     /*이메일 중복 확인 서비스*/
     public boolean isEmailCheck(String email) {
         log.warn("★★★★★★★★★이메일 중복체크 서비스★★★★★★★★★");
@@ -281,4 +282,20 @@ public class MemberService {
     }
 
 
+    /* 구글 이메일 조회 서비스 */
+    public MemberDTO findInfoByGoogle(String email) {
+        log.warn("★★★★★★★★★구글 회원 이메일 조회 서비스★★★★★★★★★");
+        log.warn("입력한 이메일(email) : " + email);
+
+
+        MemberInfo memberInfo = memberRepository.findByEmail(email);
+        if (memberInfo==null) {
+            return null;
+        } else {
+            MemberDTO memberDTO = new MemberDTO();
+            memberDTO.setId(memberInfo.getId());
+            log.warn("대체 뭘 담고 있니?" + memberInfo);
+            return memberDTO;
+        }
+    }
 }
