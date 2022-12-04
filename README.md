@@ -1,6 +1,11 @@
 # Final_ISOUR
 ISOUR Final Project
 
+22.12.04(일)
+
+전규한
+-구글 로그인 (email 존재하면 바로 로그인 , email 존재하지 않으면 회원가입 창으로 이동)
+
 22.12.02(금)
 
 우혜정 
