@@ -34,7 +34,7 @@ function Login() {
       // setGoogleEmail(() => dong);
 
       console.log("얻어온 구글 이메일(localStorage) " + localStorage.getItem("email"));
-      googleInfo(dong);
+      googleInfo();
     }).catch((error) => {
       console.log(error);
     })
@@ -47,6 +47,7 @@ function Login() {
       console.log('날아온데이터 : ' + res.data);
       if (res.data.id != null) {
         alert('일치하는 이메일이 있습니다. 해당 아이디로 로그인 합니다.')
+        window.localStorage.setItem("userId", res.data.id);
         window.localStorage.setItem("userId", res.data.id);
         window.location.replace("/home");
 

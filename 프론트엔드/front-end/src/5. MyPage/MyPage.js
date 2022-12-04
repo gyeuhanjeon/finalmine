@@ -14,8 +14,9 @@ const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 
 const MyPage = () => {
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
-  const isLogin = window.localStorage.getItem("isLogin");
-  if(isLogin === "FALSE") window.location.replace("/login");
+  // const isLogin = window.localStorage.getItem("isLogin");
+  const isLogin = window.localStorage.getItem("userId");
+  if(isLogin == "") window.location.replace("/login");
   // ▲ 로그인 안 되어 있으면 로그인 페이지로
 
   const localId = window.localStorage.getItem("userId");
