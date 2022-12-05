@@ -16,6 +16,8 @@ import 장인 from '../images/장인.png';
 import 모험가 from '../images/모험가.png';
 import 사업가 from '../images/사업가.png';
 import 연예인 from '../images/연예인.png';
+import Cookies from 'universal-cookie';
+
 
 
 //스타일 컴포넌트
@@ -199,10 +201,11 @@ const RecommendWord = styled.div`
 
 //퀴즈 컴포넌트
 const Quiz = (props) => {
-  const isLogin = window.localStorage.getItem("isLogin");
-  if (isLogin === "FALSE") window.location.replace("/");
+  const cookies = new Cookies();
 
-  const localId = window.localStorage.getItem("userId");
+  const localId = cookies.get('rememberId');
+  if (localId === "FALSE") window.location.replace("/");
+
 
   const [count, setCount] = useState(0);
   const [count2, setCount2] = useState(1);
@@ -1400,8 +1403,10 @@ const Quiz = (props) => {
 }
 
 const MBTI = () => {
-  const isLogin = window.localStorage.getItem("isLogin");
-  if (isLogin === "FALSE") window.location.replace("/login");
+
+  const cookies = new Cookies();
+  const localId = cookies.get('rememberId')  ;
+  if (localId === "FALSE") window.location.replace("/login");
 
   const currentId = window.localStorage.getItem("userId");
   const currentPw = window.localStorage.getItem("userPw");

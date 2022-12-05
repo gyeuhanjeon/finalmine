@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import TeamAPI from '../0. API/TeamAPI';
-
+import Cookies from 'universal-cookie';
 
 const Home = () => {
-  const localId = window.localStorage.getItem("userId");
-  const local_id_num = window.localStorage.getItem("id_num");
+  const cookies = new Cookies();
+
+  const localId = cookies.get('rememberId');
 
   const [nickName, setNickName] = useState('');
 
@@ -21,6 +22,8 @@ const Home = () => {
     
 }
 useEffect(() => {
+  if(localId === undefined) window.location.replace("/login");
+    // ▲ 로그인 안 되어 있으면 로그인 페이지로 
         
   const memberData = async () => {
     console.log("\n\n현재 localStorage 에 저장된 ID : " + localId);

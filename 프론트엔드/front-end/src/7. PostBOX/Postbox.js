@@ -3,12 +3,15 @@ import { useState, useEffect } from 'react';
 import TeamAPI from '../0. API/TeamAPI';
 import PostModal from '../99. Modal/PostModal';
 import yong from '../images/아이셔용.png';
+import Cookies from 'universal-cookie';
 
 
 const Postbox = () => {
-  const localId = window.localStorage.getItem("userId");
 
-/* 변수(useState) 선언 */
+  const cookies = new Cookies();
+  const localId = cookies.get('rememberId')
+
+  /* 변수(useState) 선언 */
   const [loading, setLoading] = useState(false);
   const [postList, setPostList] = useState([]);
   // ▼ 체크된 쪽지를 담을 배열
@@ -20,12 +23,15 @@ const Postbox = () => {
   /* 
   최초 통신(useEffect) */
   useEffect(() => {
+    if(localId === undefined) window.location.replace("/login");
+    // ▲ 로그인 안 되어 있으면 로그인 페이지로 
+
     const postData = async () => {
       setLoading(true);
 
       try {
         const response = await TeamAPI.postbox(localId);
-        if(response.status == 200) {
+        if (response.status == 200) {
           console.log("통신 성공(200)");
           setPostList(response.data);
           // console.log("보낸 사람[0] : " + response.data[0].postSender);
@@ -54,10 +60,10 @@ const Postbox = () => {
   }
 
   /* 
-  체크박스 단일 선택 */ 
+  체크박스 단일 선택 */
   const handleSingleCheck = (checked, num) => {
     console.log(num + "번 쪽지가 선택 되었나요? : " + checked);
-    
+
     if (checked) {
       setCheckedPosts(fix => [...fix, num]); // 체크된 쪽지 번호를 checkedPosts 배열에 추가
       console.log("checkedPosts : " + checkedPosts.toString());
@@ -68,11 +74,11 @@ const Postbox = () => {
   };
 
   /* 
-  체크박스 전체 선택 */ 
+  체크박스 전체 선택 */
   const handleAllCheck = (checked) => {
     console.log("전체 선택 되었나요? : " + checked);
 
-    if(checked) {
+    if (checked) {
       const postNumArray = []; // postNum 을 담을 빈 배열(postNumArray) 생성
       postList.forEach((e) => postNumArray.push(e.postNum)); // postList 를 하나씩 돌면서 postNumArray에 postNum을 추가
       console.log("postNumArray : " + postNumArray); // 모든 쪽지의 postNum 을 담은 배열로 checkedPosts 상태 업데이트
@@ -89,14 +95,14 @@ const Postbox = () => {
     console.log("\n\n삭제 버튼 눌렀어요.");
 
     console.log("checkedPosts : " + checkedPosts); // 5,6
-    console.log("typeof(checkedPosts) : " + typeof(checkedPosts));
+    console.log("typeof(checkedPosts) : " + typeof (checkedPosts));
 
-    if(checkedPosts.length < 1) {
+    if (checkedPosts.length < 1) {
       alert('삭제할 쪽지를 선택해주세요~^^');
     } else {
       try {
         const response = await TeamAPI.postDelete(checkedPosts);
-        if(response.status == 200) {
+        if (response.status == 200) {
           console.log("통신 성공(200)");
           alert("선택한 쪽지가 삭제되었습니다.");
           window.location.reload();
@@ -110,12 +116,12 @@ const Postbox = () => {
     }
   }
 
-  if (loading) { 
+  if (loading) {
     return (
-    <>
-      <img src={yong} alt="아이셔용"/>
-      <div>대기 중...</div> 
-    </>
+      <>
+        <img src={yong} alt="아이셔용" />
+        <div>대기 중...</div>
+      </>
     );
   }
 
@@ -127,7 +133,7 @@ const Postbox = () => {
         <button onClick={onClickDelete}>삭제</button>
 
         <table className='tableContainer'>
-        {/* thead 의 시작 */}
+          {/* thead 의 시작 */}
           <thead>
             <tr>
               <th>
@@ -142,20 +148,20 @@ const Postbox = () => {
               <th>시간(DATETIME)</th>
             </tr>
           </thead>
-        {/* tbody 의 시작 */}
+          {/* tbody 의 시작 */}
           <tbody>
             {postList?.map(post => (
-            <tr key={post.postTime}>
-              <td>
-                <input type='checkbox' 
-                  onChange={(e) => handleSingleCheck(e.target.checked, post.postNum)}
-                  // ▼ checkedPosts 에 해당 쪽지의 postNum 이 있으면 true, 아니면 false
-                  checked={checkedPosts.includes(post.postNum) ? true : false} />
-              </td>
-              <td>{post.postSender}</td>
-              <td onClick={() => onClickPost(post.postSender, post.content)}>{post.content}</td>
-              <td>{post.postTime}</td>
-            </tr>
+              <tr key={post.postTime}>
+                <td>
+                  <input type='checkbox'
+                    onChange={(e) => handleSingleCheck(e.target.checked, post.postNum)}
+                    // ▼ checkedPosts 에 해당 쪽지의 postNum 이 있으면 true, 아니면 false
+                    checked={checkedPosts.includes(post.postNum) ? true : false} />
+                </td>
+                <td>{post.postSender}</td>
+                <td onClick={() => onClickPost(post.postSender, post.content)}>{post.content}</td>
+                <td>{post.postTime}</td>
+              </tr>
             ))}
           </tbody>
         </table>

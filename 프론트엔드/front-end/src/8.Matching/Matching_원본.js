@@ -7,13 +7,13 @@ import SmsIcon from '@mui/icons-material/Sms';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EmailIcon from '@mui/icons-material/Email';
 import face from '../images/기본 프로필.png'
+import Cookies from 'universal-cookie';
 
 const Matching = () => {
+  const cookies = new Cookies();
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
-  const isLogin = window.localStorage.getItem("isLogin");
-  if(isLogin === "FALSE") window.location.replace("/login");
-  // ▲ 로그인 안 되어 있으면 로그인 페이지로
-  const localId = window.localStorage.getItem("userId");
+  const localId = cookies.get('rememberId');
+ 
   const local_id_num = window.localStorage.getItem("id_num");
 
   const [url, setUrl] = useState(null);
@@ -60,6 +60,9 @@ const Matching = () => {
 
   // 매칭 회원 정보 조회
   useEffect(() => {
+    if(localId === undefined) window.location.replace("/login");
+    // ▲ 로그인 안 되어 있으면 로그인 페이지로
+
     const memberData = async () => {
       console.log("\n>> 매칭 결과 조회(useEffect)");
       const id = localId;

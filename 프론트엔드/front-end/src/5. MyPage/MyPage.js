@@ -8,18 +8,19 @@ import { UnregisterModal } from '../99. Modal/UnregisterModal';
 // 파이어베이스 설치 ☞ yarn add firebase
 import { storage } from '../firebase'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-
+//쿠키
+import Cookies from 'universal-cookie';
 
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
 
 const MyPage = () => {
+  const cookies = new Cookies();
   // ▼ 로그인 안 되어 있으면 로그인 페이지로
-  // const isLogin = window.localStorage.getItem("isLogin");
-  const isLogin = window.localStorage.getItem("userId");
-  if(isLogin == "") window.location.replace("/login");
-  // ▲ 로그인 안 되어 있으면 로그인 페이지로
+  const localId = cookies.get('rememberId');
+  console.log(localId);
 
-  const localId = window.localStorage.getItem("userId");
+
+  // const localId = window.localStorage.getItem("userId");
 
   const [changePwdModalOpen, setChangePwdModalOpen] = useState(false);
   const [unregisterModalOpen, setUnregisterModalOpen] = useState(false);
@@ -54,7 +55,12 @@ const MyPage = () => {
   
   /* 
   최초 통신(useEffect) */
-  useEffect(() => {  
+  useEffect(() => {
+    const localId = cookies.get('rememberId');
+    if(localId === undefined) window.location.replace("/login");
+    // ▲ 로그인 안 되어 있으면 로그인 페이지로 
+
+
     const memberData = async () => {
       console.log("\n>> 회원 정보 조회(useEffect)");
       console.log("localId : "+ localId);

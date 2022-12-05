@@ -7,16 +7,18 @@ import { motion } from "framer-motion";
 import { GoogleButton } from 'react-google-button';
 import { auth, provider } from '../firebase';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import Cookies from 'universal-cookie';
 
 
-
-const regexPw = /^\w{8,20}$/;
 
 
 
 function Login() {
+  const cookies = new Cookies();
 
   const signInWithGoogle = () => {
+
+
 
     // e.preventDefault();
     signInWithPopup(auth, provider).then((result) => {
@@ -24,41 +26,45 @@ function Login() {
 
       const email = result.user.email;
 
-      localStorage.setItem("email", email);
-      localStorage.setItem("email", email);
-      console.log(localStorage);
-      const dong = result.user.email;
-      console.log(dong);
-      
-      
-      // setGoogleEmail(() => dong);
 
-      console.log("얻어온 구글 이메일(localStorage) " + localStorage.getItem("email"));
+      // setCookie('rememberEmail', email);
+      cookies.set('rememberEmail', email, {
+        path: '/',
+        expires: 0
+      }
+      );
+
+
+      console.log("얻어온 구글 이메일(serCookies) " + cookies.get('rememberEmail'));
       googleInfo();
     }).catch((error) => {
       console.log(error);
     })
   };
 
-  const googleInfo = async(e)=>{
+  const googleInfo = async (e) => {
     try {
-      console.log("try 넘어서 얻어온 구글 아이디 : " + localStorage.getItem("email"));
-      const res = await TeamAPI.googleInfo(localStorage.getItem("email"));
+      // console.log("try 넘어서 loaclStorage온 구글 아이디 : " + localStorage.getItem("email"));
+      console.log("try 넘어서 cookie로 얻어온 구글 아이디 : " + cookies.get('rememberEmail'));
+      // const res = await TeamAPI.googleInfo(localStorage.getItem("email"));
+      const res = await TeamAPI.googleInfo(cookies.get('rememberEmail'));
+
       console.log('날아온데이터 : ' + res.data);
       if (res.data.id != null) {
         alert('일치하는 이메일이 있습니다. 해당 아이디로 로그인 합니다.')
-        window.localStorage.setItem("userId", res.data.id);
-        window.localStorage.setItem("userId", res.data.id);
+
+        cookies.set('rememberId', res.data.id, {
+          path: '/',
+          expires: 0
+        }
+        );
+        console.log(cookies.rememberId);
         window.location.replace("/home");
 
-      } else{
+      } else {
+        alert('일치하는 이메일이 없습니다. 회원가입 페이지로 이동합니다.')
         window.location.replace("/signup");
-
       }
-      // if(res.data.email===localStorage.getItem("email")) {
-      //   alert('일치하는 정보가 없습니다 새로 가입을 진행해 주세요.')
-      //   window.location.replace("/signup");
-      // }
     } catch {
       console.log(e)
     }
@@ -73,7 +79,16 @@ function Login() {
 
   const [id, setId] = useState("");
   const [pwd, setPwd] = useState("");
+  const [checkedItems, setCheckedItems] = useState(false);
   const [googleEmail, setGoogleEmail] = useState("");
+
+  const onClickAutologin = () => {
+    if (checkedItems === false) {
+      setCheckedItems(true);
+    } else {
+      setCheckedItems(false);
+    }
+  }
 
   /*
   아이디 변경 */
@@ -89,11 +104,13 @@ function Login() {
     setPwd(temp_pwd);
   }
 
+
   /*
   Login 버튼 클릭 */
   const onClickLogin = async (e) => {
     e.preventDefault();
 
+    console.log(checkedItems);
     console.log("입력한 ID : " + id);
     console.log("입력한 Password : " + pwd);
     console.log("LOGIN 버튼 눌렀어요.");
@@ -103,14 +120,31 @@ function Login() {
       // 로그인을 위한 axios 호출
       // console.log("호출 TRY : " + res.data.result);
       console.log("res.data : " + res.data);
-
+      console.log("checkedItems : " + checkedItems);
+      console.log(Math.floor(Date.now() / 1000) + (60 * 60));
       // if(res.data.result === "OK") {
       if (res.data === true) {
-        window.localStorage.setItem("userId", id);
-        window.localStorage.setItem("userId", id);
-        window.localStorage.setItem("userPw", pwd);
-        window.localStorage.setItem("isLogin", "TRUE");
-        window.location.replace("/home");
+        if (checkedItems === true) {
+          const Autologin = new Date();
+          Autologin.setDate(Autologin.getDate() + 10);
+          console.log('자동로그인 여기 찍힘? : ' + Autologin);
+          cookies.set('rememberId', id, {
+            path: '/',
+            expires: Autologin
+          }
+          );
+          // window.location.replace("/home");
+        } else {
+          console.log('그냥로그인  여기 찍힘? : ');
+          cookies.set('rememberId', id, {
+            path: '/',
+            expires: 0
+
+          }
+          );
+          // window.location.replace("/home");
+        }
+
       } else {
         alert("아이디 또는 비밀번호를 확인하세요!");
       }
@@ -145,6 +179,12 @@ function Login() {
         <div className="Login-PW">
           <input className="Login-input" type="password" placeholder="Enter Password" value={pwd} onChange={onChangePwd} />
         </div>
+
+        <form>
+          <label for='checkbox'>자동로그인</label>
+          <input type="checkbox" id='checkbox' onClick={onClickAutologin}></input>
+        </form>
+
         <motion.div
           className="Login-botton"
           whileHover={{ scale: 1 }}
@@ -162,7 +202,6 @@ function Login() {
         </div>
 
         <div>
-          {googleEmail}
           <GoogleButton onClick={signInWithGoogle} />
         </div>
 

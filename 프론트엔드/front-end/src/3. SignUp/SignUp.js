@@ -4,6 +4,7 @@ import TeamAPI from '../0. API/TeamAPI';
 import hangjungdong from '../other/hangjungdong';
 import '../3. SignUp/SignUp.css';
 import EmailModal from './EmailModal';
+import Cookies from 'universal-cookie';
 
 // 정규식 - 이름, 아이디, 비밀번호
 const regexName = /^[ㄱ-ㅎ가-힣]{2,20}$/;
@@ -29,24 +30,28 @@ const Msg = styled.div`
 
 function SignUp() {
 
+  const cookies = new Cookies();
+
   const [mode, setMode] = useState("agree");
   const [checkedItems, setCheckedItems] = useState([]);
   const [check_term1, setCheck_term1] = useState("");
   const [check_term2, setCheck_term2] = useState("");
-  const [emailConfirm,setEmailConfirm] = useState(false);
+  const [emailConfirm, setEmailConfirm] = useState(false);
 
   const Terms = () => {
-  
+
 
     const [termsList, setTermsList] = useState([
-      {termNum: 1, title: "[필수] 아이셔계정 약관", content: "테스트23"},
-      {termNum: 2, title: "[선택] 프로모션 정보 수신 동의(선택)",
-        content: "엠비티아이셔에서 제공하는 이벤트/혜택 등 다양한 정보를 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 엠비티아이셔 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다."}
+      { termNum: 1, title: "[필수] 아이셔계정 약관", content: "테스트23" },
+      {
+        termNum: 2, title: "[선택] 프로모션 정보 수신 동의(선택)",
+        content: "엠비티아이셔에서 제공하는 이벤트/혜택 등 다양한 정보를 이메일로 받아보실 수 있습니다. 일부 서비스(별도 회원 체계로 운영하거나 엠비티아이셔 가입 이후 추가 가입하여 이용하는 서비스 등)의 경우, 개별 서비스에 대해 별도 수신 동의를 받을 수 있으며, 이때에도 수신 동의에 대해 별도로 안내하고 동의를 받습니다."
+      }
     ]);
-  
+
 
     function AllCheck() {
-      return(
+      return (
         <p>
           전체 동의는 필수 및 선택정보에 대한 동의도 포함되어 있으며, 개별적으로도 동의를 선택하실 수 있습니다.
           <br />
@@ -54,13 +59,13 @@ function SignUp() {
         </p>
       );
     }
-  
+
     /* 
-    체크박스 전체 선택 */ 
+    체크박스 전체 선택 */
     const handleAllCheck = (checked) => {
       console.log("\n\n전체 선택 되었나요? : " + checked);
-  
-      if(checked) {
+
+      if (checked) {
         const termNumArray = []; // termNum 을 담을 빈 배열(termNumArray) 생성
         termsList.forEach((e) => termNumArray.push(e.termNum)); // termsList 를 하나씩 돌면서 termNumArray termNum 추가
         console.log("postNumArray : " + termNumArray); // 모든 약관의 termNum 을 담은 배열로 checkedItems 상태 업데이트
@@ -70,12 +75,12 @@ function SignUp() {
         setCheckedItems([]); // checkedItems 를 빈 배열로 상태 업데이트
       }
     }
-  
+
     /* 
-    체크박스 단일 선택 */ 
+    체크박스 단일 선택 */
     const handleSingleCheck = (checked, num) => {
       console.log(num + "번 약관이 선택 되었나요? : " + checked);
-      
+
       if (checked) {
         setCheckedItems(fix => [...fix, num]); // 체크된 약관 번호를 checkedItems 배열에 추가
         console.log("checkedItems : " + checkedItems.toString());
@@ -84,55 +89,55 @@ function SignUp() {
         console.log("checkedItems : " + checkedItems.toString());
       }
     };
-  
+
     /*
     동의하고 가입하기 */
     const onClickAgree = () => {
       console.log("\n\n동의하고 가입하기 버튼 눌렀어요.");
-  
-      if(checkedItems.includes(1)) {
+
+      if (checkedItems.includes(1)) {
         setCheck_term1("동의")
-        if(checkedItems.includes(2)) setCheck_term2("동의")
+        if (checkedItems.includes(2)) setCheck_term2("동의")
         else setCheck_term2("비동의")
-        
+
         setMode("join");
-  
+
       } else {
         alert("1번에 무조건 동의해야합니다.");
       }
     }
-  
-    return(
+
+    return (
       <form>
         <div className='SignUp-Container'>
           <div className='SignUp-Main-Box'>
-        <div className='checkbox-check-all'>
-        <AllCheck />
-        </div>
-        <div className='checkbox-check-btn'>
-        <input type="checkbox" id="checkbox-check_all"
-            onChange={(e) => handleAllCheck(e.target.checked)}
-            checked={termsList.length === checkedItems.length ? true : false} />
-            <label htmlFor="checkbox-check_all">모두 동의합니다.</label>
-            </div>
-        {termsList?.map(ball => (
-          <div>
-            <div className='checkbox-check-single'>
-            <label htmlFor="checkbox-check_single">{ball.title}</label>
-            <div>{ball.content}</div>
+            <div className='checkbox-check-all'>
+              <AllCheck />
             </div>
             <div className='checkbox-check-btn'>
-            <input type="checkbox" id="checkbox-check_single"
-              onChange={(e) => handleSingleCheck(e.target.checked, ball.termNum)}
-              checked={checkedItems.includes(ball.termNum) ? true : false} />
-            <label htmlFor="checkbox-check_all">동의합니다.</label>
+              <input type="checkbox" id="checkbox-check_all"
+                onChange={(e) => handleAllCheck(e.target.checked)}
+                checked={termsList.length === checkedItems.length ? true : false} />
+              <label htmlFor="checkbox-check_all">모두 동의합니다.</label>
             </div>
+            {termsList?.map(ball => (
+              <div>
+                <div className='checkbox-check-single'>
+                  <label htmlFor="checkbox-check_single">{ball.title}</label>
+                  <div>{ball.content}</div>
+                </div>
+                <div className='checkbox-check-btn'>
+                  <input type="checkbox" id="checkbox-check_single"
+                    onChange={(e) => handleSingleCheck(e.target.checked, ball.termNum)}
+                    checked={checkedItems.includes(ball.termNum) ? true : false} />
+                  <label htmlFor="checkbox-check_all">동의합니다.</label>
+                </div>
+              </div>
+            ))}
+            <div className='Terms-agree-btn'>
+              <button type="button" onClick={onClickAgree}>동의하고 가입하기</button>
             </div>
-        ))}
-        <div className='Terms-agree-btn'>
-        <button type="button" onClick={onClickAgree}>동의하고 가입하기</button> 
-        </div>
-        </div>
+          </div>
         </div>
       </form>
     );
@@ -147,8 +152,8 @@ function SignUp() {
   const [nickname, setNickname] = useState('');
   const [introduce, setIntroduce] = useState('');
   const [emailModalOn, setEmailModalOn] = useState(false);
-  const [open,setOpen] = useState(false);
-  
+  const [open, setOpen] = useState(false);
+
 
 
   const today = new Date();
@@ -168,7 +173,7 @@ function SignUp() {
     console.log("현재 mode : " + mode);
     console.log("필수 약관 : " + check_term1);
     console.log("선택 약관 : " + check_term2);
-  }, [mode]); 
+  }, [mode]);
 
   // 유효성 검사
   const [isName, setIsName] = useState(false);
@@ -183,7 +188,7 @@ function SignUp() {
   const [isGender, setIsGender] = useState(false);
   const [isRegion1, setIsRegion1] = useState(false);
   const [isRegion2, setIsRegion2] = useState(false);
-  const [emailDoubleCheck,setEmailDoubleCheck]=useState(false);
+  const [emailDoubleCheck, setEmailDoubleCheck] = useState(false);
 
   // 보여줄 문구 목록
   const reqName = "이름을 정확히 입력하세요."
@@ -227,7 +232,7 @@ function SignUp() {
       setShowReqName(false); // 이름을 정확히 입력하세요.
     }
   };
-  
+
   /*
   닉네임 변경 */
   const onChangeNickname = e => {
@@ -390,9 +395,19 @@ function SignUp() {
     }
   };
 
- 
+  /*
+  구글 로그인 -> 회원 가입시 */
+  useEffect(() => {
+    if(cookies.get('rememberEmail')!==null){
+    setEmail(cookies.get('rememberEmail'));
+    setIsEmail(true);
+    }
+  }, []);
+
+
   /*이메일 변경*/
-  const onChangeEmail = e => {
+  const OnChangeEmail = e => {
+
     let temp_email = e.target.value;
     setEmail(temp_email);
 
@@ -407,7 +422,7 @@ function SignUp() {
 
 
   /*이메일 중복확인*/
-  const onClickEmailCheck = async(e)=>{
+  const onClickEmailCheck = async (e) => {
     e.preventDefault();
     console.log("\n\nemail 인증 버튼을 눌렀어요");
     try {
@@ -537,7 +552,7 @@ function SignUp() {
     console.log("isRegion2 : " + isRegion2);
     console.log("introduce 값 : " + introduce);
 
-    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isBirth && isGender && isRegion1 && isRegion2 && isNickname && isNicknamecheck&&emailConfirm) {
+    if (isName && isId && isIdcheck && isPwd && isPwdcheck && isBirth && isGender && isRegion1 && isRegion2 && isNickname && isNicknamecheck && emailConfirm) {
       const memberReg = await TeamAPI.memberReg(name, id, pwd, nickname, email, birth, gender, region1, region2, introduce, check_term1, check_term2);
 
       console.log("name : " + name);
@@ -564,12 +579,12 @@ function SignUp() {
 
 
   return (
-    mode === 'agree' ? 
-      <Terms/> 
-    : 
-    
-    <div className="SignUp-Container">
-      <div className="SignUp-Main-Box">
+    mode === 'agree' ?
+      <Terms />
+      :
+
+      <div className="SignUp-Container">
+        <div className="SignUp-Main-Box">
 
           <div className="SignUp-header">
             <p className='SigUp-header-font'>Sign Up</p>
@@ -579,7 +594,7 @@ function SignUp() {
           <form action="" className="SignUp-card-form">
 
             {/* 이메일 인증 모달창 */}
-            <EmailModal open={open} modalName={email} modalContent={()=>setEmailConfirm(true)} onHide={() => setOpen(false)} />
+            <EmailModal open={open} modalName={email} modalContent={() => setEmailConfirm(true)} onHide={() => setOpen(false)} />
             {/* 이름 */}
             <div className="Form-item">
               {/* <span style={{display: 'inline-block', width: 150}}>이름</span> */}
@@ -644,12 +659,12 @@ function SignUp() {
             {/* 이메일 */}
             <div className="Form-item">
               <span className="Form-item-icon material-symbols-rounded"></span>
-                <input className="Input-border-7" type="text" placeholder="이메일" value={email} onChange={onChangeEmail}  disabled={emailDoubleCheck ? true : false} />
-                {isEmail&&<button onClick={onClickEmailCheck} > 이메일 중복확인 </button>}
-                {emailDoubleCheck&&<button onClick={onClickEmailAdress}> 이메일인증</button>}
+              <input className="Input-border-7" type="text" placeholder="이메일" value={email} onChange={OnChangeEmail} disabled={emailDoubleCheck ? true : false} />
+              {isEmail && <button onClick={onClickEmailCheck} > 이메일 중복확인 </button>}
+              {emailDoubleCheck && <button onClick={onClickEmailAdress}> 이메일인증</button>}
               <Msg>
                 {showReqEmail && reqEmail}
-                  {emailConfirm && confirmEmail}
+                {emailConfirm && confirmEmail}
               </Msg>
             </div>
 
@@ -709,9 +724,9 @@ function SignUp() {
             <button type="submit" className='Button-Submit' onClick={onClickButton}>회원가입</button>
 
           </form>
+        </div>
+
       </div>
-      
-    </div>
   );
 }
 
