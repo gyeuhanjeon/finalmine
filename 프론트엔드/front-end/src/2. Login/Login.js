@@ -121,7 +121,6 @@ function Login() {
       // console.log("호출 TRY : " + res.data.result);
       console.log("res.data : " + res.data);
       console.log("checkedItems : " + checkedItems);
-      console.log(Math.floor(Date.now() / 1000) + (60 * 60));
       // if(res.data.result === "OK") {
       if (res.data === true) {
         if (checkedItems === true) {
@@ -133,7 +132,7 @@ function Login() {
             expires: Autologin
           }
           );
-          // window.location.replace("/home");
+          window.location.replace("/home");
         } else {
           console.log('그냥로그인  여기 찍힘? : ');
           cookies.set('rememberId', id, {
@@ -142,7 +141,7 @@ function Login() {
 
           }
           );
-          // window.location.replace("/home");
+          window.location.replace("/home");
         }
 
       } else {
